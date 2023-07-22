@@ -45,4 +45,19 @@ app.UseFastEndpoints(c =>
 });
 app.UseSwaggerGen();
 
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+var context = services.GetRequiredService<AppDbContext>();
+
+Log.Logger.Information("Checking if has pending migrations...");
+
+if (context.Database.GetPendingMigrations().Any())
+{
+    Log.Logger.Information(
+        "Found pending migrations: {GetPendingMigrations}, migrating...",
+        context.Database.GetPendingMigrations());
+    context.Database.Migrate();
+}
+
 app.Run();
