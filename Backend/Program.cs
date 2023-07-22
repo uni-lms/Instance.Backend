@@ -16,6 +16,7 @@ builder.Services.SwaggerDocument(o => o.DocumentSettings = s =>
 
 var app = builder.Build();
 app.UseAuthorization();
+app.UseDefaultExceptionHandler();
 app.UseFastEndpoints(c =>
 {
     c.Versioning.Prefix = "v";
