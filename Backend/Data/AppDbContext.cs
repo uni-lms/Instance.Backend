@@ -1,8 +1,8 @@
 ﻿using Backend.Modules.Courses.Contract;
 using Backend.Modules.Roles.Contract;
 using Backend.Modules.Users.Contract;
+using Backend.Modules.Groups.Contract;
 using Microsoft.EntityFrameworkCore;
-using Group = Backend.Modules.Groups.Contract.Group;
 
 namespace Backend.Data;
 

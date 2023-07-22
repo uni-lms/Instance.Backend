@@ -1,5 +1,5 @@
-global using FastEndpoints;
-global using FastEndpoints.Swagger;
+using FastEndpoints;
+using FastEndpoints.Swagger;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,13 +1,14 @@
 ﻿using Backend.Data;
+using Backend.Modules.Groups.Contract;
 using Backend.Modules.Users.Contract;
 
 namespace Backend.Modules.Courses.Contract;
 
 public class Course: BaseModel
 {
-    public string Name { get; set; }
-    public string Abbreviation { get; set; }
-    public IEnumerable<Group> AssignedGroups { get; set; }
+    public required string Name { get; set; }
+    public required string Abbreviation { get; set; }
+    public required IEnumerable<Group> AssignedGroups { get; set; }
     public int Semester { get; set; }
-    public User Owner { get; set; }
+    public required User Owner { get; set; }
 }

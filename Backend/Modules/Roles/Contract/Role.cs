@@ -4,5 +4,5 @@ namespace Backend.Modules.Roles.Contract;
 
 public class Role: BaseModel
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }

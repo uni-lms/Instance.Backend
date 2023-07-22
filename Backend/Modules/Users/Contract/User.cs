@@ -5,10 +5,10 @@ namespace Backend.Modules.Users.Contract;
 
 public class User: BaseModel
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public byte[] PasswordHash { get; set; }
-    public byte[] PasswordSalt { get; set; }
-    public Role Role { get; set; }
+    public required string FirstName { get; set; }
+    public required string LastName { get; set; }
+    public required string Email { get; set; }
+    public required byte[] PasswordHash { get; set; }
+    public required byte[] PasswordSalt { get; set; }
+    public required Role Role { get; set; }
 }
