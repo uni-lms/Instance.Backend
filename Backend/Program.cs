@@ -10,6 +10,7 @@ builder.Services.AddDbContextPool<AppDbContext>(
 builder.Services.SwaggerDocument(o =>
 {
     o.AutoTagPathSegmentIndex = 0;
+    o.MaxEndpointVersion = 1;
     o.TagDescriptions = t =>
     {
         t["Roles"] = "API of users' roles (student, tutor, administrator)";
