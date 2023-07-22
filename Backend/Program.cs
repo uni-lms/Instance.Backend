@@ -6,12 +6,17 @@ builder.Services.AddFastEndpoints();
 builder.Services.SwaggerDocument(o => o.DocumentSettings = s =>
 {
     s.Title = "UNI API";
+    s.DocumentName = "Version 1";
     s.Version = "v1";
 });
 
 var app = builder.Build();
 app.UseAuthorization();
-app.UseFastEndpoints();
+app.UseFastEndpoints(c =>
+{
+    c.Versioning.Prefix = "v";
+    c.Versioning.PrependToRoute = true;
+});
 app.UseSwaggerGen();
 
 app.Run();
