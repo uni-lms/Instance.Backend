@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Modules.Courses.Endpoints;
 
-public class GetAllCourses : EndpointWithoutRequest<List<Course>>
+public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapper>
 {
     private readonly AppDbContext _db;
 
@@ -20,7 +20,7 @@ public class GetAllCourses : EndpointWithoutRequest<List<Course>>
         Get("/api/courses");
         AllowAnonymous();
         Description(b => b
-            .Produces<List<Course>>(200, MediaTypeNames.Application.Json)
+            .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Courses"));
         Version(1);
@@ -28,7 +28,9 @@ public class GetAllCourses : EndpointWithoutRequest<List<Course>>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await _db.Courses.ToListAsync(ct);
+        var result = await _db.Courses
+            .Select(e => Map.FromEntity(e))
+            .ToListAsync(ct);
         await SendAsync(result, cancellation: ct);
     }
 }
