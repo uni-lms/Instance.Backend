@@ -44,6 +44,7 @@ builder.Services.SwaggerDocument(o =>
         t["Courses"] = "API of courses (groups of materials and assignments)";
         t["Groups"] = "API of groups of students";
         t["Users"] = "API of users";
+        t["Auth"] = "API for signing in/up users";
     };
     o.DocumentSettings = s =>
     {
