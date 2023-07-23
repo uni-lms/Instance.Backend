@@ -8,6 +8,8 @@ public class UserMapper: ResponseMapper<UserDto, User>
     {
         FirstName = e.FirstName,
         LastName = e.LastName,
+        Patronymic = e.Patronymic,
+        DateOfBirth = e.DateOfBirth,
         Email = e.Email,
         RoleName = e.Role.Name
     };

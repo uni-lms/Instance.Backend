@@ -49,6 +49,8 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
             {
                 FirstName = reqUser.FirstName,
                 LastName = reqUser.LastName,
+                Patronymic = reqUser.Patronymic,
+                DateOfBirth = reqUser.DateOfBirth,
                 Email = reqUser.Email,
                 Role = role,
                 PasswordHash = passwordHash,

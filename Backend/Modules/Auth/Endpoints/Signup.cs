@@ -46,6 +46,8 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
             Email = req.Email,
             FirstName = req.FirstName,
             LastName = req.LastName,
+            Patronymic = req.Patronymic,
+            DateOfBirth = req.DateOfBirth,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
             Role = role
