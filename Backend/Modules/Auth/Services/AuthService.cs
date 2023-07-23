@@ -16,7 +16,7 @@ public class AuthService
     public string GeneratePassword()
     {
         var passwordBytes = RandomNumberGenerator.GetBytes(13);
-        return Encoding.UTF8.GetString(passwordBytes);
+        return Convert.ToBase64String(passwordBytes);
     }
 
     private bool VerifyPasswordHash(string plainPassword, byte[] passwordHash, byte[] passwordSalt)
