@@ -18,12 +18,12 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
     public override void Configure()
     {
         Get("/courses");
-        AllowAnonymous();
         Description(b => b
             .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Courses"));
         Version(1);
+        Roles("Administrator");
     }
 
     public override async Task HandleAsync(CancellationToken ct)
