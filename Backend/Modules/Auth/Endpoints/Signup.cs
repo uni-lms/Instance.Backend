@@ -24,7 +24,7 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
         Post("/auth/signup");
         AllowAnonymous();
         Description(b => b
-            .Produces<SignupResponse>(200, MediaTypeNames.Application.Json)
+            .Produces<SignupResponse>(201, MediaTypeNames.Application.Json)
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Auth"));
         Version(1);
