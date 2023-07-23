@@ -6,9 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Modules.Users.Endpoints;
 
-public class GetAllUsers: EndpointWithoutRequest<List<UserDto>, UserMapper>
+public class GetAllUsers : EndpointWithoutRequest<List<UserDto>, UserMapper>
 {
-
     private readonly AppDbContext _db;
 
     public GetAllUsers(AppDbContext db)
@@ -29,7 +28,9 @@ public class GetAllUsers: EndpointWithoutRequest<List<UserDto>, UserMapper>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await _db.Users.Select(e => Map.FromEntity(e)).ToListAsync(ct);
+        var result = await _db.Users
+            .Include(e => e.Role)
+            .Select(e => Map.FromEntity(e)).ToListAsync(ct);
         await SendAsync(result, cancellation: ct);
     }
 }
