@@ -56,6 +56,7 @@ builder.Services.SwaggerDocument(o =>
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseDefaultExceptionHandler();
 app.UseFastEndpoints(c =>
