@@ -18,11 +18,11 @@ public class GetAllUsers : EndpointWithoutRequest<List<UserDto>, UserMapper>
     public override void Configure()
     {
         Get("/users");
-        AllowAnonymous();
         Description(b => b
             .Produces<List<UserDto>>(200, MediaTypeNames.Application.Json)
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Users"));
+        Roles("Administrator");
         Version(1);
     }
 
