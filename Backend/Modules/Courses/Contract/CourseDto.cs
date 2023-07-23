@@ -10,5 +10,5 @@ public class CourseDto
     public required string Abbreviation { get; set; }
     public required IEnumerable<GroupDto> AssignedGroups { get; set; }
     public int Semester { get; set; }
-    public required UserDto Owner { get; set; }
+    public required IEnumerable<UserDto> Owners { get; set; }
 }

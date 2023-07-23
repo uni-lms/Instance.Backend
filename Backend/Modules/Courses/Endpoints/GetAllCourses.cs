@@ -30,7 +30,7 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
     {
         var result = await _db.Courses
             .Include(e => e.AssignedGroups)
-            .Include(e => e.Owner)
+            .Include(e => e.Owners)
             .ThenInclude(e => e.Role)
             .Select(e => Map.FromEntity(e))
             .ToListAsync(ct);

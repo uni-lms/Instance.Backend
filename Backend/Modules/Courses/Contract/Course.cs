@@ -10,5 +10,5 @@ public class Course: BaseModel
     public required string Abbreviation { get; set; }
     public required IEnumerable<Group> AssignedGroups { get; set; }
     public int Semester { get; set; }
-    public required User Owner { get; set; }
+    public required IEnumerable<User> Owners { get; set; }
 }
