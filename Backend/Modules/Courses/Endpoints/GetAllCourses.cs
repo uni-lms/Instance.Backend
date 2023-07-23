@@ -17,7 +17,7 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
 
     public override void Configure()
     {
-        Get("/api/courses");
+        Get("/courses");
         AllowAnonymous();
         Description(b => b
             .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)

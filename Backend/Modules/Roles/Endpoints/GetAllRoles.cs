@@ -17,7 +17,7 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
 
     public override void Configure()
     {
-        Get("/api/roles");
+        Get("/roles");
         AllowAnonymous();
         Description(b => b
             .Produces<List<Role>>(200, MediaTypeNames.Application.Json)
