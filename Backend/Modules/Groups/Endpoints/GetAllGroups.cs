@@ -28,8 +28,7 @@ public class GetAllGroups : EndpointWithoutRequest<List<GroupDto>, GroupMapper>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var groupMapper = Resolve<GroupMapper>();
-        var result = await _db.Groups.Select(e => groupMapper.FromEntity(e)).ToListAsync(ct);
+        var result = await _db.Groups.Select(e => Map.FromEntity(e)).ToListAsync(ct);
         await SendAsync(result, cancellation: ct);
     }
 }
