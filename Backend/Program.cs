@@ -1,6 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Backend.Data;
+using FastEndpoints.Security;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -16,6 +17,11 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 builder.Services.AddFastEndpoints();
+builder.Services.AddJWTBearerAuth(builder
+        .Configuration
+        .GetRequiredSection("Security")
+        .GetRequiredSection("SigningKey").Value!
+);
 builder.Services.AddDbContextPool<AppDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 builder.Services.SwaggerDocument(o =>
