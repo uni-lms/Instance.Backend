@@ -1,8 +1,10 @@
+using Backend.Configuration;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Backend.Data;
 using FastEndpoints.Security;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 
@@ -24,6 +26,11 @@ builder.Services.AddJWTBearerAuth(builder
 );
 builder.Services.AddDbContextPool<AppDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+builder.Services.Configure<SecurityConfiguration>(builder.Configuration.GetRequiredSection("Security"));
+builder.Services.AddSingleton(resolver =>
+    resolver.GetRequiredService<IOptions<SecurityConfiguration>>().Value);
+
 builder.Services.SwaggerDocument(o =>
 {
     o.AutoTagPathSegmentIndex = 0;
