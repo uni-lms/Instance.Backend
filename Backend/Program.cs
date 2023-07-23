@@ -2,6 +2,7 @@ using Backend.Configuration;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Backend.Data;
+using Backend.Modules.Auth.Services;
 using FastEndpoints.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -30,6 +31,8 @@ builder.Services.AddDbContextPool<AppDbContext>(
 builder.Services.Configure<SecurityConfiguration>(builder.Configuration.GetRequiredSection("Security"));
 builder.Services.AddSingleton(resolver =>
     resolver.GetRequiredService<IOptions<SecurityConfiguration>>().Value);
+
+builder.Services.AddSingleton<AuthService>();
 
 builder.Services.SwaggerDocument(o =>
 {
