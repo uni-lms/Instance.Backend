@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Net.Mime;
+using System.Security.Claims;
 using Backend.Modules.Auth.Contracts;
 using FastEndpoints;
 
@@ -9,7 +10,12 @@ public class Whoami : EndpointWithoutRequest<WhoamiResponse>
     public override void Configure()
     {
         Get("/auth/whoami");
+        
         Options(x => x.WithTags("Auth"));
+        Description(b => b
+            .Produces<WhoamiResponse>(200, MediaTypeNames.Application.Json)
+            .ProducesProblemFE<InternalErrorResponse>(500));
+        Version(1);
     }
 
     public override async Task HandleAsync(CancellationToken ct)
