@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using System.Security.Claims;
 using Backend.Configuration;
 using Backend.Data;
 using Backend.Modules.Auth.Contracts;
@@ -49,7 +50,11 @@ public class Login : Endpoint<LoginRequest, LoginResponse>
                 var jwtToken = JWTBearer.CreateToken(
                     signingKey: _securityOptions.SigningKey,
                     expireAt: DateTime.UtcNow.AddMinutes(15),
-                    priviledges: u => u.Roles.Add(user.Role.Name)
+                    priviledges: u =>
+                    {
+                        u.Roles.Add(user.Role.Name);
+                        u.Claims.Add(new Claim(ClaimTypes.Name, user.Email));
+                    }
                 );
 
                 await SendAsync(new LoginResponse
