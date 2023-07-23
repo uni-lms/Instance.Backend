@@ -29,6 +29,9 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
     public override async Task HandleAsync(CancellationToken ct)
     {
         var result = await _db.Courses
+            .Include(e => e.AssignedGroups)
+            .Include(e => e.Owner)
+            .ThenInclude(e => e.Role)
             .Select(e => Map.FromEntity(e))
             .ToListAsync(ct);
         await SendAsync(result, cancellation: ct);

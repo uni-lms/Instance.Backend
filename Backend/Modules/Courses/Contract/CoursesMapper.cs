@@ -8,8 +8,8 @@ public class CoursesMapper : ResponseMapper<CourseDto, Course>
 {
     public override CourseDto FromEntity(Course r)
     {
-        var groupMapper = Resolve<GroupMapper>();
-        var userMapper = Resolve<UserMapper>();
+        var groupMapper = new GroupMapper();
+        var userMapper = new UserMapper();
         return new CourseDto
         {
             Id = r.Id,
