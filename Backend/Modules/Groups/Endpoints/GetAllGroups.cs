@@ -18,12 +18,12 @@ public class GetAllGroups : EndpointWithoutRequest<List<GroupDto>, GroupMapper>
     public override void Configure()
     {
         Get("/groups");
-        AllowAnonymous();
         Description(b => b
             .Produces<List<GroupDto>>(200, MediaTypeNames.Application.Json)
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Groups"));
         Version(1);
+        Roles("Administrator");
     }
 
     public override async Task HandleAsync(CancellationToken ct)
