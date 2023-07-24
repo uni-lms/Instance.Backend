@@ -49,7 +49,8 @@ builder.Services.SwaggerDocument(o =>
     o.DocumentSettings = s =>
     {
         s.Title = "UNI API";
-        s.DocumentName = "Version 1";
+        s.Description = "API of the learning management system \"UNI\"";
+        s.DocumentName = "v1";
         s.Version = "v1";
     };
 });
