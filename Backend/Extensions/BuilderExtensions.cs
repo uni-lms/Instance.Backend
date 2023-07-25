@@ -1,6 +1,7 @@
 ﻿using Backend.Configuration;
 using Backend.Data;
 using Backend.Modules.Auth.Services;
+using Backend.Modules.Static.Services;
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
@@ -41,6 +42,7 @@ public static class BuilderExtensions
     public static void RegisterDependencies(this WebApplicationBuilder builder)
     {
         builder.Services.AddSingleton<AuthService>();
+        builder.Services.AddSingleton<StaticService>();
     }
 
     public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder)
@@ -52,6 +54,7 @@ public static class BuilderExtensions
             t["Groups"] = "API of groups of students";
             t["Users"] = "API of users";
             t["Auth"] = "API for signing in/up users";
+            t["Static"] = "API for management static files";
         }
 
         void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s)
