@@ -2,6 +2,7 @@
 using Backend.Modules.Roles.Contract;
 using Backend.Modules.Users.Contract;
 using Backend.Modules.Groups.Contract;
+using Backend.Modules.Static.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data;
@@ -12,6 +13,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<Group> Groups => Set<Group>();
     public virtual DbSet<Role> Roles => Set<Role>();
     public virtual DbSet<User> Users => Set<User>();
+    public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
 
     public AppDbContext(DbContextOptions<AppDbContext> contextOptions) : base(contextOptions)
     {
