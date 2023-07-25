@@ -27,7 +27,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
     public override async Task HandleAsync(UploadFileRequest req, CancellationToken ct)
     {
 
-        var checksum = await _staticService.GetChecksum(req.File);
+        var checksum = await _staticService.GetChecksum(req.File, ct);
         var oldFile = await _db.StaticFiles.Where(e => e.Checksum == checksum).FirstOrDefaultAsync(ct);
 
         if (oldFile is not null)
@@ -41,17 +41,17 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
             return;
         }
         
-        var fileSaveResult = await _staticService.SaveFile(req.File);
+        var fileSaveResult = await _staticService.SaveFile(req.File, ct);
 
         if (!fileSaveResult.IsSuccess)
         {
             ThrowError("File is empty");
         }
-        
+
         var staticFile = new StaticFile
         {
             Id = fileSaveResult.FileId!,
-            Checksum = await _staticService.GetChecksum(req.File),
+            Checksum = checksum,
             FileName = req.File.FileName,
             FilePath = fileSaveResult.FilePath!,
             VisibleName = req.VisibleName
@@ -64,7 +64,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
         {
             FileId = staticFile.Id,
             VisibleName = req.VisibleName,
-            Checksum = await _staticService.GetChecksum(req.File),
+            Checksum = checksum,
         }, cancellation: ct);
     }
 }

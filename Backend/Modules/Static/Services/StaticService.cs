@@ -13,7 +13,7 @@ public class StaticService
         _uploadsPath = Path.Combine(hostEnvironment.ContentRootPath, "uploads");
     }
 
-    public async Task<FileSaveResult> SaveFile(IFormFile file)
+    public async Task<FileSaveResult> SaveFile(IFormFile file, CancellationToken ct = default)
     {
         if (file.Length <= 0)
         {
@@ -30,7 +30,7 @@ public class StaticService
             .ToString();
         var path = Path.Combine(_uploadsPath, fileName);
         await using var fileStream = new FileStream(path, FileMode.Create);
-        await file.CopyToAsync(fileStream);
+        await file.CopyToAsync(fileStream, cancellationToken: ct);
 
         return new FileSaveResult
         {
@@ -40,10 +40,12 @@ public class StaticService
         };
     }
 
-    public async Task<string> GetChecksum(IFormFile file)
+    public async Task<string> GetChecksum(IFormFile file, CancellationToken ct = default)
     {
         using var md5 = MD5.Create();
         using var streamReader = new StreamReader(file.OpenReadStream());
-        return BitConverter.ToString(await md5.ComputeHashAsync(streamReader.BaseStream)).Replace("-", "");
+        return BitConverter
+            .ToString(await md5.ComputeHashAsync(streamReader.BaseStream, cancellationToken: ct))
+            .Replace("-", "");
     }
 }
