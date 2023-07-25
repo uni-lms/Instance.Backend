@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230725183546_AddGenderToUser")]
+    [Migration("20230725190549_AddGenderToUser")]
     partial class AddGenderToUser
     {
         /// <inheritdoc />
@@ -178,7 +178,7 @@ namespace Backend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("GenderId")
+                    b.Property<Guid?>("GenderId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("GroupId")
@@ -230,9 +230,7 @@ namespace Backend.Data.Migrations
 
                     b.HasOne("Backend.Modules.Genders.Contracts.Gender", "Gender")
                         .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GenderId");
 
                     b.HasOne("Backend.Modules.Groups.Contract.Group", null)
                         .WithMany("Students")

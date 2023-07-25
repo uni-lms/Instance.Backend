@@ -17,8 +17,7 @@ namespace Backend.Data.Migrations
                 name: "GenderId",
                 table: "Users",
                 type: "uuid",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Genders",
@@ -51,8 +50,7 @@ namespace Backend.Data.Migrations
                 table: "Users",
                 column: "GenderId",
                 principalTable: "Genders",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

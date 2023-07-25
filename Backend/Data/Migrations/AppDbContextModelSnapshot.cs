@@ -175,7 +175,7 @@ namespace Backend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("GenderId")
+                    b.Property<Guid?>("GenderId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("GroupId")
@@ -227,9 +227,7 @@ namespace Backend.Data.Migrations
 
                     b.HasOne("Backend.Modules.Genders.Contracts.Gender", "Gender")
                         .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GenderId");
 
                     b.HasOne("Backend.Modules.Groups.Contract.Group", null)
                         .WithMany("Students")
