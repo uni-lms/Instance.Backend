@@ -1,6 +1,6 @@
 ﻿namespace Backend.Modules.Static.Contracts;
 
-public class UploadFileResponse
+public class FileResponse
 {
     public required string FileId { get; set; }
     public required string Checksum { get; set; }

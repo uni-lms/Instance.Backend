@@ -2,7 +2,7 @@
 
 namespace Backend.Modules.Static.Contracts;
 
-public class DeleteFileRequest
+public class SearchFileRequest
 {
     public string FileId { get; set; }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Modules.Static.Endpoints;
 
-public class UploadFile : Endpoint<UploadFileRequest, UploadFileResponse>
+public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
 {
     private readonly StaticService _staticService;
     private readonly AppDbContext _db;
@@ -32,7 +32,7 @@ public class UploadFile : Endpoint<UploadFileRequest, UploadFileResponse>
 
         if (oldFile is not null)
         {
-            await SendAsync(new UploadFileResponse
+            await SendAsync(new FileResponse
             {
                 Checksum = checksum,
                 FileId = oldFile.Id,
@@ -60,7 +60,7 @@ public class UploadFile : Endpoint<UploadFileRequest, UploadFileResponse>
         await _db.StaticFiles.AddAsync(staticFile, ct);
         await _db.SaveChangesAsync(ct);
 
-        await SendAsync(new UploadFileResponse
+        await SendAsync(new FileResponse
         {
             FileId = staticFile.Id,
             VisibleName = req.VisibleName,

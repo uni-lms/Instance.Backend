@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Modules.Static.Endpoints;
 
-public class DeleteFile : Endpoint<DeleteFileRequest>
+public class DeleteFile : Endpoint<SearchFileRequest>
 {
     private readonly AppDbContext _db;
 
@@ -20,7 +20,7 @@ public class DeleteFile : Endpoint<DeleteFileRequest>
         Options(x => x.WithTags("Static"));
     }
 
-    public override async Task HandleAsync(DeleteFileRequest req, CancellationToken ct)
+    public override async Task HandleAsync(SearchFileRequest req, CancellationToken ct)
     {
         var file = await _db.StaticFiles.FindAsync(new object?[] { req.FileId }, cancellationToken: ct);
 
