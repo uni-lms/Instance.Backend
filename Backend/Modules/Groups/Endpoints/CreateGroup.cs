@@ -9,7 +9,7 @@ using Group = Backend.Modules.Groups.Contract.Group;
 
 namespace Backend.Modules.Groups.Endpoints;
 
-public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
+public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMapper>
 {
     private readonly AppDbContext _db;
     private readonly AuthService _authService;
@@ -35,6 +35,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
     public override async Task HandleAsync(CreateGroupRequest req, CancellationToken ct)
     {
         var users = new List<User>();
+        var usersData = new List<UserCredentials>();
 
         var role = await _db.Roles
             .Where(e => e.Name == "Student")
@@ -64,6 +65,12 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             });
+            
+            usersData.Add(new UserCredentials
+            {
+                Email = reqUser.Email,
+                Password = password
+            });
         }
         
         var tryFindGroup = await _db.Groups.AnyAsync(e => e.Name == req.Name, ct);
@@ -83,6 +90,12 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
             Students = users
         };
 
+        var result = new CreateGroupDto()
+        {
+            Group = Map.FromEntity(group),
+            UsersData = usersData
+        };
+
         await _db.Groups.AddAsync(group, ct);
         await _db.SaveChangesAsync(ct);
         
@@ -91,7 +104,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
         await SendCreatedAtAsync(
             "/groups",
             null,
-            Map.FromEntity(group),
+            result,
             cancellation: ct
         );
     }
