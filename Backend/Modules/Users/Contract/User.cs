@@ -1,6 +1,7 @@
 ﻿using Backend.Data;
 using Backend.Modules.Genders.Contracts;
 using Backend.Modules.Roles.Contract;
+using Backend.Modules.Static.Contracts;
 
 namespace Backend.Modules.Users.Contract;
 
@@ -15,4 +16,5 @@ public class User : BaseModel
     public required byte[] PasswordHash { get; set; }
     public required byte[] PasswordSalt { get; set; }
     public required Role Role { get; set; }
+    public StaticFile? Avatar { get; set; }
 }

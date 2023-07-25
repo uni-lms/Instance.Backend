@@ -9,4 +9,5 @@ public class SignupRequest
     public required string Email { get; set; }
     public Guid Role { get; set; }
     public Guid Gender { get; set; }
+    public string? Avatar { get; set; }
 }

@@ -7,9 +7,8 @@ using FastEndpoints;
 
 namespace Backend.Modules.Auth.Endpoints;
 
-public class Signup: Endpoint<SignupRequest, SignupResponse>
+public class Signup : Endpoint<SignupRequest, SignupResponse>
 {
-
     private readonly AppDbContext _db;
     private readonly AuthService _authService;
 
@@ -36,17 +35,21 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
         _authService.CreatePasswordHash(password, out var passwordSalt, out var passwordHash);
         var role = await _db.Roles.FindAsync(new object?[] { req.Role }, cancellationToken: ct);
         var gender = await _db.Genders.FindAsync(new object?[] { req.Gender }, cancellationToken: ct);
+        var avatar = await _db.StaticFiles.FindAsync(
+            new object?[] { req.Avatar },
+            cancellationToken: ct
+        );
 
         if (role is null)
         {
             ThrowError(e => e.Role, "Role was not found", 404);
         }
-        
+
         if (gender is null)
         {
             ThrowError(e => e.Gender, "Gender was not found", 404);
         }
-        
+
         var user = new User
         {
             Email = req.Email,
@@ -57,7 +60,8 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
             Role = role,
-            Gender = gender
+            Gender = gender,
+            Avatar = avatar
         };
 
         await _db.Users.AddAsync(user, ct);
@@ -71,6 +75,6 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
             Password = password
         };
 
-        await SendCreatedAtAsync("/auth/register",null, result, cancellation: ct);
+        await SendCreatedAtAsync("/auth/register", null, result, cancellation: ct);
     }
 }
