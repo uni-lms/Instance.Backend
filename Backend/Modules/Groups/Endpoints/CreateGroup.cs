@@ -42,6 +42,14 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
 
         foreach (var reqUser in req.Users)
         {
+
+            var tryFindUser = await _db.Users.AnyAsync(e => e.Email == reqUser.Email, ct);
+
+            if (tryFindUser)
+            {
+                AddError(e => e.Users, $"User with email {reqUser.Email} already registered", "409");
+                continue;
+            };
             var password = _authService.GeneratePassword();
             _authService.CreatePasswordHash(password, out var passwordSalt, out var passwordHash);
 
@@ -56,9 +64,16 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             });
-
-            // TODO: Добавить отправку писем с данными для входа (в очередь)
         }
+        
+        var tryFindGroup = await _db.Groups.AnyAsync(e => e.Name == req.Name, ct);
+
+        if (tryFindGroup)
+        {
+            AddError(e => e.Name, $"Group with name {req.Name} already created");
+        }
+        
+        ThrowIfAnyErrors();
 
         var group = new Group
         {
@@ -70,6 +85,8 @@ public class CreateGroup : Endpoint<CreateGroupRequest, GroupDto, GroupMapper>
 
         await _db.Groups.AddAsync(group, ct);
         await _db.SaveChangesAsync(ct);
+        
+        // TODO: Добавить отправку писем с данными для входа (в очередь)
 
         await SendCreatedAtAsync(
             "/groups",
