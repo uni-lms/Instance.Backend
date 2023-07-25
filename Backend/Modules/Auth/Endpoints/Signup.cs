@@ -38,7 +38,7 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
 
         if (role is null)
         {
-            ThrowError("", 404);
+            ThrowError(e => e.Role, "Role was not found", 404);
         }
         
         var user = new User

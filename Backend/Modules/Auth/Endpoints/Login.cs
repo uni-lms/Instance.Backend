@@ -65,12 +65,12 @@ public class Login : Endpoint<LoginRequest, LoginResponse>
             }
             else
             {
-                ThrowError("Wrong password", 401);
+                ThrowError(e => e.Password, "Wrong password", 401);
             }
         }
         else
         {
-            ThrowError("User was not found", 404);
+            ThrowError(e => e.Email, "User was not found", 404);
         }
     }
 }

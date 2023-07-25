@@ -30,7 +30,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
     {
         if (User.Identity is null)
         {
-            ThrowError("Not authorized", 401);
+            ThrowError(_ => User, "Not authorized", 401);
         }
 
         var user = await _db.Users
@@ -39,7 +39,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
 
         if (user is null)
         {
-            ThrowError("User not found", 404);
+            ThrowError(_ => User.Identity.Name, "User not found", 404);
         }
 
         var courses = await _db.Courses
