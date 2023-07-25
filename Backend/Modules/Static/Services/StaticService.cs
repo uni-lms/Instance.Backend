@@ -13,18 +13,31 @@ public class StaticService
         _uploadsPath = Path.Combine(hostEnvironment.ContentRootPath, "uploads");
     }
 
-    public async Task<string?> SaveFile(IFormFile file)
+    public async Task<FileSaveResult> SaveFile(IFormFile file)
     {
-        if (file.Length <= 0) return null;
+        if (file.Length <= 0)
+        {
+            return new FileSaveResult
+            {
+                IsSuccess = false
+            };
+        }
+
         Directory.CreateDirectory(_uploadsPath);
-        var fileName = new StringBuilder(ShortId.FromGuid(Guid.NewGuid()))
+        var fileId = ShortId.FromGuid(Guid.NewGuid());
+        var fileName = new StringBuilder(fileId)
             .Append(Path.GetExtension(file.FileName))
             .ToString();
         var path = Path.Combine(_uploadsPath, fileName);
         await using var fileStream = new FileStream(path, FileMode.Create);
         await file.CopyToAsync(fileStream);
 
-        return path;
+        return new FileSaveResult
+        {
+            IsSuccess = true,
+            FileId = fileId,
+            FilePath = path
+        };
     }
 
     public async Task<string> GetChecksum(IFormFile file)

@@ -35,24 +35,25 @@ public class UploadFile : Endpoint<UploadFileRequest, UploadFileResponse>
             await SendAsync(new UploadFileResponse
             {
                 Checksum = checksum,
-                FileId = ShortId.FromGuid(oldFile.Id),
+                FileId = oldFile.Id,
                 VisibleName = oldFile.VisibleName
             }, cancellation: ct);
             return;
         }
         
-        var filePath = await _staticService.SaveFile(req.File);
+        var fileSaveResult = await _staticService.SaveFile(req.File);
 
-        if (filePath is null)
+        if (!fileSaveResult.IsSuccess)
         {
             ThrowError("File is empty");
         }
         
         var staticFile = new StaticFile
         {
+            Id = fileSaveResult.FileId!,
             Checksum = await _staticService.GetChecksum(req.File),
             FileName = req.File.FileName,
-            FilePath = filePath,
+            FilePath = fileSaveResult.FilePath!,
             VisibleName = req.VisibleName
         };
 
@@ -61,7 +62,7 @@ public class UploadFile : Endpoint<UploadFileRequest, UploadFileResponse>
 
         await SendAsync(new UploadFileResponse
         {
-            FileId = ShortId.FromGuid(staticFile.Id),
+            FileId = staticFile.Id,
             VisibleName = req.VisibleName,
             Checksum = await _staticService.GetChecksum(req.File),
         }, cancellation: ct);
