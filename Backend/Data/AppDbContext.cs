@@ -1,4 +1,6 @@
 ﻿using Backend.Modules.CourseBlocks.Contracts;
+using Backend.Modules.CourseContents.File.Contracts;
+using Backend.Modules.CourseContents.Text.Contract;
 using Backend.Modules.Courses.Contract;
 using Backend.Modules.Genders.Contracts;
 using Backend.Modules.Groups.Contract;
@@ -18,6 +20,8 @@ public class AppDbContext : DbContext
     public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
     public virtual DbSet<Gender> Genders => Set<Gender>();
     public virtual DbSet<CourseBlock> CourseBlocks => Set<CourseBlock>();
+    public virtual DbSet<TextContent> TextContents => Set<TextContent>();
+    public virtual DbSet<FileContent> FileContents => Set<FileContent>();
 
     public AppDbContext(DbContextOptions<AppDbContext> contextOptions) : base(contextOptions)
     {
