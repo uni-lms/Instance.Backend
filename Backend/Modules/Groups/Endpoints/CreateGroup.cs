@@ -54,6 +54,13 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
             var password = _authService.GeneratePassword();
             _authService.CreatePasswordHash(password, out var passwordSalt, out var passwordHash);
 
+            var gender = await _db.Genders.FindAsync(new object?[] { reqUser.Gender }, ct);
+
+            if (gender is null)
+            {
+                ThrowError("Gender is not found", 404);
+            }
+            
             users.Add(new User
             {
                 FirstName = reqUser.FirstName,
@@ -62,6 +69,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
                 DateOfBirth = reqUser.DateOfBirth,
                 Email = reqUser.Email,
                 Role = role,
+                Gender = gender,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             });

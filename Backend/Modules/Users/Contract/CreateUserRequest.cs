@@ -7,4 +7,5 @@ public class CreateUserRequest
     public required string Patronymic { get; set; }
     public DateOnly DateOfBirth { get; set; }
     public required string Email { get; set; }
+    public required Guid Gender { get; set; }
 }

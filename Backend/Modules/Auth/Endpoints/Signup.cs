@@ -35,10 +35,16 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
         var password = _authService.GeneratePassword();
         _authService.CreatePasswordHash(password, out var passwordSalt, out var passwordHash);
         var role = await _db.Roles.FindAsync(new object?[] { req.Role }, cancellationToken: ct);
+        var gender = await _db.Genders.FindAsync(new object?[] { req.Gender }, cancellationToken: ct);
 
         if (role is null)
         {
             ThrowError(e => e.Role, "Role was not found", 404);
+        }
+        
+        if (gender is null)
+        {
+            ThrowError(e => e.Gender, "Gender was not found", 404);
         }
         
         var user = new User
@@ -50,7 +56,8 @@ public class Signup: Endpoint<SignupRequest, SignupResponse>
             DateOfBirth = req.DateOfBirth,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
-            Role = role
+            Role = role,
+            Gender = gender
         };
 
         await _db.Users.AddAsync(user, ct);
