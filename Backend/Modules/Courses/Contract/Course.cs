@@ -1,5 +1,5 @@
 ﻿using Backend.Data;
-using Backend.Modules.CourseContentTypes.Contracts;
+using Backend.Modules.CourseBlocks.Contracts;
 using Backend.Modules.Groups.Contract;
 using Backend.Modules.Users.Contract;
 
@@ -12,5 +12,5 @@ public class Course: BaseModel
     public required IEnumerable<Group> AssignedGroups { get; set; }
     public int Semester { get; set; }
     public required IEnumerable<User> Owners { get; set; }
-    public required IEnumerable<CourseContentType> ContentTypes { get; set; }
+    public required IEnumerable<CourseBlock> Blocks { get; set; }
 }

@@ -1,10 +1,10 @@
-﻿using Backend.Modules.CourseContentTypes.Contracts;
+﻿using Backend.Modules.CourseBlocks.Contracts;
 using Backend.Modules.Courses.Contract;
 using Backend.Modules.Genders.Contracts;
-using Backend.Modules.Roles.Contract;
-using Backend.Modules.Users.Contract;
 using Backend.Modules.Groups.Contract;
+using Backend.Modules.Roles.Contract;
 using Backend.Modules.Static.Contracts;
+using Backend.Modules.Users.Contract;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data;
@@ -17,7 +17,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<User> Users => Set<User>();
     public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
     public virtual DbSet<Gender> Genders => Set<Gender>();
-    public virtual DbSet<CourseContentType> CourseContentTypes => Set<CourseContentType>();
+    public virtual DbSet<CourseBlock> CourseBlocks => Set<CourseBlock>();
 
     public AppDbContext(DbContextOptions<AppDbContext> contextOptions) : base(contextOptions)
     {
@@ -36,11 +36,11 @@ public class AppDbContext : DbContext
             new Gender { Id = new Guid("f0b882f9-f4ed-4d23-abe4-378a4caefd72"), Name = "Female" }
         );
 
-        modelBuilder.Entity<CourseContentType>().HasData(
-            new CourseContentType { Id = new Guid("e6cb3460-fb09-43c1-84b4-3de4542470f5"), Name = "LabWorks" },
-            new CourseContentType { Id = new Guid("90f395b7-aba3-4720-a338-d0260801c185"), Name = "Lectures" },
-            new CourseContentType { Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"), Name = "CourseProject" },
-            new CourseContentType { Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification" }
+        modelBuilder.Entity<CourseBlock>().HasData(
+            new CourseBlock { Id = new Guid("e6cb3460-fb09-43c1-84b4-3de4542470f5"), Name = "LabWorks" },
+            new CourseBlock { Id = new Guid("90f395b7-aba3-4720-a338-d0260801c185"), Name = "Lectures" },
+            new CourseBlock { Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"), Name = "CourseProject" },
+            new CourseBlock { Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification" }
         );
     }
 }
