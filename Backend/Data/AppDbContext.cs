@@ -1,4 +1,5 @@
-﻿using Backend.Modules.Courses.Contract;
+﻿using Backend.Modules.CourseContentTypes.Contracts;
+using Backend.Modules.Courses.Contract;
 using Backend.Modules.Genders.Contracts;
 using Backend.Modules.Roles.Contract;
 using Backend.Modules.Users.Contract;
@@ -16,6 +17,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<User> Users => Set<User>();
     public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
     public virtual DbSet<Gender> Genders => Set<Gender>();
+    public virtual DbSet<CourseContentType> CourseContentTypes => Set<CourseContentType>();
 
     public AppDbContext(DbContextOptions<AppDbContext> contextOptions) : base(contextOptions)
     {
@@ -24,14 +26,21 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Role>().HasData(
-            new Role {Id = new Guid("c80ea5a3-0687-4d8e-b23c-3f9352d1ad05"), Name = "Student"},
-            new Role {Id = new Guid("0330d24d-1501-4cc5-bd6a-fbfe31c2a6f4"), Name = "Tutor"},
-            new Role {Id = new Guid("a6c4a4bd-e4b5-44a0-a2dd-b3e9b42bc240"), Name = "Administrator"}
+            new Role { Id = new Guid("c80ea5a3-0687-4d8e-b23c-3f9352d1ad05"), Name = "Student" },
+            new Role { Id = new Guid("0330d24d-1501-4cc5-bd6a-fbfe31c2a6f4"), Name = "Tutor" },
+            new Role { Id = new Guid("a6c4a4bd-e4b5-44a0-a2dd-b3e9b42bc240"), Name = "Administrator" }
         );
 
         modelBuilder.Entity<Gender>().HasData(
-            new Gender {Id = new Guid("8f10243b-6565-45bd-b459-e68ea8ef2536"), Name = "Male"},
-            new Gender {Id = new Guid("f0b882f9-f4ed-4d23-abe4-378a4caefd72"), Name = "Female"}
+            new Gender { Id = new Guid("8f10243b-6565-45bd-b459-e68ea8ef2536"), Name = "Male" },
+            new Gender { Id = new Guid("f0b882f9-f4ed-4d23-abe4-378a4caefd72"), Name = "Female" }
+        );
+
+        modelBuilder.Entity<CourseContentType>().HasData(
+            new CourseContentType { Id = new Guid("e6cb3460-fb09-43c1-84b4-3de4542470f5"), Name = "LabWorks" },
+            new CourseContentType { Id = new Guid("90f395b7-aba3-4720-a338-d0260801c185"), Name = "Lectures" },
+            new CourseContentType { Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"), Name = "CourseProject" },
+            new CourseContentType { Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification" }
         );
     }
 }
