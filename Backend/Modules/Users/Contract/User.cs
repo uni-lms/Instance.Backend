@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Modules.Courses.Contract;
 using Backend.Modules.Genders.Contracts;
 using Backend.Modules.Roles.Contract;
 using Backend.Modules.Static.Contracts;
@@ -17,4 +18,5 @@ public class User : BaseModel
     public required byte[] PasswordSalt { get; set; }
     public required Role Role { get; set; }
     public StaticFile? Avatar { get; set; }
+    public IEnumerable<Course> OwnedCourses { get; set; }
 }
