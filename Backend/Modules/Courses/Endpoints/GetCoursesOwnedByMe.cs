@@ -35,6 +35,10 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
 
         var user = await _db.Users
             .Where(e => e.Email == User.Identity.Name)
+            .Include(e => e.Gender)
+            .Include(e => e.Role)
+            .Include(e => e.OwnedCourses)
+            .ThenInclude(e => e.AssignedGroups)
             .FirstOrDefaultAsync(ct);
 
         if (user is null)
@@ -42,13 +46,9 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
             ThrowError(_ => User.Identity.Name, "User not found", 404);
         }
 
-        var courses = await _db.Courses
-            .Where(e => e.Owners.Any(x => x == user))
-            .Include(e => e.Owners)
-            .ThenInclude(e => e.Role)
-            .Include(e => e.AssignedGroups)
+        var courses = user.OwnedCourses
             .Select(e => Map.FromEntity(e))
-            .ToListAsync(ct);
+            .ToList();
 
         await SendAsync(courses, cancellation: ct);
     }
