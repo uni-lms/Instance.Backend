@@ -15,7 +15,7 @@ public class CoursesMapper : ResponseMapper<CourseDto, Course>
             Id = r.Id,
             Name = r.Name,
             Abbreviation = r.Abbreviation,
-            AssignedGroups = r.AssignedGroups
+            AssignedGroups = r.AssignedGroups?
                 .Select(g => groupMapper.FromEntity(g)),
             Owners = r.Owners.Select(e => userMapper.FromEntity(e)),
             Semester = r.Semester

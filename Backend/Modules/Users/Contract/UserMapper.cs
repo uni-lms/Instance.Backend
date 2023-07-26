@@ -11,7 +11,7 @@ public class UserMapper: ResponseMapper<UserDto, User>
         Patronymic = e.Patronymic,
         DateOfBirth = e.DateOfBirth,
         Email = e.Email,
-        RoleName = e.Role.Name,
-        GenderName = e.Gender.Name
+        RoleName = e.Role?.Name,
+        GenderName = e.Gender?.Name
     };
 }

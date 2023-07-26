@@ -35,8 +35,6 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
 
         var user = await _db.Users
             .Where(e => e.Email == User.Identity.Name)
-            .Include(e => e.Gender)
-            .Include(e => e.Role)
             .Include(e => e.OwnedCourses)
             .ThenInclude(e => e.AssignedGroups)
             .FirstOrDefaultAsync(ct);

@@ -70,17 +70,14 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
             "archived" => _db.Courses.Where(e =>
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester < groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
-                .ThenInclude(e => e.Role)
                 .Select(e => Map.FromEntity(e)),
             "current" => _db.Courses.Where(e =>
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester == groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
-                .ThenInclude(e => e.Role)
                 .Select(e => Map.FromEntity(e)),
             "upcoming" => _db.Courses.Where(e =>
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester > groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
-                .ThenInclude(e => e.Role)
                 .Select(e => Map.FromEntity(e)),
         };
 

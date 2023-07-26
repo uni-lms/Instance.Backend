@@ -16,7 +16,7 @@ public class User : BaseModel
     public required string Email { get; set; }
     public required byte[] PasswordHash { get; set; }
     public required byte[] PasswordSalt { get; set; }
-    public required Role Role { get; set; }
+    public Role? Role { get; set; }
     public StaticFile? Avatar { get; set; }
     public IEnumerable<Course> OwnedCourses { get; set; }
 }
