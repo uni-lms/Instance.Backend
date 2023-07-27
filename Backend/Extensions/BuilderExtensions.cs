@@ -57,12 +57,12 @@ public static class BuilderExtensions
             t["Static"] = "API for management static files";
         }
 
-        void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s)
+        void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s, string version)
         {
             s.Title = "UNI API";
             s.Description = "API of the learning management system \"UNI\"";
-            s.DocumentName = "v1";
-            s.Version = "v1";
+            s.DocumentName = version;
+            s.Version = version;
         }
 
         builder.Services.SwaggerDocument(o =>
@@ -70,7 +70,7 @@ public static class BuilderExtensions
             o.AutoTagPathSegmentIndex = 0;
             o.MaxEndpointVersion = 1;
             o.TagDescriptions = Tags;
-            o.DocumentSettings = DocumentSettings;
-        }); 
+            o.DocumentSettings = s => DocumentSettings(s, "v1");
+        });
     }
 }
