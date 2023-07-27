@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using Backend.Configuration;
 using Backend.Data;
 using Backend.Modules.Auth.Services;
 using Backend.Modules.Groups.Contract;
@@ -29,7 +30,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Groups"));
         Version(1);
-        Roles("Administrator");
+        Roles(UserRoles.Administrator);
     }
 
     public override async Task HandleAsync(CreateGroupRequest req, CancellationToken ct)

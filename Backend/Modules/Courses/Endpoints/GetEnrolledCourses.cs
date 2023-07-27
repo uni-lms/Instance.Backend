@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using Backend.Configuration;
 using Backend.Data;
 using Backend.Modules.Courses.Contract;
 using FastEndpoints;
@@ -32,7 +33,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
                 """Filtering rule for courses.<br>Allowed values: <code>archived</code>, <code>current</code>, <code>upcoming</code>""");
         });
         Version(1);
-        Roles("Student");
+        Roles(UserRoles.Student);
     }
 
     public override async Task HandleAsync(EnrolledCoursesFilterRequest req, CancellationToken ct)

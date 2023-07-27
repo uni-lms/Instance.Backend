@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using Backend.Configuration;
 using Backend.Data;
 using Backend.Modules.Users.Contract;
 using FastEndpoints;
@@ -22,7 +23,7 @@ public class GetAllUsers : EndpointWithoutRequest<List<UserDto>, UserMapper>
             .Produces<List<UserDto>>(200, MediaTypeNames.Application.Json)
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Users"));
-        Roles("Administrator");
+        Roles(UserRoles.Administrator);
         Version(1);
     }
 

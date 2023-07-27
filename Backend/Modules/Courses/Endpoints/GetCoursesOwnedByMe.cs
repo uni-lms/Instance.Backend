@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using Backend.Configuration;
 using Backend.Data;
 using Backend.Modules.Courses.Contract;
 using FastEndpoints;
@@ -23,7 +24,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Courses"));
         Version(1);
-        Roles("Tutor", "Administrator");
+        Roles(UserRoles.Tutor, UserRoles.Administrator);
     }
 
     public override async Task HandleAsync(CancellationToken ct)

@@ -1,4 +1,5 @@
-﻿using Backend.Data;
+﻿using Backend.Configuration;
+using Backend.Data;
 using Backend.Modules.CourseBlocks.Contracts;
 using Backend.Modules.Courses.Contract;
 using Backend.Modules.Users.Contract;
@@ -22,7 +23,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
         Post("/courses");
         Options(x => x.WithTags("Courses"));
         Version(1);
-        Roles("Tutor", "Administrator");
+        Roles(UserRoles.Tutor, UserRoles.Administrator);
     }
 
     public override async Task HandleAsync(CreateCourseRequest req, CancellationToken ct)
