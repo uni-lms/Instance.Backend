@@ -19,7 +19,7 @@ public class DeleteUser: Endpoint<SearchEntityRequest>
     public override void Configure()
     {
         Delete("/users/{Id}");
-        Options(x => x.WithTags("Static"));
+        Options(x => x.WithTags("Users"));
         Roles(UserRoles.Administrator);
     }
 
