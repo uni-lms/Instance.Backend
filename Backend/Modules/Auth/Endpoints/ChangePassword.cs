@@ -26,13 +26,13 @@ public class ChangePassword : Endpoint<ChangePasswordRequest, EmptyResponse>
 
     public override async Task HandleAsync(ChangePasswordRequest req, CancellationToken ct)
     {
-        var user = await _db.Users.Where(e => e.Email == User.Identity.Name).FirstOrDefaultAsync(ct);
+        var user = await _db.Users.Where(e => e.Email == User.Identity!.Name).FirstOrDefaultAsync(ct);
 
         if (user is null)
         {
             ThrowError(
-                e => User.Identity.Name,
-                $"User with email {User.Identity.Name} is not found",
+                e => User.Identity!.Name!,
+                $"User with email {User.Identity!.Name} is not found",
                 404
             );
         }

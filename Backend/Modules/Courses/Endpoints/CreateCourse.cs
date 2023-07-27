@@ -39,7 +39,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
 
         if (user is null)
         {
-            ThrowError(_ => User.Identity.Name, "User not found", 404);
+            ThrowError(_ => User.Identity!.Name!, "User not found", 404);
         }
 
         var assignedGroups = new List<Group>();

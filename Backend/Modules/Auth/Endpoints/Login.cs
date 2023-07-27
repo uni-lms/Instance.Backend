@@ -52,7 +52,7 @@ public class Login : Endpoint<LoginRequest, LoginResponse>
                     expireAt: DateTime.UtcNow.AddMinutes(15),
                     priviledges: u =>
                     {
-                        u.Roles.Add(user.Role.Name);
+                        u.Roles.Add(user.Role!.Name);
                         u.Claims.Add(new Claim(ClaimTypes.Name, user.Email));
                     }
                 );

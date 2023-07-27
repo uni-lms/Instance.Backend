@@ -35,17 +35,17 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
         }
 
         var user = await _db.Users
-            .Where(e => e.Email == User.Identity.Name)
-            .Include(e => e.OwnedCourses)
+            .Where(e => e.Email == User.Identity!.Name!)
+            .Include(e => e.OwnedCourses!)
             .ThenInclude(e => e.AssignedGroups)
             .FirstOrDefaultAsync(ct);
 
         if (user is null)
         {
-            ThrowError(_ => User.Identity.Name, "User not found", 404);
+            ThrowError(_ => User.Identity!.Name!, "User not found", 404);
         }
 
-        var courses = user.OwnedCourses
+        var courses = user.OwnedCourses!
             .Select(e => Map.FromEntity(e))
             .ToList();
 

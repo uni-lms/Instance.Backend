@@ -54,7 +54,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
 
         if (user is null)
         {
-            ThrowError(_ => User.Identity.Name, "User not found", 404);
+            ThrowError(_ => User.Identity!.Name!, "User not found", 404);
         }
 
         var groupOfUser = await _db.Groups.Where(e => e.Students.Contains(user)).FirstOrDefaultAsync(ct);
@@ -80,6 +80,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester > groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
                 .Select(e => Map.FromEntity(e)),
+            _ => throw new ArgumentOutOfRangeException()
         };
 
         await SendAsync(await filteredCourses.ToListAsync(ct), 200, ct);

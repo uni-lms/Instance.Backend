@@ -11,5 +11,5 @@ public class Group : BaseModel
     public int CurrentSemester { get; set; }
     public int MaxSemester { get; set; }
     public required IEnumerable<User> Students { get; set; }
-    public IEnumerable<Course> Courses { get; set; }
+    public IEnumerable<Course>? Courses { get; set; }
 }
