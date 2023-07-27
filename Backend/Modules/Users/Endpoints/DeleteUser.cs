@@ -1,11 +1,12 @@
 ﻿using Backend.Configuration;
 using Backend.Data;
+using Backend.Modules.Common.Contract;
 using Backend.Modules.Users.Contract;
 using FastEndpoints;
 
 namespace Backend.Modules.Users.Endpoints;
 
-public class DeleteUser: Endpoint<SearchUserRequest>
+public class DeleteUser: Endpoint<SearchEntityRequest>
 {
 
     private readonly AppDbContext _db;
@@ -22,7 +23,7 @@ public class DeleteUser: Endpoint<SearchUserRequest>
         Roles(UserRoles.Administrator);
     }
 
-    public override async Task HandleAsync(SearchUserRequest req, CancellationToken ct)
+    public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct)
     {
         
         var user = await _db.Users.FindAsync(new object?[] { req.Id }, cancellationToken: ct);
