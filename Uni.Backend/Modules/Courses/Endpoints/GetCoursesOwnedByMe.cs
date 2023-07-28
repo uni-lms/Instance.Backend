@@ -24,7 +24,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
             .ProducesProblemFE<InternalErrorResponse>(500));
         Options(x => x.WithTags("Courses"));
         Version(1);
-        Roles(UserRoles.Tutor, UserRoles.Administrator);
+        Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     }
 
     public override async Task HandleAsync(CancellationToken ct)

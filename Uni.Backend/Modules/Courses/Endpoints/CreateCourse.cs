@@ -23,7 +23,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
         Post("/courses");
         Options(x => x.WithTags("Courses"));
         Version(1);
-        Roles(UserRoles.Tutor, UserRoles.Administrator);
+        Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     }
 
     public override async Task HandleAsync(CreateCourseRequest req, CancellationToken ct)
