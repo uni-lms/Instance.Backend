@@ -1,0 +1,80 @@
+﻿using System.Net.Mime;
+using FastEndpoints;
+using Uni.Backend.Data;
+using Uni.Backend.Modules.Auth.Contracts;
+using Uni.Backend.Modules.Auth.Services;
+using Uni.Backend.Modules.Users.Contract;
+
+namespace Uni.Backend.Modules.Auth.Endpoints;
+
+public class Signup : Endpoint<SignupRequest, SignupResponse>
+{
+    private readonly AppDbContext _db;
+    private readonly AuthService _authService;
+
+    public Signup(AppDbContext db, AuthService authService)
+    {
+        _db = db;
+        _authService = authService;
+    }
+
+    public override void Configure()
+    {
+        Post("/auth/signup");
+        AllowAnonymous();
+        Description(b => b
+            .Produces<SignupResponse>(201, MediaTypeNames.Application.Json)
+            .ProducesProblemFE<InternalErrorResponse>(500));
+        Options(x => x.WithTags("Auth"));
+        Version(1);
+    }
+
+    public override async Task HandleAsync(SignupRequest req, CancellationToken ct)
+    {
+        var password = _authService.GeneratePassword();
+        _authService.CreatePasswordHash(password, out var passwordSalt, out var passwordHash);
+        var role = await _db.Roles.FindAsync(new object?[] { req.Role }, cancellationToken: ct);
+        var gender = await _db.Genders.FindAsync(new object?[] { req.Gender }, cancellationToken: ct);
+        var avatar = await _db.StaticFiles.FindAsync(
+            new object?[] { req.Avatar },
+            cancellationToken: ct
+        );
+
+        if (role is null)
+        {
+            ThrowError(e => e.Role, "Role was not found", 404);
+        }
+
+        if (gender is null)
+        {
+            ThrowError(e => e.Gender, "Gender was not found", 404);
+        }
+
+        var user = new User
+        {
+            Email = req.Email,
+            FirstName = req.FirstName,
+            LastName = req.LastName,
+            Patronymic = req.Patronymic,
+            DateOfBirth = req.DateOfBirth,
+            PasswordHash = passwordHash,
+            PasswordSalt = passwordSalt,
+            Role = role,
+            Gender = gender,
+            Avatar = avatar
+        };
+
+        await _db.Users.AddAsync(user, ct);
+        await _db.SaveChangesAsync(ct);
+
+        var result = new SignupResponse
+        {
+            FirstName = req.FirstName,
+            LastName = req.LastName,
+            Email = req.Email,
+            Password = password
+        };
+
+        await SendCreatedAtAsync("/auth/register", null, result, cancellation: ct);
+    }
+}
