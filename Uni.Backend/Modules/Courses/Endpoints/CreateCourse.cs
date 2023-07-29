@@ -26,11 +26,11 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
         Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
         Options(x => x.WithTags("Courses"));
         Description(b => b
+            .ClearDefaultProduces()
             .Produces<CourseDto>(201, MediaTypeNames.Application.Json)
             .ProducesProblemFE(401)
             .ProducesProblemFE(403)
             .ProducesProblemFE(404)
-            .ProducesProblemFE(409)
             .ProducesProblemFE(500));
         Summary(x =>
         {
@@ -38,7 +38,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
             x.Description = """
                                <b>Allowed scopes:</b> Tutor, Administrator
                             """;
-            x.Responses[200] = "Course created";
+            x.Responses[201] = "Course created";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";
             x.Responses[404] = "Some related entity was not found";

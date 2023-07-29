@@ -29,6 +29,7 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
         Post("/courses/{CourseId}/text");
         Options(x => x.WithTags("Courses"));
         Description(b => b
+            .ClearDefaultProduces()
             .Produces<List<CourseDto>>(201, MediaTypeNames.Application.Json)
             .ProducesProblemFE(401)
             .ProducesProblemFE(403)

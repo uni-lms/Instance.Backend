@@ -38,6 +38,13 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";
             x.Responses[500] = "Some other error occured";
+            x.RequestParam(
+        r => r.Filter,
+        """
+                    Filtering rule for courses.<br>
+                    Allowed values: <code>archived</code>, <code>current</code>, <code>upcoming</code>
+                 """
+            );
         });
     }
 
