@@ -23,7 +23,7 @@ public class DeleteCourse: Endpoint<SearchEntityRequest>
         Options(x => x.WithTags("Courses"));
         Description(b => b
             .ClearDefaultProduces()
-            .Produces<SearchEntityRequest>(204, MediaTypeNames.Application.Json)
+            .Produces<EmptyResponse>(204, MediaTypeNames.Application.Json)
             .ProducesProblemFE(401)
             .ProducesProblemFE(403)
             .ProducesProblemFE(404)

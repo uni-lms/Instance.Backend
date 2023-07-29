@@ -30,7 +30,7 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
         Options(x => x.WithTags("Courses"));
         Description(b => b
             .ClearDefaultProduces()
-            .Produces<List<CourseDto>>(201, MediaTypeNames.Application.Json)
+            .Produces<TextContent>(201, MediaTypeNames.Application.Json)
             .ProducesProblemFE(401)
             .ProducesProblemFE(403)
             .ProducesProblemFE(404)
