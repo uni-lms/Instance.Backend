@@ -1,6 +1,8 @@
-﻿using FastEndpoints;
+﻿using System.Reflection;
+using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NSwag.Generation.AspNetCore;
@@ -37,6 +39,27 @@ public static class BuilderExtensions
         builder.Services.Configure<SecurityConfiguration>(builder.Configuration.GetRequiredSection("Security"));
         builder.Services.AddSingleton(resolver =>
             resolver.GetRequiredService<IOptions<SecurityConfiguration>>().Value);
+    }
+
+    public static void ConfigureMassTransit(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddMassTransit(x =>
+        {
+            x.SetKebabCaseEndpointNameFormatter();
+            x.SetInMemorySagaRepositoryProvider();
+
+            var entryAssembly = Assembly.GetEntryAssembly();
+            
+            x.AddConsumers(entryAssembly);
+            x.AddSagaStateMachines(entryAssembly);
+            x.AddSagas(entryAssembly);
+            x.AddActivities(entryAssembly);
+            
+            x.UsingInMemory((context, cfg) =>
+            {
+                cfg.ConfigureEndpoints(context);
+            });
+        });
     }
 
     public static void RegisterDependencies(this WebApplicationBuilder builder)
