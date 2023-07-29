@@ -1,15 +1,18 @@
 ﻿using MassTransit;
 using Uni.Backend.Background.Contracts;
+using Uni.Backend.Modules.Common.Services;
 
 namespace Uni.Backend.Background.Mailings.Consumers;
 
 public class CreateGroupMailingConsumer : IConsumer<CreateGroupMailingContract>
 {
     private readonly ILogger<CreateGroupMailingConsumer> _logger;
+    private readonly MailingService _mailingService;
 
-    public CreateGroupMailingConsumer(ILogger<CreateGroupMailingConsumer> logger)
+    public CreateGroupMailingConsumer(ILogger<CreateGroupMailingConsumer> logger, MailingService mailingService)
     {
         _logger = logger;
+        _mailingService = mailingService;
     }
 
     public Task Consume(ConsumeContext<CreateGroupMailingContract> context)

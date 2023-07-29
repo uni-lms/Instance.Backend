@@ -9,6 +9,7 @@ using NSwag.Generation.AspNetCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Services;
+using Uni.Backend.Modules.Common.Services;
 using Uni.Backend.Modules.Static.Services;
 
 namespace Uni.Backend.Extensions;
@@ -66,6 +67,7 @@ public static class BuilderExtensions
     {
         builder.Services.AddSingleton<AuthService>();
         builder.Services.AddSingleton<StaticService>();
+        builder.Services.AddSingleton<MailingService>();
     }
 
     public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder)
