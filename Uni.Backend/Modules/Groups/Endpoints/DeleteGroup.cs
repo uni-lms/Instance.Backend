@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contract;
@@ -17,10 +18,28 @@ public class DeleteGroup: Endpoint<SearchEntityRequest>
 
     public override void Configure()
     {
-        Delete("/groups");
-        Options(x => x.WithTags("Groups"));
-        Roles(UserRoles.Administrator);
         Version(1);
+        Delete("/groups");
+        Roles(UserRoles.Administrator);
+        Options(x => x.WithTags("Groups"));
+        Description(b => b
+            .Produces<EmptyResponse>(204, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Permanently deletes group";
+            x.Description = """
+                               <b>Allowed scopes:</b> Administrator
+                            """;
+            x.Responses[204] = "Group deleted";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[404] = "Group was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct)

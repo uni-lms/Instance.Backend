@@ -23,14 +23,36 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
 
     public override void Configure()
     {
-        Post("/groups");
-        Description(b => b
-            .Produces<GroupDto>(201, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<InternalErrorResponse>(404)
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Options(x => x.WithTags("Groups"));
         Version(1);
+        Post("/groups");
         Roles(UserRoles.Administrator);
+        Options(x => x.WithTags("Groups"));
+        Description(b => b
+            .Produces<CreateGroupDto>(201, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(409)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Creates new group";
+            x.Description = """
+                               Additionally:
+                               <ul>
+                               <li>registers new users belonging to the group</li>
+                               <li>sends letter with credentials to every created user <i>(WIP)</i></li>
+                               </ul>
+                               <b>Allowed scopes:</b> Administrator
+                               <b>Date format:</b> yyyy-MM-dd
+                            """;
+            x.Responses[200] = "Group created";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[404] = "Gender was not found";
+            x.Responses[409] = "User with this email has already been registered";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(CreateGroupRequest req, CancellationToken ct)
@@ -91,7 +113,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
         
         ThrowIfAnyErrors();
 
-        var group = new Contract.Group
+        var group = new Group
         {
             Name = req.Name,
             CurrentSemester = req.CurrentSemester,

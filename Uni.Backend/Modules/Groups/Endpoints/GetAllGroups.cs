@@ -18,13 +18,26 @@ public class GetAllGroups : EndpointWithoutRequest<List<GroupDto>, GroupMapper>
 
     public override void Configure()
     {
-        Get("/groups");
-        Description(b => b
-            .Produces<List<GroupDto>>(200, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Options(x => x.WithTags("Groups"));
         Version(1);
-        Roles(UserRoles.Tutor, UserRoles.Administrator);
+        Get("/groups");
+        Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
+        Options(x => x.WithTags("Groups"));
+        Description(b => b
+            .Produces<CreateGroupDto>(200, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Gets list of all groups";
+            x.Description = """
+                               <b>Allowed scopes:</b> Tutor, Administrator
+                            """;
+            x.Responses[200] = "Successfully fetched list of groups";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(CancellationToken ct)
