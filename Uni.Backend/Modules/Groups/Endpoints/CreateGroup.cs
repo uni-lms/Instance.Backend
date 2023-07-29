@@ -43,7 +43,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
                                <li>registers new users belonging to the group</li>
                                <li>sends letter with credentials to every created user <i>(WIP)</i></li>
                                </ul>
-                               <b>Allowed scopes:</b> Administrator
+                               <b>Allowed scopes:</b> Administrator<br/>
                                <b>Date format:</b> yyyy-MM-dd
                             """;
             x.Responses[200] = "Group created";
