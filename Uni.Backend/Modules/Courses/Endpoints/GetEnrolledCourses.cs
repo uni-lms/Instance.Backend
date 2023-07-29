@@ -20,8 +20,8 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
     public override void Configure()
     {
         Version(1);
-        Get("/courses/owned");
         Roles(UserRoles.Student);
+        Get("/courses/enrolled");
         Options(x => x.WithTags("Courses"));
         Description(b => b
             .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
