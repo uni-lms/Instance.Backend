@@ -9,13 +9,21 @@ public class Whoami : EndpointWithoutRequest<WhoamiResponse>
 {
     public override void Configure()
     {
+        Version(1);
         Get("/auth/whoami");
-        
         Options(x => x.WithTags("Auth"));
         Description(b => b
             .Produces<WhoamiResponse>(200, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Version(1);
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Gets email and role of current user";
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
+            x.Responses[200] = "Information successfully fetched";
+            x.Responses[401] = "Unauthorized";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(CancellationToken ct)

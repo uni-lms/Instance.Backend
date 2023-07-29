@@ -25,15 +25,24 @@ public class Login : Endpoint<LoginRequest, LoginResponse>
 
     public override void Configure()
     {
+        Version(1);
         Post("/auth/login");
         AllowAnonymous();
+        Options(x => x.WithTags("Auth"));
         Description(b => b
             .Produces<LoginResponse>(200, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<ValidationFailureException>(401)
-            .ProducesProblemFE<ValidationFailureException>(404, "")
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Options(x => x.WithTags("Auth"));
-        Version(1);
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Generates auth token for user by login and password";
+            x.Description = "<b>Allowed scopes:</b> Anyone";
+            x.Responses[200] = "Token successfully generated";
+            x.Responses[401] = "Wrong password provided";
+            x.Responses[404] = "User was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(LoginRequest req, CancellationToken ct)

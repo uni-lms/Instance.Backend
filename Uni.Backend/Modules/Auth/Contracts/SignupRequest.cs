@@ -1,4 +1,6 @@
-﻿namespace Uni.Backend.Modules.Auth.Contracts;
+﻿using System.ComponentModel;
+
+namespace Uni.Backend.Modules.Auth.Contracts;
 
 public class SignupRequest
 {
@@ -6,6 +8,7 @@ public class SignupRequest
     public required string LastName { get; set; }
     public required string? Patronymic { get; set; }
     public DateOnly DateOfBirth { get; set; }
+    [DefaultValue("me@example.com")]
     public required string Email { get; set; }
     public Guid Role { get; set; }
     public Guid Gender { get; set; }

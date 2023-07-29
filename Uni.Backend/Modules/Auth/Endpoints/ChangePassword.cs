@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Contracts;
@@ -19,9 +20,23 @@ public class ChangePassword : Endpoint<ChangePasswordRequest, EmptyResponse>
 
     public override void Configure()
     {
+        Version(1);
         Post("/auth/change-password");
         Options(x => x.WithTags("Auth"));
-        Version(1);
+        Description(b => b
+            .Produces<EmptyResponse>(200, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Changes password of current user";
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
+            x.Responses[200] = "Password successfully changed";
+            x.Responses[401] = "<ul><li>Unauthorized</li><li>Wrong password</li></ul>";
+            x.Responses[404] = "User was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(ChangePasswordRequest req, CancellationToken ct)
@@ -43,7 +58,7 @@ public class ChangePassword : Endpoint<ChangePasswordRequest, EmptyResponse>
                 Password = req.OldPassword
             }))
         {
-            ThrowError("Wrong password", 403);
+            ThrowError("Wrong password", 401);
         }
 
         _authService.CreatePasswordHash(req.NewPassword, out var passwordSalt, out var passwordHash);

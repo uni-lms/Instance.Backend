@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Contracts;
@@ -19,10 +20,22 @@ public class RestorePassword : Endpoint<RestorePasswordRequest, EmptyResponse>
 
     public override void Configure()
     {
+        Version(1);
         Post("/auth/restore-password");
         AllowAnonymous();
         Options(x => x.WithTags("Auth"));
-        Version(1);
+        Description(b => b
+            .Produces<EmptyResponse>(200, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Changes password of current user";
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
+            x.Responses[200] = "Password successfully changed";
+            x.Responses[404] = "User was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(RestorePasswordRequest req, CancellationToken ct)
