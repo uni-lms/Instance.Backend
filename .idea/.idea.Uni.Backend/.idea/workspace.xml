@@ -10,7 +10,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8244d815-b413-4d59-98b6-fd7156554d6e" name="Changes" comment="rename solution">
+    <list default="true" id="8244d815-b413-4d59-98b6-fd7156554d6e" name="Changes" comment="update configs">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni.Backend/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/efCoreCommonOptions.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/efCoreDialogsState.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Contracts/LoginRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Contracts/LoginRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Contracts/SignupRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Contracts/SignupRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Documentation/LoginDocs.cs" beforeDir="false" />
@@ -18,6 +27,7 @@
       <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/Login.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/Login.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/RestorePassword.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/RestorePassword.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/Signup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/Signup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/Whoami.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Uni.Backend/Modules/Auth/Endpoints/Whoami.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +155,7 @@
       <workItem from="1690363775112" duration="13784000" />
       <workItem from="1690461992151" duration="8529000" />
       <workItem from="1690529984846" duration="73000" />
-      <workItem from="1690616086208" duration="4116000" />
+      <workItem from="1690616086208" duration="4889000" />
     </task>
     <task id="LOCAL-00084" summary="add version specifier to csproj file">
       <option name="closed" value="true" />
@@ -559,7 +569,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add optional avatar to user" />
     <MESSAGE value="add list of content types to course" />
     <MESSAGE value="rename content type to block in course" />
     <MESSAGE value="add basic content types of course" />
@@ -584,6 +593,7 @@
     <MESSAGE value="add uploading text materials to courses" />
     <MESSAGE value="save some ide settings" />
     <MESSAGE value="rename solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename solution" />
+    <MESSAGE value="update configs" />
+    <option name="LAST_COMMIT_MESSAGE" value="update configs" />
   </component>
 </project>
