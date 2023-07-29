@@ -19,6 +19,7 @@ public static class ApplicationExtensions
         {
             c.Versioning.Prefix = "v";
             c.Versioning.PrependToRoute = true;
+            c.Endpoints.ShortNames = true;
         });
     }
 
