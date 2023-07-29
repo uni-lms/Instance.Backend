@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contract;
@@ -16,10 +17,28 @@ public class DeleteCourse: Endpoint<SearchEntityRequest>
 
     public override void Configure()
     {
-        Delete("/course");
-        Options(x => x.WithTags("Courses"));
-        Roles(UserRoles.Administrator);
         Version(1);
+        Delete("/courses/{Id}");
+        Roles(UserRoles.Administrator);
+        Options(x => x.WithTags("Courses"));
+        Description(b => b
+            .Produces<SearchEntityRequest>(204, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Permanently deletes course";
+            x.Description = """
+                               <b>Allowed scopes:</b> Administrator
+                            """;
+            x.Responses[204] = "Course deleted";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[404] = "Group was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct)
@@ -29,7 +48,7 @@ public class DeleteCourse: Endpoint<SearchEntityRequest>
 
         if (course is null)
         {
-            ThrowError("File was not found", 404);
+            ThrowError("Course was not found", 404);
         }
         
         _db.Courses.Remove(course);

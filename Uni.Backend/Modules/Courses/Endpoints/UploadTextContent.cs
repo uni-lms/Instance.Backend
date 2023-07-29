@@ -1,5 +1,7 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Courses.Contract;
@@ -21,10 +23,31 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
 
     public override void Configure()
     {
+        Version(1);
+        AllowFileUploads();
+        Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
         Post("/courses/{CourseId}/text");
         Options(x => x.WithTags("Courses"));
-        AllowFileUploads();
-        Version(1);
+        Description(b => b
+            .Produces<List<CourseDto>>(201, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(409)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Uploads text content to the course";
+            x.Description = """
+                               <b>Allowed scopes:</b> Tutor, Administrator
+                            """;
+            x.Responses[201] = "Content uploaded successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[404] = "Some related entity was not found";
+            x.Responses[409] = "Block doesn't enabled on the course";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(UploadTextContentRequest req, CancellationToken ct)

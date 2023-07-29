@@ -19,21 +19,26 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
 
     public override void Configure()
     {
-        Get("/courses/enrolled");
+        Version(1);
+        Get("/courses/owned");
+        Roles(UserRoles.Student);
+        Options(x => x.WithTags("Courses"));
         Description(b => b
             .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Options(x => x.WithTags("Courses"));
-        Summary(s =>
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(500));
+        Summary(x =>
         {
-            s.Summary = "Get all courses, in which current user is enrolled (with filter by semester)";
-            s.Description = "Allowed roles: students";
-            s.RequestParam(
-                r => r.Filter,
-                """Filtering rule for courses.<br>Allowed values: <code>archived</code>, <code>current</code>, <code>upcoming</code>""");
+            x.Summary = "Gets all courses current user is enrolled in";
+            x.Description = """
+                               <b>Allowed scopes:</b> Student
+                            """;
+            x.Responses[200] = "List of courses fetched successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[500] = "Some other error occured";
         });
-        Version(1);
-        Roles(UserRoles.Student);
     }
 
     public override async Task HandleAsync(EnrolledCoursesFilterRequest req, CancellationToken ct)

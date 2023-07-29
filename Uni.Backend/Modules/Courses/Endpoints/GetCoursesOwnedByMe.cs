@@ -18,13 +18,26 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
 
     public override void Configure()
     {
+        Version(1);
         Get("/courses/owned");
+        Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
+        Options(x => x.WithTags("Courses"));
         Description(b => b
             .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Options(x => x.WithTags("Courses"));
-        Version(1);
-        Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Gets all courses owned by current user";
+            x.Description = """
+                               <b>Allowed scopes:</b> Tutor, Administrator
+                            """;
+            x.Responses[200] = "List of courses fetched successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(CancellationToken ct)

@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
@@ -20,10 +21,29 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
 
     public override void Configure()
     {
-        Post("/courses");
-        Options(x => x.WithTags("Courses"));
         Version(1);
+        Post("/courses");
         Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
+        Options(x => x.WithTags("Courses"));
+        Description(b => b
+            .Produces<CourseDto>(201, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(409)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Creates new course";
+            x.Description = """
+                               <b>Allowed scopes:</b> Tutor, Administrator
+                            """;
+            x.Responses[200] = "Course created";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[404] = "Some related entity was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(CreateCourseRequest req, CancellationToken ct)
@@ -42,7 +62,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
             ThrowError(_ => User.Identity!.Name!, "User not found", 404);
         }
 
-        var assignedGroups = new List<Groups.Contract.Group>();
+        var assignedGroups = new List<Group>();
         var enabledBlocks = new List<CourseBlock>();
         var owners = new List<User> { user };
 
