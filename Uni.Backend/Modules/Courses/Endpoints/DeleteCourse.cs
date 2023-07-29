@@ -2,7 +2,7 @@
 using FastEndpoints;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Common.Contract;
+using Uni.Backend.Modules.Common.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Contracts;
 using Uni.Backend.Modules.Auth.Services;
-using Uni.Backend.Modules.Users.Contract;
+using Uni.Backend.Modules.Users.Contracts;
 
 namespace Uni.Backend.Modules.Auth.Endpoints;
 

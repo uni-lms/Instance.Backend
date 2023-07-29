@@ -1,8 +1,8 @@
 ﻿using FastEndpoints;
-using Uni.Backend.Modules.Groups.Contract;
-using Uni.Backend.Modules.Users.Contract;
+using Uni.Backend.Modules.Groups.Contracts;
+using Uni.Backend.Modules.Users.Contracts;
 
-namespace Uni.Backend.Modules.Courses.Contract;
+namespace Uni.Backend.Modules.Courses.Contracts;
 
 public class CoursesMapper : ResponseMapper<CourseDto, Course>
 {

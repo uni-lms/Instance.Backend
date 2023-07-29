@@ -1,6 +1,6 @@
 ﻿using Uni.Backend.Data;
 
-namespace Uni.Backend.Modules.Roles.Contract;
+namespace Uni.Backend.Modules.Roles.Contracts;
 
 public class Role: BaseModel
 {

@@ -1,4 +1,4 @@
-﻿using Uni.Backend.Modules.Users.Contract;
+﻿using Uni.Backend.Modules.Users.Contracts;
 
 namespace Uni.Backend.Background.Contracts;
 

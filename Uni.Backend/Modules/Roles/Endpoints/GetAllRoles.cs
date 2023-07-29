@@ -2,7 +2,7 @@
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Roles.Contract;
+using Uni.Backend.Modules.Roles.Contracts;
 
 namespace Uni.Backend.Modules.Roles.Endpoints;
 

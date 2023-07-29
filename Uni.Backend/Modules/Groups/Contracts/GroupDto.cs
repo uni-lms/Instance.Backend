@@ -1,4 +1,4 @@
-﻿namespace Uni.Backend.Modules.Groups.Contract;
+﻿namespace Uni.Backend.Modules.Groups.Contracts;
 
 public class GroupDto
 {

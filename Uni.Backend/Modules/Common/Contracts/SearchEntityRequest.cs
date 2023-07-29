@@ -1,4 +1,4 @@
-﻿namespace Uni.Backend.Modules.Common.Contract;
+﻿namespace Uni.Backend.Modules.Common.Contracts;
 
 public class SearchEntityRequest
 {

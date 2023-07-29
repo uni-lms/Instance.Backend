@@ -1,10 +1,10 @@
 ﻿using Uni.Backend.Data;
-using Uni.Backend.Modules.Courses.Contract;
+using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Genders.Contracts;
-using Uni.Backend.Modules.Roles.Contract;
+using Uni.Backend.Modules.Roles.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
 
-namespace Uni.Backend.Modules.Users.Contract;
+namespace Uni.Backend.Modules.Users.Contracts;
 
 public class User : BaseModel
 {

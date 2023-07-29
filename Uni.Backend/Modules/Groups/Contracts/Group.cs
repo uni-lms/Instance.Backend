@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using Uni.Backend.Data;
-using Uni.Backend.Modules.Courses.Contract;
-using Uni.Backend.Modules.Users.Contract;
+﻿using Uni.Backend.Data;
+using Uni.Backend.Modules.Courses.Contracts;
+using Uni.Backend.Modules.Users.Contracts;
 
-namespace Uni.Backend.Modules.Groups.Contract;
+namespace Uni.Backend.Modules.Groups.Contracts;
 
 public class Group : BaseModel
 {

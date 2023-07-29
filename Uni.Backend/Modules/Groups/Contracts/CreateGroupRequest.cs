@@ -1,6 +1,6 @@
-﻿using Uni.Backend.Modules.Users.Contract;
+﻿using Uni.Backend.Modules.Users.Contracts;
 
-namespace Uni.Backend.Modules.Groups.Contract;
+namespace Uni.Backend.Modules.Groups.Contracts;
 
 public class CreateGroupRequest
 {

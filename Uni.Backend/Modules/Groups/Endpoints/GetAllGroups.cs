@@ -3,7 +3,7 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Groups.Contract;
+using Uni.Backend.Modules.Groups.Contracts;
 
 namespace Uni.Backend.Modules.Groups.Endpoints;
 

@@ -6,9 +6,9 @@ using Uni.Backend.Background.Contracts;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Services;
-using Uni.Backend.Modules.Groups.Contract;
-using Uni.Backend.Modules.Users.Contract;
-using Group = Uni.Backend.Modules.Groups.Contract.Group;
+using Uni.Backend.Modules.Groups.Contracts;
+using Uni.Backend.Modules.Users.Contracts;
+using Group = Uni.Backend.Modules.Groups.Contracts.Group;
 
 namespace Uni.Backend.Modules.Groups.Endpoints;
 

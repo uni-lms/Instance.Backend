@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 
-namespace Uni.Backend.Modules.Users.Contract;
+namespace Uni.Backend.Modules.Users.Contracts;
 
 public class UserMapper: ResponseMapper<UserDto, User>
 {

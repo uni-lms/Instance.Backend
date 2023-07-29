@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using FluentValidation;
 
-namespace Uni.Backend.Modules.Groups.Contract;
+namespace Uni.Backend.Modules.Groups.Contracts;
 
 public class CreateGroupRequestValidator: Validator<CreateGroupRequest>
 {
