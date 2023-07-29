@@ -17,13 +17,22 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
 
     public override void Configure()
     {
+        Version(1);
         Get("/roles");
         AllowAnonymous();
+        Options(x => x.WithTags("Roles"));
         Description(b => b
             .Produces<List<Role>>(200, MediaTypeNames.Application.Json)
-            .ProducesProblemFE<InternalErrorResponse>(500));
-        Options(x => x.WithTags("Roles"));
-        Version(1);
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Gets all available user roles";
+            x.Description = """
+                               <b>Allowed scopes:</b> Anyone
+                            """;
+            x.Responses[200] = "List of roles fetched successfully";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(CancellationToken ct)
