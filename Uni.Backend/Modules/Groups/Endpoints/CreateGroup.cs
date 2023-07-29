@@ -1,6 +1,8 @@
 ﻿using System.Net.Mime;
 using FastEndpoints;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Uni.Backend.Background.Contracts;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Services;
@@ -14,11 +16,13 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
 {
     private readonly AppDbContext _db;
     private readonly AuthService _authService;
+    private readonly IBus _bus;
 
-    public CreateGroup(AppDbContext db, AuthService authService)
+    public CreateGroup(AppDbContext db, AuthService authService, IBus bus)
     {
         _db = db;
         _authService = authService;
+        _bus = bus;
     }
 
     public override void Configure()
@@ -66,14 +70,14 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
 
         foreach (var reqUser in req.Users)
         {
-
             var tryFindUser = await _db.Users.AnyAsync(e => e.Email == reqUser.Email, ct);
 
             if (tryFindUser)
             {
                 AddError(e => e.Users, $"User with email {reqUser.Email} already registered", "409");
                 continue;
-            };
+            }
+
             var password = _authService.GeneratePassword();
             _authService.CreatePasswordHash(password, out var passwordSalt, out var passwordHash);
 
@@ -83,7 +87,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
             {
                 ThrowError("Gender is not found", 404);
             }
-            
+
             users.Add(new User
             {
                 FirstName = reqUser.FirstName,
@@ -96,21 +100,21 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             });
-            
+
             usersData.Add(new UserCredentials
             {
                 Email = reqUser.Email,
                 Password = password
             });
         }
-        
+
         var tryFindGroup = await _db.Groups.AnyAsync(e => e.Name == req.Name, ct);
 
         if (tryFindGroup)
         {
             AddError(e => e.Name, $"Group with name {req.Name} already created");
         }
-        
+
         ThrowIfAnyErrors();
 
         var group = new Group
@@ -121,7 +125,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
             Students = users
         };
 
-        var result = new CreateGroupDto()
+        var result = new CreateGroupDto
         {
             Group = Map.FromEntity(group),
             UsersData = usersData
@@ -129,8 +133,14 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
 
         await _db.Groups.AddAsync(group, ct);
         await _db.SaveChangesAsync(ct);
-        
-        // TODO: Добавить отправку писем с данными для входа (в очередь)
+
+        foreach (var userData in usersData)
+        {
+            if (!ct.IsCancellationRequested)
+            {
+                await _bus.Publish(new CreateGroupMailingContract { Credentials = userData }, ct);
+            }
+        }
 
         await SendCreatedAtAsync(
             "/groups",
