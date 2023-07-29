@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using Microsoft.AspNetCore.Mvc;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Static.Contracts;
 
@@ -15,8 +16,25 @@ public class DownloadFile : Endpoint<SearchFileRequest>
 
     public override void Configure()
     {
+        Version(1);
         Get("/static/{FileId}/download");
         Options(x => x.WithTags("Static"));
+        Description(b => b
+            .Produces<IFormFile>()
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Downloads static file";
+            x.Description = """
+                               <b>Allowed scopes:</b> Any authorized user
+                            """;
+            x.Responses[200] = "File exposed successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[404] = "File was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(SearchFileRequest req, CancellationToken ct)

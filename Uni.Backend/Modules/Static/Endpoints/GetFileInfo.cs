@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Static.Contracts;
 
@@ -15,8 +16,25 @@ public class GetFileInfo : Endpoint<SearchFileRequest, FileResponse>
 
     public override void Configure()
     {
+        Version(1);
         Get("/static/{FileId}");
         Options(x => x.WithTags("Static"));
+        Description(b => b
+            .Produces<FileResponse>(200, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Gets information about uploaded file";
+            x.Description = """
+                               <b>Allowed scopes:</b> Any authorized user
+                            """;
+            x.Responses[200] = "File information fetched successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[404] = "File was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(SearchFileRequest req, CancellationToken ct)

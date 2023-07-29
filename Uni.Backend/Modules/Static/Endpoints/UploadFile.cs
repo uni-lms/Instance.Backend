@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Net.Mime;
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Static.Contracts;
@@ -19,9 +20,27 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
 
     public override void Configure()
     {
-        Post("/static");
+        Version(1);
         AllowFileUploads();
+        Post("/static");
         Options(x => x.WithTags("Static"));
+        Description(b => b
+            .ClearDefaultProduces()
+            .Produces<FileResponse>(201, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(422)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Uploads new static file";
+            x.Description = """
+                               <b>Allowed scopes:</b> Any authorized user
+                            """;
+            x.Responses[201] = "File uploaded successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[422] = "Can't upload empty file";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(UploadFileRequest req, CancellationToken ct)
@@ -45,7 +64,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
 
         if (!fileSaveResult.IsSuccess)
         {
-            ThrowError("File is empty");
+            ThrowError("File is empty",422);
         }
 
         var staticFile = new StaticFile
@@ -65,6 +84,6 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
             FileId = staticFile.Id,
             VisibleName = req.VisibleName,
             Checksum = checksum,
-        }, cancellation: ct);
+        }, 201, cancellation: ct);
     }
 }
