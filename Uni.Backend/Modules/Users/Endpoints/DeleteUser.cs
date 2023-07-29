@@ -1,5 +1,4 @@
-﻿using Uni.Backend.Modules.Users.Contract;
-using FastEndpoints;
+﻿using FastEndpoints;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contract;
@@ -18,9 +17,28 @@ public class DeleteUser: Endpoint<SearchEntityRequest>
 
     public override void Configure()
     {
+        Version(1);
+        Roles(UserRoles.Administrator);
         Delete("/users/{Id}");
         Options(x => x.WithTags("Users"));
-        Roles(UserRoles.Administrator);
+        Description(b => b
+            .Produces(204)
+            .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
+            .ProducesProblemFE(404)
+            .ProducesProblemFE(500));
+        Summary(x =>
+        {
+            x.Summary = "Permanently deletes user";
+            x.Description = """
+                               <b>Allowed scopes:</b> Administrator
+                            """;
+            x.Responses[204] = "User deleted successfully";
+            x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Access forbidden";
+            x.Responses[404] = "User was not found";
+            x.Responses[500] = "Some other error occured";
+        });
     }
 
     public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct)
