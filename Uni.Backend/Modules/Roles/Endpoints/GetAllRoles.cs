@@ -19,10 +19,10 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
     {
         Version(1);
         Get("/roles");
-        AllowAnonymous();
         Options(x => x.WithTags("Roles"));
         Description(b => b
             .Produces<List<Role>>(200, MediaTypeNames.Application.Json)
+            .ProducesProblemFE(401)
             .ProducesProblemFE(500));
         Summary(x =>
         {
@@ -31,6 +31,7 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
                                <b>Allowed scopes:</b> Anyone
                             """;
             x.Responses[200] = "List of roles fetched successfully";
+            x.Responses[200] = "Unauthorized";
             x.Responses[500] = "Some other error occured";
         });
     }
