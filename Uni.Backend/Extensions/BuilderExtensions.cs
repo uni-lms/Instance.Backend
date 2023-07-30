@@ -40,6 +40,10 @@ public static class BuilderExtensions
         builder.Services.Configure<SecurityConfiguration>(builder.Configuration.GetRequiredSection("Security"));
         builder.Services.AddSingleton(resolver =>
             resolver.GetRequiredService<IOptions<SecurityConfiguration>>().Value);
+        
+        builder.Services.Configure<UniversityConfiguration>(builder.Configuration.GetRequiredSection("University"));
+        builder.Services.AddSingleton(resolver =>
+            resolver.GetRequiredService<IOptions<UniversityConfiguration>>().Value);
     }
 
     public static void ConfigureMassTransit(this WebApplicationBuilder builder)
