@@ -1,0 +1,27 @@
+﻿{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "dadyarri",
+  "classifications": [ "Uni", "Module" ],
+  "identity": "Uni.Templates.Module",
+  "name": "API's module",
+  "description": "Functionality module for UNI",
+  "shortName": "umodule",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "defaultName": "ModuleName",
+  "sourceName": "ModuleName",
+  "symbols": {
+    "namespace": {
+      "description": "Namespace where module should be created",
+      "replaces": "Namespace",
+      "type": "parameter"
+    },
+    "module": {
+      "description": "Name of the module",
+      "replaces": "ModuleName",
+      "type": "parameter"
+    }
+  }
+}
