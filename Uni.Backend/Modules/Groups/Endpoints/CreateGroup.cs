@@ -2,7 +2,7 @@
 using FastEndpoints;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Uni.Backend.Background.Contracts;
+using Uni.Backend.Background.Mailings.Contracts;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Auth.Services;
@@ -138,7 +138,14 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
         {
             if (!ct.IsCancellationRequested)
             {
-                await _bus.Publish(new CreateGroupMailingContract { Credentials = userData }, ct);
+                await _bus.Publish(
+                    new CreateGroupMailingContract
+                    {
+                        Credentials = userData,
+                        GroupName = group.Name
+                    },
+                    ct
+                );
             }
         }
 

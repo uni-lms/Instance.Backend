@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using Uni.Backend.Background.Contracts;
+using Uni.Backend.Background.Mailings.Contracts;
 using Uni.Backend.Modules.Common.Services;
 
 namespace Uni.Backend.Background.Mailings.Consumers;
