@@ -11,17 +11,5 @@
     "type": "item"
   },
   "defaultName": "ModuleName",
-  "sourceName": "ModuleName",
-  "symbols": {
-    "namespace": {
-      "description": "Namespace where module should be created",
-      "replaces": "Namespace",
-      "type": "parameter"
-    },
-    "module": {
-      "description": "Name of the module",
-      "replaces": "ModuleName",
-      "type": "parameter"
-    }
-  }
+  "sourceName": "ModuleName"
 }
