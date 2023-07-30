@@ -15,9 +15,9 @@ public class CreateGroupMailingConsumer : IConsumer<CreateGroupMailingContract>
         _mailingService = mailingService;
     }
 
-    public Task Consume(ConsumeContext<CreateGroupMailingContract> context)
+    public async Task Consume(ConsumeContext<CreateGroupMailingContract> context)
     {
         _logger.LogInformation("Sending letter to {Email}", context.Message.Credentials.Email);
-        return Task.CompletedTask;
+        await _mailingService.SendEmail(context.Message);
     }
 }
