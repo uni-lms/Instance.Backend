@@ -1,4 +1,4 @@
-﻿namespace Uni.Templates.Module.Content.Module.Modules.ModuleNames.Endpoints;
+﻿namespace Namespace.Modules.ModuleNames.Endpoints;
 
 public class GetModuleNameDetails
 {
