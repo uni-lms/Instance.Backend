@@ -1,17 +1,12 @@
 ﻿using FastEndpoints;
+using Riok.Mapperly.Abstractions;
 
 namespace Uni.Backend.Modules.Users.Contracts;
 
-public class UserMapper: ResponseMapper<UserDto, User>
+[Mapper]
+public partial class UserMapper: ResponseMapper<UserDto, User>
 {
-    public override UserDto FromEntity(User e) => new()
-    {
-        FirstName = e.FirstName,
-        LastName = e.LastName,
-        Patronymic = e.Patronymic,
-        DateOfBirth = e.DateOfBirth,
-        Email = e.Email,
-        RoleName = e.Role?.Name,
-        GenderName = e.Gender?.Name
-    };
+    [MapProperty(nameof(User.Role), nameof(UserDto.RoleName))]
+    [MapProperty(nameof(User.Gender), nameof(UserDto.GenderName))]
+    public partial UserDto FromEntity(User e);
 }

@@ -1,13 +1,10 @@
 ﻿using FastEndpoints;
+using Riok.Mapperly.Abstractions;
 
 namespace Uni.Backend.Modules.Groups.Contracts;
 
-public class GroupMapper: ResponseMapper<GroupDto, Group>
+[Mapper]
+public partial class GroupMapper: ResponseMapper<GroupDto, Group>
 {
-    public override GroupDto FromEntity(Group e) => new()
-    {
-        Name = e.Name,
-        CurrentSemester = e.CurrentSemester,
-        MaxSemester = e.MaxSemester
-    };
+    public partial GroupDto FromEntity(Group e);
 }
