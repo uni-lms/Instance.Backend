@@ -18,5 +18,5 @@ public class User : BaseModel
     public required byte[] PasswordSalt { get; set; }
     public Role? Role { get; set; }
     public StaticFile? Avatar { get; set; }
-    public IEnumerable<Course>? OwnedCourses { get; set; }
+    public List<Course>? OwnedCourses { get; set; }
 }

@@ -7,5 +7,5 @@ public class CreateGroupRequest
     public required string Name { get; set; }
     public int CurrentSemester { get; set; }
     public int MaxSemester { get; set; }
-    public required IEnumerable<CreateUserRequest> Users { get; set; }
+    public required List<CreateUserRequest> Users { get; set; }
 }

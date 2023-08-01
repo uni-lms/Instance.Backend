@@ -9,6 +9,6 @@ public class Group : BaseModel
     public required string Name { get; set; }
     public int CurrentSemester { get; set; }
     public int MaxSemester { get; set; }
-    public required IEnumerable<User> Students { get; set; }
-    public IEnumerable<Course>? Courses { get; set; }
+    public required List<User> Students { get; set; }
+    public List<Course>? Courses { get; set; }
 }

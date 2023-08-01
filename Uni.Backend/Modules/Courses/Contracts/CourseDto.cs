@@ -8,7 +8,7 @@ public class CourseDto
     public Guid Id { get; set; }
     public required string Name { get; set; }
     public required string Abbreviation { get; set; }
-    public IEnumerable<GroupDto>? AssignedGroups { get; set; }
+    public List<GroupDto>? AssignedGroups { get; set; }
     public int Semester { get; set; }
-    public IEnumerable<UserDto>? Owners { get; set; }
+    public List<UserDto>? Owners { get; set; }
 }

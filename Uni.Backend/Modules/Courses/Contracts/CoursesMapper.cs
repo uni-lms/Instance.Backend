@@ -16,8 +16,8 @@ public class CoursesMapper : ResponseMapper<CourseDto, Course>
             Name = r.Name,
             Abbreviation = r.Abbreviation,
             AssignedGroups = r.AssignedGroups?
-                .Select(g => groupMapper.FromEntity(g)),
-            Owners = r.Owners.Select(e => userMapper.FromEntity(e)),
+                .Select(g => groupMapper.FromEntity(g)).ToList(),
+            Owners = r.Owners.Select(e => userMapper.FromEntity(e)).ToList(),
             Semester = r.Semester
         };
     }

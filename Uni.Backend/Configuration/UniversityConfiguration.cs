@@ -2,6 +2,6 @@
 
 public class UniversityConfiguration
 {
-    public string Name { get; set; }
-    public string Domain { get; set; }
+    public required string Name { get; set; }
+    public required string Domain { get; set; }
 }

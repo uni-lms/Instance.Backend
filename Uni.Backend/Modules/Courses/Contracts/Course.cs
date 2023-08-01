@@ -9,8 +9,8 @@ public class Course: BaseModel
 {
     public required string Name { get; set; }
     public required string Abbreviation { get; set; }
-    public required IEnumerable<Group> AssignedGroups { get; set; }
+    public required List<Group> AssignedGroups { get; set; }
     public int Semester { get; set; }
-    public required IEnumerable<User> Owners { get; set; }
-    public required IEnumerable<CourseBlock> Blocks { get; set; }
+    public required List<User> Owners { get; set; }
+    public required List<CourseBlock> Blocks { get; set; }
 }
