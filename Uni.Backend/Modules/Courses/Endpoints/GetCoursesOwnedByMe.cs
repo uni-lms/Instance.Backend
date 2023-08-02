@@ -49,6 +49,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
         }
 
         var user = await _db.Users
+            .AsNoTracking()
             .Where(e => e.Email == User.Identity!.Name!)
             .Include(e => e.OwnedCourses!)
             .ThenInclude(e => e.AssignedGroups)

@@ -42,7 +42,7 @@ public class GetAllUsers : EndpointWithoutRequest<List<UserDto>, UserMapper>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await _db.Users
+        var result = await _db.Users.AsNoTracking()
             .Include(e => e.Role)
             .Select(e => Map.FromEntity(e)).ToListAsync(ct);
         await SendAsync(result, cancellation: ct);

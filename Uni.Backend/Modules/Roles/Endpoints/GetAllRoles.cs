@@ -38,7 +38,7 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await _db.Roles.ToListAsync(ct);
+        var result = await _db.Roles.AsNoTracking().ToListAsync(ct);
 
         await SendAsync(result, cancellation: ct);
     }

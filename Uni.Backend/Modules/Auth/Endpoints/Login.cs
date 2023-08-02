@@ -48,6 +48,7 @@ public class Login : Endpoint<LoginRequest, LoginResponse>
     public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
     {
         var user = await _db.Users
+            .AsNoTracking()
             .Where(u => u.Email == req.Email)
             .Include(u => u.Role)
             .FirstOrDefaultAsync(ct);
