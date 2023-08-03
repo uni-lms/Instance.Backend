@@ -1,4 +1,4 @@
-﻿using System.Net.Mail;
+﻿using MimeKit;
 using Razor.Templating.Core;
 using Uni.Backend.Background.Mailings.Contracts;
 using Uni.Backend.Configuration;
@@ -8,7 +8,6 @@ namespace Uni.Backend.Modules.Common.Services;
 
 public class MailingService
 {
-
     private readonly UniversityConfiguration _configuration;
 
     public MailingService(UniversityConfiguration configuration)
@@ -18,17 +17,16 @@ public class MailingService
 
     public async Task SendEmail(CreateGroupMailingContract data)
     {
-        var message = new MailMessage
+        var message = new MimeMessage
         {
-            From = new MailAddress("my@email.com"),
-            Subject = "Регистрация в LMS UNI",
-            Body = await RenderTemplate(data.Credentials, data.GroupName),
-            IsBodyHtml = true
+            Subject = $"Регистрация в LMS {_configuration.Name}",
+            Body = new TextPart("html") { Text = await RenderTemplate(data.Credentials, data.GroupName) }
         };
         
-        message.To.Add(data.Credentials.Email);
-
+        message.From.Add(new MailboxAddress($"LMS {_configuration.Name}", _configuration.NoReplyEmail));
+        message.To.Add(new MailboxAddress("", data.Credentials.Email));
     }
+
     private async Task<string> RenderTemplate(UserCredentials credentials, string groupName)
     {
         var viewBag = new Dictionary<string, object>
@@ -38,6 +36,7 @@ public class MailingService
             { "Domain", _configuration.Domain },
             { "University", _configuration.Name }
         };
-        return await RazorTemplateEngine.RenderAsync("/Templates/Mailings/CreateGroupCredentials.cshtml", viewBagOrViewData: viewBag);
+        return await RazorTemplateEngine.RenderAsync("/Templates/Mailings/CreateGroupCredentials.cshtml",
+            viewBagOrViewData: viewBag);
     }
 }
