@@ -12,6 +12,7 @@
         <PackageReference Include="FastEndpoints" Version="5.14.0" />
         <PackageReference Include="FastEndpoints.Security" Version="5.14.0" />
         <PackageReference Include="FastEndpoints.Swagger" Version="5.14.0" />
+        <PackageReference Include="MailKit" Version="4.1.0" />
         <PackageReference Include="MassTransit" Version="8.0.16" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
