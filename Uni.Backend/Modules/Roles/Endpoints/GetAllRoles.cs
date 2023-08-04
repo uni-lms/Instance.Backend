@@ -2,7 +2,7 @@
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Roles.Contract;
+using Uni.Backend.Modules.Roles.Contracts;
 
 namespace Uni.Backend.Modules.Roles.Endpoints;
 
@@ -28,7 +28,7 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
         {
             x.Summary = "Gets all available user roles";
             x.Description = """
-                               <b>Allowed scopes:</b> Anyone
+                               <b>Allowed scopes:</b> Any authorized user
                             """;
             x.Responses[200] = "List of roles fetched successfully";
             x.Responses[200] = "Unauthorized";
@@ -38,7 +38,7 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await _db.Roles.ToListAsync(ct);
+        var result = await _db.Roles.AsNoTracking().ToListAsync(ct);
 
         await SendAsync(result, cancellation: ct);
     }

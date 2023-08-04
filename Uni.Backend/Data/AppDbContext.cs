@@ -3,11 +3,12 @@ using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Courses.Contract;
+using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Genders.Contracts;
-using Uni.Backend.Modules.Groups.Contract;
-using Uni.Backend.Modules.Roles.Contract;
+using Uni.Backend.Modules.Groups.Contracts;
+using Uni.Backend.Modules.Roles.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
-using Uni.Backend.Modules.Users.Contract;
+using Uni.Backend.Modules.Users.Contracts;
 
 namespace Uni.Backend.Data;
 

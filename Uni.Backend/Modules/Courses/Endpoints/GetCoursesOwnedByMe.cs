@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Courses.Contract;
+using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 
@@ -48,6 +49,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
         }
 
         var user = await _db.Users
+            .AsNoTracking()
             .Where(e => e.Email == User.Identity!.Name!)
             .Include(e => e.OwnedCourses!)
             .ThenInclude(e => e.AssignedGroups)

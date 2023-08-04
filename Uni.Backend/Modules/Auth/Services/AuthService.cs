@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Unicode;
 using Uni.Backend.Modules.Auth.Contracts;
-using Uni.Backend.Modules.Users.Contract;
+using Uni.Backend.Modules.Users.Contracts;
 
 namespace Uni.Backend.Modules.Auth.Services;
 

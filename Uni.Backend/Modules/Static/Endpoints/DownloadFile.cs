@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Static.Contracts;
 
@@ -39,7 +40,10 @@ public class DownloadFile : Endpoint<SearchFileRequest>
 
     public override async Task HandleAsync(SearchFileRequest req, CancellationToken ct)
     {
-        var file = await _db.StaticFiles.FindAsync(new object?[] { req.FileId }, cancellationToken: ct);
+        var file = await _db.StaticFiles
+            .AsNoTracking()
+            .Where(e => e.Id == req.FileId)
+            .FirstOrDefaultAsync(ct);
 
         if (file is null)
         {

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Courses.Contract;
+using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 
@@ -61,6 +62,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
         }
 
         var user = await _db.Users
+            .AsNoTracking()
             .Where(e => e.Email == User.Identity.Name)
             .FirstOrDefaultAsync(ct);
 
@@ -69,7 +71,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
             ThrowError(_ => User.Identity!.Name!, "User not found", 404);
         }
 
-        var groupOfUser = await _db.Groups.Where(e => e.Students.Contains(user)).FirstOrDefaultAsync(ct);
+        var groupOfUser = await _db.Groups.AsNoTracking().Where(e => e.Students.Contains(user)).FirstOrDefaultAsync(ct);
 
         if (groupOfUser is null)
         {
@@ -80,15 +82,15 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
 
         var filteredCourses = req.Filter switch
         {
-            "archived" => _db.Courses.Where(e =>
+            "archived" => _db.Courses.AsNoTracking().Where(e =>
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester < groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
                 .Select(e => Map.FromEntity(e)),
-            "current" => _db.Courses.Where(e =>
+            "current" => _db.Courses.AsNoTracking().Where(e =>
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester == groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
                 .Select(e => Map.FromEntity(e)),
-            "upcoming" => _db.Courses.Where(e =>
+            "upcoming" => _db.Courses.AsNoTracking().Where(e =>
                     e.AssignedGroups.Contains(groupOfUser) && e.Semester > groupOfUser.CurrentSemester)
                 .Include(e => e.Owners)
                 .Select(e => Map.FromEntity(e)),

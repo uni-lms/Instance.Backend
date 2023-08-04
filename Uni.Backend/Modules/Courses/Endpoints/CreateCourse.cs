@@ -5,8 +5,9 @@ using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.Courses.Contract;
-using Uni.Backend.Modules.Users.Contract;
-using Group = Uni.Backend.Modules.Groups.Contract.Group;
+using Uni.Backend.Modules.Courses.Contracts;
+using Uni.Backend.Modules.Users.Contracts;
+using Group = Uni.Backend.Modules.Groups.Contracts.Group;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 

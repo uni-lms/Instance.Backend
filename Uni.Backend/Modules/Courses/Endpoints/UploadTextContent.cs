@@ -5,6 +5,7 @@ using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Courses.Contract;
+using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
 using Uni.Backend.Modules.Static.Services;
 

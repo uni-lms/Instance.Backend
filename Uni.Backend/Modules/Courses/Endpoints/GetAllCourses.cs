@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Courses.Contract;
+using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 
@@ -42,12 +43,15 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await _db.Courses
+        var courses = await _db.Courses
+            .AsNoTracking()
             .Include(e => e.AssignedGroups)
             .Include(e => e.Owners)
             .ThenInclude(e => e.Role)
-            .Select(e => Map.FromEntity(e))
             .ToListAsync(ct);
+
+        var result = courses.Select(e => Map.FromEntity(e)).ToList();
+
         await SendAsync(result, cancellation: ct);
     }
 }

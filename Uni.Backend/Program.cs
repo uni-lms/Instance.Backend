@@ -16,6 +16,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.ConfigureFastEndpoints();
+builder.ConfigureMassTransit();
 builder.ConfigureDatabase();
 builder.MapConfiguration();
 builder.RegisterDependencies();
