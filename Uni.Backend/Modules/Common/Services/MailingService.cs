@@ -34,6 +34,7 @@ public class MailingService
         await client.AuthenticateAsync(_configuration.SmtpConfiguration.Login,
             _configuration.SmtpConfiguration.Password);
         await client.SendAsync(message);
+        await client.DisconnectAsync(true);
     }
 
     private async Task<string> RenderTemplate(UserCredentials credentials, string groupName)
