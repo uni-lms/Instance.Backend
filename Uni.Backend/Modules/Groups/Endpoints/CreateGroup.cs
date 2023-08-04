@@ -104,7 +104,9 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
             usersData.Add(new UserCredentials
             {
                 Email = reqUser.Email,
-                Password = password
+                Password = password,
+                FirstName = reqUser.FirstName,
+                Patronymic = reqUser.Patronymic
             });
         }
 
