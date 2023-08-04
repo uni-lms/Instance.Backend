@@ -22,8 +22,9 @@ public class MailingService
             Subject = $"Регистрация в LMS {_configuration.Name}",
             Body = new TextPart("html") { Text = await RenderTemplate(data.Credentials, data.GroupName) }
         };
-        
-        message.From.Add(new MailboxAddress($"LMS {_configuration.Name}", _configuration.NoReplyEmail));
+
+        message.From.Add(new MailboxAddress($"LMS {_configuration.Name}",
+            _configuration.SmtpConfiguration.SenderAddress));
         message.To.Add(new MailboxAddress("", data.Credentials.Email));
     }
 
