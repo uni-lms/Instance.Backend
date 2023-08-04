@@ -18,6 +18,6 @@ public class CreateGroupMailingConsumer : IConsumer<CreateGroupMailingContract>
     public async Task Consume(ConsumeContext<CreateGroupMailingContract> context)
     {
         _logger.LogInformation("Sending letter to {Email}", context.Message.Credentials.Email);
-        await _mailingService.SendEmail(context.Message);
+        await _mailingService.SendEmailAsync(context.Message);
     }
 }

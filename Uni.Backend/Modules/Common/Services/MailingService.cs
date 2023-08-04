@@ -1,4 +1,5 @@
-﻿using MimeKit;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
 using Razor.Templating.Core;
 using Uni.Backend.Background.Mailings.Contracts;
 using Uni.Backend.Configuration;
@@ -15,7 +16,7 @@ public class MailingService
         _configuration = configuration;
     }
 
-    public async Task SendEmail(CreateGroupMailingContract data)
+    public async Task SendEmailAsync(CreateGroupMailingContract data)
     {
         var message = new MimeMessage
         {
@@ -26,6 +27,13 @@ public class MailingService
         message.From.Add(new MailboxAddress($"LMS {_configuration.Name}",
             _configuration.SmtpConfiguration.SenderAddress));
         message.To.Add(new MailboxAddress("", data.Credentials.Email));
+
+        using var client = new SmtpClient();
+        await client.ConnectAsync(_configuration.SmtpConfiguration.ServerUrl, _configuration.SmtpConfiguration.Port,
+            false);
+        await client.AuthenticateAsync(_configuration.SmtpConfiguration.Login,
+            _configuration.SmtpConfiguration.Password);
+        await client.SendAsync(message);
     }
 
     private async Task<string> RenderTemplate(UserCredentials credentials, string groupName)
