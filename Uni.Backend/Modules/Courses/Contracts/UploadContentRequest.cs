@@ -2,7 +2,7 @@
 
 namespace Uni.Backend.Modules.Courses.Contracts;
 
-public class UploadTextContentRequest
+public class UploadContentRequest
 {
     [BindFrom("courseId")]
     public Guid CourseId { get; set; }

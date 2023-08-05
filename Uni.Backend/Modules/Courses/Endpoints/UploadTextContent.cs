@@ -11,7 +11,7 @@ using Uni.Backend.Modules.Static.Services;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 
-public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
+public class UploadTextContent : Endpoint<UploadContentRequest, TextContent>
 {
     private readonly AppDbContext _db;
     private readonly StaticService _staticService;
@@ -52,7 +52,7 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
         });
     }
 
-    public override async Task HandleAsync(UploadTextContentRequest req, CancellationToken ct)
+    public override async Task HandleAsync(UploadContentRequest req, CancellationToken ct)
     {
         var course = await _db.Courses
             .Where(e => e.Id == req.CourseId)
