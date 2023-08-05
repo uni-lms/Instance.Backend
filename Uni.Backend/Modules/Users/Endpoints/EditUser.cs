@@ -38,7 +38,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
                             """;
             x.Responses[200] = "User updated successfully";
             x.Responses[401] = "Not authorized";
-            x.Responses[404] = "User was not found";
+            x.Responses[404] = "User (or related entity) was not found";
             x.Responses[500] = "Some other error occured";
         });
     }
@@ -49,7 +49,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
 
         if (user is null)
         {
-            ThrowError(e => e.Id, "User with this id was not found");
+            ThrowError(e => e.Id, "User with this id was not found", 404);
         }
 
         user.FirstName = req.FirstName;
@@ -64,7 +64,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
 
         if (newGender is null)
         {
-            ThrowError(e => e.Gender, "Gender was not found");
+            ThrowError(e => e.Gender, "Gender was not found", 404);
         }
 
         user.Gender = newGender;
