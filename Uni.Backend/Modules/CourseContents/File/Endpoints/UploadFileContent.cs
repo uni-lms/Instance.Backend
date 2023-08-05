@@ -3,13 +3,12 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
+using Uni.Backend.Modules.CourseContents.Common.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
-using Uni.Backend.Modules.CourseContents.Text.Contract;
-using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
 using Uni.Backend.Modules.Static.Services;
 
-namespace Uni.Backend.Modules.Courses.Endpoints;
+namespace Uni.Backend.Modules.CourseContents.File.Endpoints;
 
 public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
 {

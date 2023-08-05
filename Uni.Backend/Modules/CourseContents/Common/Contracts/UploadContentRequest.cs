@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 
-namespace Uni.Backend.Modules.Courses.Contracts;
+namespace Uni.Backend.Modules.CourseContents.Common.Contracts;
 
 public class UploadContentRequest
 {
