@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Groups.Contracts;
 
@@ -17,21 +18,24 @@ public class EditGroup: Endpoint<EditGroupRequest, GroupDto, GroupMapper>
     public override void Configure()
     {
         Version(1);
+        Roles(UserRoles.Administrator);
         Put("/groups/{id}");
         Options(x => x.WithTags("Groups"));
         Description(b => b
             .Produces(200)
             .ProducesProblemFE(401)
+            .ProducesProblemFE(403)
             .ProducesProblemFE(404)
             .ProducesProblemFE(500));
         Summary(x =>
         {
             x.Summary = "Edits group";
             x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
+                               <b>Allowed scopes:</b> Administrator
                             """;
             x.Responses[200] = "Group updated successfully";
             x.Responses[401] = "Not authorized";
+            x.Responses[403] = "Forbidden";
             x.Responses[404] = "Group was not found";
             x.Responses[500] = "Some other error occured";
         });
