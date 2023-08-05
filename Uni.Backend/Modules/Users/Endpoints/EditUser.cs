@@ -8,9 +8,8 @@ using Uni.Backend.Modules.Users.Contracts;
 
 namespace Uni.Backend.Modules.Users.Endpoints;
 
-public class EditUser: Endpoint<EditUserRequest, UserDto>
+public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
 {
-
     private readonly AppDbContext _db;
     private readonly StaticService _staticService;
 
@@ -64,7 +63,7 @@ public class EditUser: Endpoint<EditUserRequest, UserDto>
             var currentAvatar = await _db.StaticFiles
                 .Where(e => e.Id == user.Avatar.Id)
                 .FirstOrDefaultAsync(ct);
-            
+
             File.Delete(currentAvatar!.FilePath);
             _db.StaticFiles.Remove(currentAvatar);
         }
@@ -75,7 +74,7 @@ public class EditUser: Endpoint<EditUserRequest, UserDto>
 
             if (!fileSaveResult.IsSuccess)
             {
-                ThrowError("File is empty",422);
+                ThrowError("File is empty", 422);
             }
 
             var checksum = await _staticService.GetChecksum(req.Avatar, ct);
@@ -94,6 +93,7 @@ public class EditUser: Endpoint<EditUserRequest, UserDto>
         
         await _db.SaveChangesAsync(ct);
 
+        await SendAsync(Map.FromEntity(user), cancellation: ct);
 
     }
 }
