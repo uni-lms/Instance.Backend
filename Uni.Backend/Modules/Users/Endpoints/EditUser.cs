@@ -58,6 +58,18 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
         user.Patronymic = req.Patronymic;
         user.DateOfBirth = req.DateOfBirth;
 
+        var newGender = await _db.Genders
+            .AsNoTracking()
+            .Where(e => e.Id == req.Gender)
+            .FirstOrDefaultAsync(ct);
+
+        if (newGender is null)
+        {
+            ThrowError(e => e.Gender, "Gender was not found");
+        }
+
+        user.Gender = newGender;
+
         if (user.Avatar is not null)
         {
             var currentAvatar = await _db.StaticFiles
@@ -90,10 +102,9 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
             await _db.StaticFiles.AddAsync(staticFile, ct);
             user.Avatar = staticFile;
         }
-        
+
         await _db.SaveChangesAsync(ct);
 
         await SendAsync(Map.FromEntity(user), cancellation: ct);
-
     }
 }
