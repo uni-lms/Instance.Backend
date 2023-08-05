@@ -1,6 +1,5 @@
 ﻿using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
-using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Static.Contracts;
 using Uni.Backend.Modules.Static.Services;
