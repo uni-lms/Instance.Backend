@@ -79,6 +79,7 @@ public static class BuilderExtensions
         void Tags(Dictionary<string, string> t)
         {
             t["Roles"] = "API of users' roles (student, tutor, administrator)";
+            t["Course Materials"] = "API of materials on the courses";
             t["Courses"] = "API of courses (groups of materials and assignments)";
             t["Groups"] = "API of groups of students";
             t["Users"] = "API of users";
