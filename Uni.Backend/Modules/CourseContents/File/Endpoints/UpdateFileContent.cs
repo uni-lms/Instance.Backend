@@ -4,11 +4,12 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
+using Uni.Backend.Modules.CourseContents.Common.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
 
 namespace Uni.Backend.Modules.CourseContents.File.Endpoints;
 
-public class UpdateFileContent : Endpoint<UpdateFileContentRequest, FileContent>
+public class UpdateFileContent : Endpoint<UpdateContentRequest, FileContent>
 {
     private readonly AppDbContext _db;
 
@@ -46,7 +47,7 @@ public class UpdateFileContent : Endpoint<UpdateFileContentRequest, FileContent>
         });
     }
 
-    public override async Task HandleAsync(UpdateFileContentRequest req, CancellationToken ct)
+    public override async Task HandleAsync(UpdateContentRequest req, CancellationToken ct)
     {
         var fileContent = await _db.FileContents
             .Where(e => e.Id == req.Id)
@@ -76,7 +77,7 @@ public class UpdateFileContent : Endpoint<UpdateFileContentRequest, FileContent>
 
         if (block is null)
         {
-            ThrowError(e => e.Block, "Course block was not found");
+            ThrowError(e => e.Block, "Course block was not found", 404);
         }
 
         if (!fileContent.Course.Blocks.Contains(block))

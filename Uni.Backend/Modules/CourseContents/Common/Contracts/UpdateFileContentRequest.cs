@@ -1,9 +1,9 @@
 ﻿using FastEndpoints;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Uni.Backend.Modules.CourseContents.File.Contracts;
+namespace Uni.Backend.Modules.CourseContents.Common.Contracts;
 
-public class UpdateFileContentRequest
+public class UpdateContentRequest
 {
     [FromRoute]
     [BindFrom("id")]
