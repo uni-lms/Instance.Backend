@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using System.Security.Claims;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
@@ -41,7 +42,7 @@ public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
         {
             x.Summary = "Uploads file content to the course";
             x.Description = """
-                               <b>Allowed scopes:</b> Tutor, Administrator
+                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
                             """;
             x.Responses[201] = "Content uploaded successfully";
             x.Responses[401] = "Not authorized";
@@ -64,7 +65,17 @@ public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
             ThrowError("Course was not found", 404);
         }
 
-        var block = await _db.CourseBlocks.FindAsync(new object?[] { req.BlockId }, ct);
+        var user = await _db.Users.AsNoTracking().Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
+
+        if (User.HasClaim(ClaimTypes.Role, UserRoles.Tutor) && !course.Owners.Contains(user))
+        {
+            ThrowError(_ => User, "Access forbidden", 403);
+        }
+
+        var block = await _db.CourseBlocks
+            .AsNoTracking()
+            .Where(e => e.Id == req.BlockId)
+            .FirstOrDefaultAsync(ct);
 
         if (block is null)
         {
@@ -103,7 +114,7 @@ public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
             await _db.FileContents.AddAsync(content, ct);
             await _db.SaveChangesAsync(ct);
 
-            await SendCreatedAtAsync($"/courses/{req.CourseId}/text", null, content, cancellation: ct);
+            await SendCreatedAtAsync($"/courses/{req.CourseId}/file", null, content, cancellation: ct);
         }
         else
         {

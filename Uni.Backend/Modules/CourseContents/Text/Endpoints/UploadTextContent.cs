@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using System.Security.Claims;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
@@ -40,7 +41,7 @@ public class UploadTextContent : Endpoint<UploadContentRequest, TextContent>
         {
             x.Summary = "Uploads text content to the course";
             x.Description = """
-                               <b>Allowed scopes:</b> Tutor, Administrator
+                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
                             """;
             x.Responses[201] = "Content uploaded successfully";
             x.Responses[401] = "Not authorized";
@@ -62,8 +63,18 @@ public class UploadTextContent : Endpoint<UploadContentRequest, TextContent>
         {
             ThrowError("Course was not found", 404);
         }
+        
+        var user = await _db.Users.AsNoTracking().Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
 
-        var block = await _db.CourseBlocks.FindAsync(new object?[] { req.BlockId }, ct);
+        if (User.HasClaim(ClaimTypes.Role, UserRoles.Tutor) && !course.Owners.Contains(user))
+        {
+            ThrowError(_ => User, "Access forbidden", 403);
+        }
+
+        var block = await _db.CourseBlocks
+            .AsNoTracking()
+            .Where(e => e.Id == req.BlockId)
+            .FirstOrDefaultAsync(ct);
 
         if (block is null)
         {
