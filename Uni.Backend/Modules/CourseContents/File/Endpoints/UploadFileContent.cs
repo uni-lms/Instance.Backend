@@ -29,7 +29,7 @@ public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
         AllowFileUploads();
         Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
         Post("/courses/{CourseId}/file");
-        Options(x => x.WithTags("Courses"));
+        Options(x => x.WithTags("Course Materials"));
         Description(b => b
             .ClearDefaultProduces()
             .Produces<FileContent>(201, MediaTypeNames.Application.Json)
