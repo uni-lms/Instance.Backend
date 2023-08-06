@@ -37,7 +37,7 @@ public class UpdateCourse : Endpoint<UpdateCourseRequest, CourseDto, CoursesMapp
             x.Description = """
                                <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
                             """;
-            x.Responses[200] = "User updated successfully";
+            x.Responses[200] = "Course updated successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Forbidden";
             x.Responses[404] = "User was not found";
