@@ -1,5 +1,7 @@
 ﻿using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
+using Uni.Backend.Modules.CourseContents.File.Contracts;
+using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Groups.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
 
@@ -13,4 +15,6 @@ public class Course: BaseModel
     public int Semester { get; set; }
     public required List<User> Owners { get; set; }
     public required List<CourseBlock> Blocks { get; set; }
+    public required List<TextContent> TextContents { get; set; }
+    public required List<FileContent> FileContents { get; set; }
 }
