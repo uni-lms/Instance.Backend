@@ -33,7 +33,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
             x.Description = """
                                <b>Allowed scopes:</b> Any authorized user
                             """;
-            x.Responses[201] = "Course contents fetched successfully";
+            x.Responses[200] = "Course contents fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[404] = "Course was not found";
             x.Responses[500] = "Some other error occured";
@@ -59,11 +59,25 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
             return $"{e.LastName} {e.FirstName[0]}.{patronymicInitials}";
         }).ToList();
 
+        var textContents = _db.TextContents
+            .Where(e => e.Id == req.Id)
+            .Include(e => e.Block)
+            .GroupBy(e => e.Block.Name)
+            .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
+        
+        var fileContents = _db.FileContents
+            .Where(e => e.Id == req.Id)
+            .Include(e => e.Block)
+            .GroupBy(e => e.Block.Name)
+            .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
+
         var dto = new CourseContentsDto
         {
             Name = course.Name,
             Semester = course.Semester,
-            Owners = owners
+            Owners = owners,
+            TextContents = await textContents,
+            FileContents = await fileContents
         };
 
         await SendAsync(dto, cancellation: ct);
