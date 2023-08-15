@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
+using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
@@ -23,6 +24,11 @@ public class AppDbContext : DbContext
     public virtual DbSet<CourseBlock> CourseBlocks => Set<CourseBlock>();
     public virtual DbSet<TextContent> TextContents => Set<TextContent>();
     public virtual DbSet<FileContent> FileContents => Set<FileContent>();
+    public virtual DbSet<QuizContent> QuizContents => Set<QuizContent>();
+    public virtual DbSet<MultipleChoiceQuestion> MultipleChoiceQuestions => Set<MultipleChoiceQuestion>();
+    public virtual DbSet<QuestionChoice> QuestionChoices => Set<QuestionChoice>();
+    public virtual DbSet<QuizPassAttempt> QuizPassAttempts => Set<QuizPassAttempt>();
+    public virtual DbSet<AccruedPoint> AccruedPoints => Set<AccruedPoint>();
 
     public AppDbContext(DbContextOptions<AppDbContext> contextOptions) : base(contextOptions)
     {
