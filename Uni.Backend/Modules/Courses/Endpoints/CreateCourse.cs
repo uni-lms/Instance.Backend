@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
+using Uni.Backend.Modules.CourseContents.File.Contracts;
+using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
@@ -104,7 +106,9 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
             Semester = req.Semester,
             AssignedGroups = assignedGroups,
             Blocks = enabledBlocks,
-            Owners = owners
+            Owners = owners,
+            TextContents = new List<TextContent>(),
+            FileContents = new List<FileContent>()
         };
 
         await _db.Courses.AddAsync(course, ct);

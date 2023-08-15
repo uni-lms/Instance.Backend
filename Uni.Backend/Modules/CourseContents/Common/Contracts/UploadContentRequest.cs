@@ -1,8 +1,8 @@
 ﻿using FastEndpoints;
 
-namespace Uni.Backend.Modules.Courses.Contracts;
+namespace Uni.Backend.Modules.CourseContents.Common.Contracts;
 
-public class UploadTextContentRequest
+public class UploadContentRequest
 {
     [BindFrom("courseId")]
     public Guid CourseId { get; set; }

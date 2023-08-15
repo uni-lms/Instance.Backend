@@ -1,22 +1,23 @@
 ﻿using System.Net.Mime;
+using System.Security.Claims;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.CourseContents.Text.Contract;
-using Uni.Backend.Modules.Courses.Contract;
-using Uni.Backend.Modules.Courses.Contracts;
+using Uni.Backend.Modules.CourseContents.Common.Contracts;
+using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
 using Uni.Backend.Modules.Static.Services;
 
-namespace Uni.Backend.Modules.Courses.Endpoints;
+namespace Uni.Backend.Modules.CourseContents.File.Endpoints;
 
-public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
+public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
 {
+
     private readonly AppDbContext _db;
     private readonly StaticService _staticService;
 
-    public UploadTextContent(AppDbContext db, StaticService staticService)
+    public UploadFileContent(AppDbContext db, StaticService staticService)
     {
         _db = db;
         _staticService = staticService;
@@ -27,11 +28,11 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
         Version(1);
         AllowFileUploads();
         Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
-        Post("/courses/{CourseId}/text");
-        Options(x => x.WithTags("Courses"));
+        Post("/courses/{CourseId}/file");
+        Options(x => x.WithTags("Course Materials"));
         Description(b => b
             .ClearDefaultProduces()
-            .Produces<TextContent>(201, MediaTypeNames.Application.Json)
+            .Produces<FileContent>(201, MediaTypeNames.Application.Json)
             .ProducesProblemFE(401)
             .ProducesProblemFE(403)
             .ProducesProblemFE(404)
@@ -39,9 +40,9 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
             .ProducesProblemFE(500));
         Summary(x =>
         {
-            x.Summary = "Uploads text content to the course";
+            x.Summary = "Uploads file content to the course";
             x.Description = """
-                               <b>Allowed scopes:</b> Tutor, Administrator
+                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
                             """;
             x.Responses[201] = "Content uploaded successfully";
             x.Responses[401] = "Not authorized";
@@ -51,8 +52,8 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
             x.Responses[500] = "Some other error occured";
         });
     }
-
-    public override async Task HandleAsync(UploadTextContentRequest req, CancellationToken ct)
+    
+    public override async Task HandleAsync(UploadContentRequest req, CancellationToken ct)
     {
         var course = await _db.Courses
             .Where(e => e.Id == req.CourseId)
@@ -64,7 +65,17 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
             ThrowError("Course was not found", 404);
         }
 
-        var block = await _db.CourseBlocks.FindAsync(new object?[] { req.BlockId }, ct);
+        var user = await _db.Users.AsNoTracking().Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
+
+        if (User.HasClaim(ClaimTypes.Role, UserRoles.Tutor) && !course.Owners.Contains(user))
+        {
+            ThrowError(_ => User, "Access forbidden", 403);
+        }
+
+        var block = await _db.CourseBlocks
+            .AsNoTracking()
+            .Where(e => e.Id == req.BlockId)
+            .FirstOrDefaultAsync(ct);
 
         if (block is null)
         {
@@ -92,18 +103,18 @@ public class UploadTextContent : Endpoint<UploadTextContentRequest, TextContent>
 
             await _db.StaticFiles.AddAsync(file, ct);
             
-            var content = new TextContent
+            var content = new FileContent
             {
                 Course = course,
                 Block = block,
                 IsVisibleToStudents = req.IsVisibleToStudents,
-                Content = file
+                File = file
             };
 
-            await _db.TextContents.AddAsync(content, ct);
+            await _db.FileContents.AddAsync(content, ct);
             await _db.SaveChangesAsync(ct);
 
-            await SendCreatedAtAsync($"/courses/{req.CourseId}/text", null, content, cancellation: ct);
+            await SendCreatedAtAsync($"/courses/{req.CourseId}/file", null, content, cancellation: ct);
         }
         else
         {
