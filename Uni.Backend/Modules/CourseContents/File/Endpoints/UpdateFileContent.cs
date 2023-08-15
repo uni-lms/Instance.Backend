@@ -35,9 +35,7 @@ public class UpdateFileContent : Endpoint<UpdateContentRequest, FileContent>
         Summary(x =>
         {
             x.Summary = "Updates file content";
-            x.Description = """
-                            <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course";
             x.Responses[201] = "Content updated successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

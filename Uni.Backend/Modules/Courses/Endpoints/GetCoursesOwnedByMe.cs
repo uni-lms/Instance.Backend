@@ -3,7 +3,6 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
@@ -31,9 +30,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
         Summary(x =>
         {
             x.Summary = "Gets all courses owned by current user";
-            x.Description = """
-                               <b>Allowed scopes:</b> Tutor, Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Tutor, Administrator";
             x.Responses[200] = "List of courses fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

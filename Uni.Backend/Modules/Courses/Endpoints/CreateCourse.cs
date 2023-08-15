@@ -6,7 +6,6 @@ using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
-using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
 using Group = Uni.Backend.Modules.Groups.Contracts.Group;
@@ -38,9 +37,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
         Summary(x =>
         {
             x.Summary = "Creates new course";
-            x.Description = """
-                               <b>Allowed scopes:</b> Tutor, Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Tutor, Administrator";
             x.Responses[201] = "Course created";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

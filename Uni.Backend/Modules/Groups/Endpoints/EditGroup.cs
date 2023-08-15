@@ -30,9 +30,7 @@ public class EditGroup: Endpoint<EditGroupRequest, GroupDto, GroupMapper>
         Summary(x =>
         {
             x.Summary = "Edits group";
-            x.Description = """
-                               <b>Allowed scopes:</b> Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Administrator";
             x.Responses[200] = "Group updated successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Forbidden";

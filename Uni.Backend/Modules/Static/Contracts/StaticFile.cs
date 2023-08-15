@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Uni.Backend.Data;
 
 namespace Uni.Backend.Modules.Static.Contracts;
 

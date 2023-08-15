@@ -33,9 +33,7 @@ public class DeleteTextContents: Endpoint<SearchEntityRequest>
         Summary(x =>
         {
             x.Summary = "Permanently deletes text content from course";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course";
             x.Responses[204] = "Content deleted successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

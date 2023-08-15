@@ -41,9 +41,7 @@ public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
         Summary(x =>
         {
             x.Summary = "Uploads file content to the course";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course";
             x.Responses[201] = "Content uploaded successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";
@@ -95,7 +93,7 @@ public class UploadFileContent: Endpoint<UploadContentRequest, FileContent>
             var file = new StaticFile
             {
                 Id = result.FileId!,
-                Checksum = await _staticService.GetChecksum(req.Content, ct),
+                Checksum = await StaticService.GetChecksum(req.Content, ct),
                 FileName = req.Content.FileName,
                 FilePath = result.FilePath!,
                 VisibleName = req.VisibleName

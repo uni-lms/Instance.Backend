@@ -26,9 +26,7 @@ public class DeleteFile : Endpoint<SearchFileRequest>
         Summary(x =>
         {
             x.Summary = "Permanently deletes static file";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
             x.Responses[204] = "Static file deleted successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[404] = "File was not found";

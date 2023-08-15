@@ -1,6 +1,5 @@
 ﻿using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
-using Uni.Backend.Modules.CourseContents.Abstractions;
 using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;

@@ -30,9 +30,7 @@ public class DeleteUser: Endpoint<SearchEntityRequest>
         Summary(x =>
         {
             x.Summary = "Permanently deletes user";
-            x.Description = """
-                               <b>Allowed scopes:</b> Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Administrator";
             x.Responses[204] = "User deleted successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

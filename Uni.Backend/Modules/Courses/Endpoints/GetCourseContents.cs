@@ -30,9 +30,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
         Summary(x =>
         {
             x.Summary = "Gets content of the course";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
             x.Responses[200] = "Course contents fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[404] = "Course was not found";

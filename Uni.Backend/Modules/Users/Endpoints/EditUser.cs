@@ -33,9 +33,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
         Summary(x =>
         {
             x.Summary = "Edits user";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
             x.Responses[200] = "User updated successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[404] = "User (or related entity) was not found";
@@ -88,7 +86,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper>
                 ThrowError("File is empty", 422);
             }
 
-            var checksum = await _staticService.GetChecksum(req.Avatar, ct);
+            var checksum = await StaticService.GetChecksum(req.Avatar, ct);
             var staticFile = new StaticFile
             {
                 Id = fileSaveResult.FileId!,

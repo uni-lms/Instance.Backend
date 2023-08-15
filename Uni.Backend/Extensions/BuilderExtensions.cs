@@ -76,6 +76,24 @@ public static class BuilderExtensions
 
     public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder)
     {
+        builder.Services.SwaggerDocument(o =>
+        {
+            o.AutoTagPathSegmentIndex = 0;
+            o.MaxEndpointVersion = 1;
+            o.ShortSchemaNames = true;
+            o.TagDescriptions = Tags;
+            o.DocumentSettings = s => DocumentSettings(s, "v1");
+        });
+        return;
+
+        void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s, string version)
+        {
+            s.Title = "UNI API";
+            s.Description = "API of the learning management system \"UNI\"";
+            s.DocumentName = version;
+            s.Version = version;
+        }
+
         void Tags(Dictionary<string, string> t)
         {
             t["Roles"] = "API of users' roles (student, tutor, administrator)";
@@ -86,22 +104,5 @@ public static class BuilderExtensions
             t["Auth"] = "API for signing in/up users";
             t["Static"] = "API for management static files";
         }
-
-        void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s, string version)
-        {
-            s.Title = "UNI API";
-            s.Description = "API of the learning management system \"UNI\"";
-            s.DocumentName = version;
-            s.Version = version;
-        }
-
-        builder.Services.SwaggerDocument(o =>
-        {
-            o.AutoTagPathSegmentIndex = 0;
-            o.MaxEndpointVersion = 1;
-            o.ShortSchemaNames = true;
-            o.TagDescriptions = Tags;
-            o.DocumentSettings = s => DocumentSettings(s, "v1");
-        });
     }
 }

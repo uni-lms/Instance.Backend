@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseContents.Common.Contracts;
-using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 
 namespace Uni.Backend.Modules.CourseContents.Text.Endpoints;
@@ -36,9 +35,7 @@ public class UpdateTextContent : Endpoint<UpdateContentRequest, TextContent>
         Summary(x =>
         {
             x.Summary = "Updates text content";
-            x.Description = """
-                            <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course";
             x.Responses[201] = "Content updated successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

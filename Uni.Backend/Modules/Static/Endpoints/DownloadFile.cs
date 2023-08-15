@@ -1,5 +1,4 @@
 ﻿using FastEndpoints;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Static.Contracts;
@@ -28,9 +27,7 @@ public class DownloadFile : Endpoint<SearchFileRequest>
         Summary(x =>
         {
             x.Summary = "Downloads static file";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
             x.Responses[200] = "File exposed successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[404] = "File was not found";

@@ -3,7 +3,6 @@ using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
-using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Genders.Contracts;
 using Uni.Backend.Modules.Groups.Contracts;

@@ -2,7 +2,7 @@
 
 public class FileSaveResult
 {
-    public bool IsSuccess { get; set; }
-    public string? FilePath { get; set; }
-    public string? FileId { get; set; }
+    public bool IsSuccess { get; init; }
+    public string? FilePath { get; init; }
+    public string? FileId { get; init; }
 }

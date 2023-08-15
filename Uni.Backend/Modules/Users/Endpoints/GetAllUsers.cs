@@ -30,9 +30,7 @@ public class GetAllUsers : EndpointWithoutRequest<List<UserDto>, UserMapper>
         Summary(x =>
         {
             x.Summary = "Gets all users";
-            x.Description = """
-                               <b>Allowed scopes:</b> Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Administrator";
             x.Responses[200] = "List of users fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

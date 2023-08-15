@@ -30,9 +30,7 @@ public class GetAllGroups : EndpointWithoutRequest<List<GroupDto>, GroupMapper>
         Summary(x =>
         {
             x.Summary = "Gets list of all groups";
-            x.Description = """
-                               <b>Allowed scopes:</b> Tutor, Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Tutor, Administrator";
             x.Responses[200] = "Successfully fetched list of groups";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

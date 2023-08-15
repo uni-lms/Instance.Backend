@@ -40,7 +40,7 @@ public class StaticService
         };
     }
 
-    public async Task<string> GetChecksum(IFormFile file, CancellationToken ct = default)
+    public static async Task<string> GetChecksum(IFormFile file, CancellationToken ct = default)
     {
         using var md5 = MD5.Create();
         using var streamReader = new StreamReader(file.OpenReadStream());

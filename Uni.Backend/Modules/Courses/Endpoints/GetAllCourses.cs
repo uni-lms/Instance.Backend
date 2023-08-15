@@ -3,7 +3,6 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
@@ -31,9 +30,7 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
         Summary(x =>
         {
             x.Summary = "Gets list of all courses";
-            x.Description = """
-                               <b>Allowed scopes:</b> Administrator
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Administrator";
             x.Responses[200] = "List of courses fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

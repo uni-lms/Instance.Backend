@@ -3,14 +3,13 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
-using Uni.Backend.Modules.Courses.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 
 public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<CourseDto>, CoursesMapper>
 {
-    private static readonly string[] AllowedFilters = new[] { "archived", "current", "upcoming" };
+    private static readonly string[] AllowedFilters = { "archived", "current", "upcoming" };
     private readonly AppDbContext _db;
 
     public GetEnrolledCourses(AppDbContext db)
@@ -32,9 +31,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
         Summary(x =>
         {
             x.Summary = "Gets all courses current user is enrolled in";
-            x.Description = """
-                               <b>Allowed scopes:</b> Student
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Student";
             x.Responses[200] = "List of courses fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";
@@ -77,8 +74,6 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
         {
             ThrowError(_ => "Group", "User doesn't exist in any of groups");
         }
-
-        ;
 
         var filteredCourses = req.Filter switch
         {

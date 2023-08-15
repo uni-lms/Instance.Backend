@@ -33,9 +33,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
         Summary(x =>
         {
             x.Summary = "Uploads new static file";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
             x.Responses[201] = "File uploaded successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[422] = "Can't upload empty file";
@@ -46,7 +44,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
     public override async Task HandleAsync(UploadFileRequest req, CancellationToken ct)
     {
 
-        var checksum = await _staticService.GetChecksum(req.File, ct);
+        var checksum = await StaticService.GetChecksum(req.File, ct);
         var oldFile = await _db.StaticFiles.Where(e => e.Checksum == checksum).FirstOrDefaultAsync(ct);
 
         if (oldFile is not null)
@@ -83,7 +81,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse>
         {
             FileId = staticFile.Id,
             VisibleName = req.VisibleName,
-            Checksum = checksum,
+            Checksum = checksum
         }, 201, cancellation: ct);
     }
 }

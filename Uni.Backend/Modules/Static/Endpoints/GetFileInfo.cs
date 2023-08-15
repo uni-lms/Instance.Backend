@@ -28,9 +28,7 @@ public class GetFileInfo : Endpoint<SearchFileRequest, FileResponse>
         Summary(x =>
         {
             x.Summary = "Gets information about uploaded file";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any authorized user
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any authorized user";
             x.Responses[200] = "File information fetched successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[404] = "File was not found";

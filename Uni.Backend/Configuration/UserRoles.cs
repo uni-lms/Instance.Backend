@@ -2,9 +2,9 @@
 
 public static class UserRoles
 {
-    public static readonly string Student = "Student";
-    public static readonly string Tutor = "Tutor";
-    public static readonly string Administrator = "Administrator";
+    public const string Student = "Student";
+    public const string Tutor = "Tutor";
+    public const string Administrator = "Administrator";
 
     private static readonly string[] MinimumRequiredStudent = { "Student", "Tutor", "Administrator" };
     private static readonly string[] MinimumRequiredTutor = { "Tutor", "Administrator" };

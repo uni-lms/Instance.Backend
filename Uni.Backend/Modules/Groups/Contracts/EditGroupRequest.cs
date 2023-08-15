@@ -1,15 +1,14 @@
 ﻿using FastEndpoints;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Uni.Backend.Modules.Groups.Contracts;
 
 public class EditGroupRequest
 {
-    [FromRoute]
-    [BindFrom("id")]
-    public Guid Id { get; set; }
+    [FromRoute] [BindFrom("id")] public Guid Id { get; [UsedImplicitly] set; }
 
-    public required string Name { get; set; }
-    public int CurrentSemester { get; set; }
-    public int MaxSemester { get; set; }
+    public required string Name { get; [UsedImplicitly] set; }
+    public int CurrentSemester { get; [UsedImplicitly] set; }
+    public int MaxSemester { get; [UsedImplicitly] set; }
 }

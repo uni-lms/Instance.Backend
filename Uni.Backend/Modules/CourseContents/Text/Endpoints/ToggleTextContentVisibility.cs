@@ -35,9 +35,7 @@ public class ToggleTextContentVisibility : Endpoint<SearchEntityRequest, TextCon
         Summary(x =>
         {
             x.Summary = "Toggles visibility of the text content";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes course to which the material belongs
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any Administrator, Tutor who ownes course to which the material belongs";
             x.Responses[200] = "Content visibility toggled successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Access forbidden";

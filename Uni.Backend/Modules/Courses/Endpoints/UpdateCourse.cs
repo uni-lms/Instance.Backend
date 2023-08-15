@@ -34,9 +34,7 @@ public class UpdateCourse : Endpoint<UpdateCourseRequest, CourseDto, CoursesMapp
         Summary(x =>
         {
             x.Summary = "Edits course";
-            x.Description = """
-                               <b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course
-                            """;
+            x.Description = "<b>Allowed scopes:</b> Any Administrator, Tutor who ownes the course";
             x.Responses[200] = "Course updated successfully";
             x.Responses[401] = "Not authorized";
             x.Responses[403] = "Forbidden";
