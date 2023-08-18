@@ -45,10 +45,15 @@ public class AppDbContext : DbContext {
     );
 
     modelBuilder.Entity<CourseBlock>().HasData(
-      new CourseBlock { Id = new Guid("e6cb3460-fb09-43c1-84b4-3de4542470f5"), Name = "LabWorks" },
-      new CourseBlock { Id = new Guid("90f395b7-aba3-4720-a338-d0260801c185"), Name = "Lectures" },
-      new CourseBlock { Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"), Name = "CourseProject" },
-      new CourseBlock { Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification" }
+      new CourseBlock
+        { Id = new Guid("e6cb3460-fb09-43c1-84b4-3de4542470f5"), Name = "LabWorks", Courses = new List<Course>() },
+      new CourseBlock
+        { Id = new Guid("90f395b7-aba3-4720-a338-d0260801c185"), Name = "Lectures", Courses = new List<Course>() },
+      new CourseBlock
+        { Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"), Name = "CourseProject", Courses = new List<Course>() },
+      new CourseBlock {
+        Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification", Courses = new List<Course>()
+      }
     );
   }
 }
