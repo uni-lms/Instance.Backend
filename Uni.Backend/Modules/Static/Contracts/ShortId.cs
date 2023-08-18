@@ -8,8 +8,7 @@ public static class ShortId {
     var base64 = Convert.ToBase64String(guid.ToByteArray());
     return base64
       .Replace("+", "-")
-      .Replace("/", "_")
-      .Substring(0, base64.Length - 2);
+      .Replace("/", "_")[..^2];
   }
 
   public static Guid ToGuid(string value) {
