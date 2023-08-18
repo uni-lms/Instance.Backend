@@ -95,6 +95,7 @@ public static class BuilderExtensions {
       t["Users"] = "API of users";
       t["Auth"] = "API for signing in/up users";
       t["Static"] = "API for management static files";
+      t["Quizzes"] = "API for management quizzes in courses";
     }
   }
 }
