@@ -16,5 +16,5 @@ exclude:
   - name: "CollectionNeverUpdated.Global"
   - name: "MemberCanBeMadeStatic.Global"
   - name: "MemberCanBeMadeStatic.Local"
-  - name: "ClassNeverInstantiated.Local"
+  - name: "ClassNeverInstantiated.Global"
   - name: "ReplaceSliceWithRangeIndexer"
