@@ -84,7 +84,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper> {
         Checksum = checksum,
         FileName = req.Avatar.FileName,
         FilePath = fileSaveResult.FilePath!,
-        VisibleName = Path.GetFileNameWithoutExtension(fileSaveResult.FilePath!)
+        VisibleName = Path.GetFileNameWithoutExtension(fileSaveResult.FilePath!),
       };
 
       await _db.StaticFiles.AddAsync(staticFile, ct);

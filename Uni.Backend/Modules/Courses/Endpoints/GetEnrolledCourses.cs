@@ -83,7 +83,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
           e.AssignedGroups.Contains(groupOfUser) && e.Semester > groupOfUser.CurrentSemester)
         .Include(e => e.Owners)
         .Select(e => Map.FromEntity(e)),
-      _ => throw new ArgumentOutOfRangeException()
+      _ => throw new ArgumentOutOfRangeException(),
     };
 
     await SendAsync(await filteredCourses.ToListAsync(ct), 200, ct);

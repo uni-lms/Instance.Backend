@@ -14,7 +14,7 @@ public static class UserRoles {
       "Student"       => MinimumRequiredStudent,
       "Tutor"         => MinimumRequiredTutor,
       "Administrator" => MinimumRequiredAdministrator,
-      _               => throw new ArgumentOutOfRangeException(roleName)
+      _               => throw new ArgumentOutOfRangeException(roleName),
     };
   }
 }

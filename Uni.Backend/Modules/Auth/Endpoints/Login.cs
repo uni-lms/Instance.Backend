@@ -65,7 +65,7 @@ public class Login : Endpoint<LoginRequest, LoginResponse> {
 
         await SendAsync(new LoginResponse {
           Email = req.Email,
-          Token = jwtToken
+          Token = jwtToken,
         }, cancellation: ct);
       }
       else {

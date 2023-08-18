@@ -49,7 +49,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse> {
       await SendAsync(new FileResponse {
         Checksum = checksum,
         FileId = oldFile.Id,
-        VisibleName = oldFile.VisibleName
+        VisibleName = oldFile.VisibleName,
       }, cancellation: ct);
       return;
     }
@@ -65,7 +65,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse> {
       Checksum = checksum,
       FileName = req.File.FileName,
       FilePath = fileSaveResult.FilePath!,
-      VisibleName = req.VisibleName
+      VisibleName = req.VisibleName,
     };
 
     await _db.StaticFiles.AddAsync(staticFile, ct);
@@ -74,7 +74,7 @@ public class UploadFile : Endpoint<UploadFileRequest, FileResponse> {
     await SendAsync(new FileResponse {
       FileId = staticFile.Id,
       VisibleName = req.VisibleName,
-      Checksum = checksum
+      Checksum = checksum,
     }, 201, cancellation: ct);
   }
 }

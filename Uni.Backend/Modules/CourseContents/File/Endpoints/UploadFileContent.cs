@@ -87,7 +87,7 @@ public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
         Checksum = await StaticService.GetChecksum(req.Content, ct),
         FileName = req.Content.FileName,
         FilePath = result.FilePath!,
-        VisibleName = req.VisibleName
+        VisibleName = req.VisibleName,
       };
 
       await _db.StaticFiles.AddAsync(file, ct);
@@ -96,7 +96,7 @@ public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
         Course = course,
         Block = block,
         IsVisibleToStudents = req.IsVisibleToStudents,
-        File = file
+        File = file,
       };
 
       await _db.FileContents.AddAsync(content, ct);

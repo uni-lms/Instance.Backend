@@ -16,7 +16,7 @@ public class StaticService {
   public async Task<FileSaveResult> SaveFile(IFormFile file, CancellationToken ct = default) {
     if (file.Length <= 0) {
       return new FileSaveResult {
-        IsSuccess = false
+        IsSuccess = false,
       };
     }
 
@@ -32,7 +32,7 @@ public class StaticService {
     return new FileSaveResult {
       IsSuccess = true,
       FileId = fileId,
-      FilePath = path
+      FilePath = path,
     };
   }
 

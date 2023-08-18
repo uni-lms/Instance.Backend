@@ -21,7 +21,7 @@ public class MailingService {
   public async Task SendEmailAsync(CreateGroupMailingContract data) {
     var message = new MimeMessage {
       Subject = $"Регистрация в LMS {_configuration.Name}",
-      Body = new TextPart("html") { Text = await RenderTemplate(data.Credentials, data.GroupName) }
+      Body = new TextPart("html") { Text = await RenderTemplate(data.Credentials, data.GroupName) },
     };
 
     message.From.Add(new MailboxAddress($"LMS {_configuration.Name}",
@@ -42,7 +42,7 @@ public class MailingService {
       { "Credentials", credentials },
       { "GroupName", groupName },
       { "Domain", _configuration.Domain },
-      { "University", _configuration.Name }
+      { "University", _configuration.Name },
     };
     return await RazorTemplateEngine.RenderAsync("/Templates/Mailings/CreateGroupCredentials.cshtml",
       viewBagOrViewData: viewBag);

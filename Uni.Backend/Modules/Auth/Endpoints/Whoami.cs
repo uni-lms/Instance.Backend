@@ -29,7 +29,7 @@ public class Whoami : EndpointWithoutRequest<WhoamiResponse> {
   public override async Task HandleAsync(CancellationToken ct) {
     var result = new WhoamiResponse {
       Email = User.Identity?.Name ?? "",
-      Role = User.FindAll(ClaimTypes.Role).ToList()[0].Value
+      Role = User.FindAll(ClaimTypes.Role).ToList()[0].Value,
     };
     await SendAsync(result, cancellation: ct);
   }

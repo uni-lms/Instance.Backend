@@ -95,14 +95,14 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
         Role = role,
         Gender = gender,
         PasswordHash = passwordHash,
-        PasswordSalt = passwordSalt
+        PasswordSalt = passwordSalt,
       });
 
       usersData.Add(new UserCredentials {
         Email = reqUser.Email,
         Password = password,
         FirstName = reqUser.FirstName,
-        Patronymic = reqUser.Patronymic
+        Patronymic = reqUser.Patronymic,
       });
     }
 
@@ -118,12 +118,12 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
       Name = req.Name,
       CurrentSemester = req.CurrentSemester,
       MaxSemester = req.MaxSemester,
-      Students = users
+      Students = users,
     };
 
     var result = new CreateGroupDto {
       Group = Map.FromEntity(group),
-      UsersData = usersData
+      UsersData = usersData,
     };
 
     await _db.Groups.AddAsync(group, ct);
@@ -134,7 +134,7 @@ public class CreateGroup : Endpoint<CreateGroupRequest, CreateGroupDto, GroupMap
         await _bus.Publish(
           new CreateGroupMailingContract {
             Credentials = userData,
-            GroupName = group.Name
+            GroupName = group.Name,
           },
           ct
         );

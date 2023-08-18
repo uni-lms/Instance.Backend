@@ -75,7 +75,7 @@ public class Signup : Endpoint<SignupRequest, SignupResponse> {
       PasswordSalt = passwordSalt,
       Role = role,
       Gender = gender,
-      Avatar = avatar
+      Avatar = avatar,
     };
 
     await _db.Users.AddAsync(user, ct);
@@ -85,7 +85,7 @@ public class Signup : Endpoint<SignupRequest, SignupResponse> {
       FirstName = req.FirstName,
       LastName = req.LastName,
       Email = req.Email,
-      Password = password
+      Password = password,
     };
 
     await SendCreatedAtAsync("/auth/register", null, result, cancellation: ct);

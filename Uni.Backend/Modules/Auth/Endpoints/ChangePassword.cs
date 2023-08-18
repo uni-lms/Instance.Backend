@@ -52,7 +52,7 @@ public class ChangePassword : Endpoint<ChangePasswordRequest, EmptyResponse> {
 
     if (!_authService.ValidateCredentials(user, new LoginRequest {
         Email = "",
-        Password = req.OldPassword
+        Password = req.OldPassword,
       })) {
       ThrowError("Wrong password", 401);
     }

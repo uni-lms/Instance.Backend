@@ -71,7 +71,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       Semester = course.Semester,
       Owners = owners,
       TextContents = await textContents,
-      FileContents = await fileContents
+      FileContents = await fileContents,
     };
 
     await SendAsync(dto, cancellation: ct);

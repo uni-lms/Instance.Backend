@@ -98,7 +98,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
       Blocks = enabledBlocks,
       Owners = owners,
       TextContents = new List<TextContent>(),
-      FileContents = new List<FileContent>()
+      FileContents = new List<FileContent>(),
     };
 
     await _db.Courses.AddAsync(course, ct);
