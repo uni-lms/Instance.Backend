@@ -52,7 +52,8 @@ public class AppDbContext : DbContext {
       new CourseBlock
         { Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"), Name = "CourseProject", Courses = new List<Course>() },
       new CourseBlock {
-        Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification", Courses = new List<Course>()
+        Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"), Name = "FinalCertification",
+        Courses = new List<Course>(),
       }
     );
   }

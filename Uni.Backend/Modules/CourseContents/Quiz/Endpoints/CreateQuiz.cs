@@ -86,6 +86,6 @@ public class CreateQuiz : Endpoint<CreateQuizRequest, QuizDto, QuizMapper> {
     await _db.QuizContents.AddAsync(quiz, ct);
     await _db.SaveChangesAsync(ct);
 
-    await SendCreatedAtAsync($"/quizzes", null, Map.FromEntity(quiz), cancellation: ct);
+    await SendCreatedAtAsync("/quizzes", null, Map.FromEntity(quiz), cancellation: ct);
   }
 }
