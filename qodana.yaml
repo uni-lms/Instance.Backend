@@ -18,3 +18,4 @@ exclude:
   - name: "MemberCanBeMadeStatic.Local"
   - name: "ClassNeverInstantiated.Global"
   - name: "ReplaceSliceWithRangeIndexer"
+  - name: "ReplaceSubstringWithRangeIndexer"
