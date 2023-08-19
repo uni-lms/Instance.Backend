@@ -46,14 +46,17 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
 
   public override async Task HandleAsync(UpdateQuizRequest req, CancellationToken ct) {
 
-    var quiz = await _db.QuizContents.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+    var quiz = await _db.QuizContents
+      .Where(e => e.Id == req.Id)
+      .Include(e => e.Course)
+      .FirstOrDefaultAsync(ct);
 
     if (quiz is null) {
       ThrowError("Quiz was not found", 404);
     }
     
     var course = await _db.Courses
-      .Where(e => e.Id == req.CourseId)
+      .Where(e => e.Id == quiz.Course.Id)
       .Include(e => e.Blocks)
       .FirstOrDefaultAsync(ct);
 
