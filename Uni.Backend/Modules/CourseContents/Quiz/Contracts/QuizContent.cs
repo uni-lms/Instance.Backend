@@ -14,4 +14,5 @@ public class QuizContent : BaseModel {
   public required List<MultipleChoiceQuestion> Questions { get; set; }
   public required Course Course { get; set; }
   public required CourseBlock CourseBlock { get; set; }
+  public bool IsVisibleToStudents { get; set; }
 }
