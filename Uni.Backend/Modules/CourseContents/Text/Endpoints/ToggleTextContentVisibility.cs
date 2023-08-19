@@ -23,7 +23,7 @@ public class ToggleTextContentVisibility : Endpoint<SearchEntityRequest, TextCon
   public override void Configure() {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
-    Put("/materials/text/{id}/toggle-visibility");
+    Patch("/materials/text/{id}/toggle-visibility");
     Options(x => x.WithTags("Course Materials"));
     Description(b => b
       .ClearDefaultProduces()

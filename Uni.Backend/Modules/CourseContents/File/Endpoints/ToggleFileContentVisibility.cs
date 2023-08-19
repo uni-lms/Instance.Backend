@@ -23,7 +23,7 @@ public class ToggleFileContentVisibility : Endpoint<SearchEntityRequest, FileCon
   public override void Configure() {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
-    Put("/materials/file/{id}/toggle-visibility");
+    Patch("/materials/file/{id}/toggle-visibility");
     Options(x => x.WithTags("Course Materials"));
     Description(b => b
       .ClearDefaultProduces()
