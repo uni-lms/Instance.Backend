@@ -72,17 +72,34 @@ public class CreateQuiz : Endpoint<CreateQuizRequest, QuizDto, QuizMapper> {
       ThrowError("This block wasn't enabled in the course", 409);
     }
 
+    var questions = new List<MultipleChoiceQuestion>();
+
+    foreach (var question in req.Questions) {
+      var choices = question.Choices.Select(choice => new QuestionChoice
+        { Text = choice.Text, IsCorrect = choice.IsCorrect, AmountOfPoints = choice.AmountOfPoints, }).ToList();
+
+      var questionToCreate = new MultipleChoiceQuestion {
+        Text = question.Text,
+        Choices = choices,
+        IsMultipleChoicesAllowed = question.IsMultipleChoicesAllowed,
+        IsGivingPointsForIncompleteAnswersEnabled = question.IsGivingPointsForIncompleteAnswersEnabled,
+        MaximumPoints = question.MaximumPoints,
+      };
+      
+      questions.Add(questionToCreate);
+    }
+
     var quiz = new QuizContent {
       Title = req.Title,
       Description = req.Description,
       TimeLimit = req.TimeLimit,
       IsQuestionsShuffled = req.IsQuestionsShuffled,
       AvailableUntil = req.AvailableUntil,
-      Questions = new List<MultipleChoiceQuestion>(),
+      Questions = questions,
       Course = course,
       CourseBlock = block,
     };
-    
+
     await _db.QuizContents.AddAsync(quiz, ct);
     await _db.SaveChangesAsync(ct);
 
