@@ -2,10 +2,13 @@
 
 using JetBrains.Annotations;
 
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Uni.Backend.Modules.CourseContents.Common.Contracts;
 
 public class UploadContentRequest {
+  [FromRoute]
   [BindFrom("courseId")]
   public Guid CourseId { get; [UsedImplicitly] set; }
 

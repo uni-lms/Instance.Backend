@@ -28,7 +28,7 @@ public class UploadTextContent : Endpoint<UploadContentRequest, TextContent> {
     Version(1);
     AllowFileUploads();
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
-    Post("/courses/{CourseId}/text");
+    Post("/courses/{courseId}/text");
     Options(x => x.WithTags("Course Materials"));
     Description(b => b
       .ClearDefaultProduces()
