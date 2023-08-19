@@ -22,8 +22,8 @@ public class CreateQuiz : Endpoint<CreateQuizRequest, QuizDto, QuizMapper> {
   public override void Configure() {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
-    Post("/quiz");
-    Options(x => x.WithTags("Quizzes"));
+    Post("/courses/{courseId}/quiz");
+    Options(x => x.WithTags("Course Materials"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<QuizDto>(201, MediaTypeNames.Application.Json)
