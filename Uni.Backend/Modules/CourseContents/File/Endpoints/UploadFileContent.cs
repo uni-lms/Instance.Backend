@@ -72,7 +72,7 @@ public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
       .FirstOrDefaultAsync(ct);
 
     if (block is null) {
-      ThrowError("Course block was not found");
+      ThrowError("Course block was not found", 404);
     }
 
     if (!course.Blocks.Contains(block)) {
