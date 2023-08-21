@@ -22,7 +22,7 @@ public class DeleteFileContents : Endpoint<SearchEntityRequest> {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Delete("/materials/file/{id}");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Files"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces(204)

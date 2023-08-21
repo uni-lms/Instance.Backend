@@ -89,13 +89,14 @@ public static class BuilderExtensions {
 
     void Tags(Dictionary<string, string> t) {
       t["Roles"] = "API of users' roles (student, tutor, administrator)";
-      t["Course Materials"] = "API of materials on the courses";
+      t["Course Materials. Text"] = "API for management file contents in courses";
+      t["Course Materials. Quizzes"] = "API for management quizzes in courses";
+      t["Course Materials. Files"] = "API for management text contents in courses";
       t["Courses"] = "API of courses (groups of materials and assignments)";
       t["Groups"] = "API of groups of students";
       t["Users"] = "API of users";
       t["Auth"] = "API for signing in/up users";
       t["Static"] = "API for management static files";
-      t["Quizzes"] = "API for management quizzes in courses";
     }
   }
 }

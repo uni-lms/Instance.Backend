@@ -19,7 +19,7 @@ public class GetQuizPassAttemptsList : Endpoint<SearchEntityRequest, List<QuizPa
   public override void Configure() {
     Version(1);
     Get("/materials/quiz/{id}/attempts");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<List<QuizPassAttemptDto>>()

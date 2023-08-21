@@ -24,7 +24,7 @@ public class UpdateTextContent : Endpoint<UpdateContentRequest, TextContent> {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Put("/materials/text/{id}");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Text"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<TextContent>(200, MediaTypeNames.Application.Json)

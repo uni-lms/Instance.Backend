@@ -18,7 +18,7 @@ public class UpdateQuizPassAttempt : Endpoint<UpdateQuizPassAttemptRequest, Quiz
   public override void Configure() {
     Version(1);
     Patch("/quiz-attempt/{id}");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces(200)

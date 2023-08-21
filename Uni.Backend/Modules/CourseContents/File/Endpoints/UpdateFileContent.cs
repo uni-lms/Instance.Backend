@@ -24,7 +24,7 @@ public class UpdateFileContent : Endpoint<UpdateContentRequest, FileContent> {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Put("/materials/file/{id}");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Files"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<FileContent>(200, MediaTypeNames.Application.Json)

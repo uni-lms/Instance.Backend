@@ -24,7 +24,7 @@ public class ToggleFileContentVisibility : Endpoint<SearchEntityRequest, FileCon
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Patch("/materials/file/{id}/toggle-visibility");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Files"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<FileContent>(200, MediaTypeNames.Application.Json)

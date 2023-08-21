@@ -23,7 +23,7 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Put("/materials/quiz/{id}");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<QuizDto>(201, MediaTypeNames.Application.Json)

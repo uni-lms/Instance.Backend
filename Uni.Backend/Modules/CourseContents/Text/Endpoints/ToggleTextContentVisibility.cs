@@ -24,7 +24,7 @@ public class ToggleTextContentVisibility : Endpoint<SearchEntityRequest, TextCon
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Patch("/materials/text/{id}/toggle-visibility");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Text"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<TextContent>(200, MediaTypeNames.Application.Json)

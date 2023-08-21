@@ -25,7 +25,7 @@ public class ToggleQuizVisibility : Endpoint<SearchEntityRequest, QuizDto, QuizM
     Version(1);
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Patch("/materials/quiz/{id}/toggle-visibility");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces<FileContent>(200, MediaTypeNames.Application.Json)

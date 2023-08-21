@@ -18,7 +18,7 @@ public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPa
   public override void Configure() {
     Version(1);
     Post("/materials/quiz/{id}/start-attempt");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces(200)

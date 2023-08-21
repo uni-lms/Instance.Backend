@@ -21,7 +21,7 @@ public class
   public override void Configure() {
     Version(1);
     Get("/quiz-attempt/{id}/details");
-    Options(x => x.WithTags("Course Materials"));
+    Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
       .Produces(200)
