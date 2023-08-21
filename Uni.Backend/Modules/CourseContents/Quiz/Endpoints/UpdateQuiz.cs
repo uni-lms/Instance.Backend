@@ -45,7 +45,6 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
   }
 
   public override async Task HandleAsync(UpdateQuizRequest req, CancellationToken ct) {
-
     var quiz = await _db.QuizContents
       .Where(e => e.Id == req.Id)
       .Include(e => e.Course)
@@ -54,7 +53,7 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
     if (quiz is null) {
       ThrowError("Quiz was not found", 404);
     }
-    
+
     var course = await _db.Courses
       .Where(e => e.Id == quiz.Course.Id)
       .Include(e => e.Blocks)
@@ -95,20 +94,19 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
         IsGivingPointsForIncompleteAnswersEnabled = question.IsGivingPointsForIncompleteAnswersEnabled,
         MaximumPoints = question.MaximumPoints,
       };
-      
+
       questions.Add(questionToCreate);
     }
 
-    quiz = new QuizContent {
-      Title = req.Title,
-      Description = req.Description,
-      TimeLimit = req.TimeLimit,
-      IsQuestionsShuffled = req.IsQuestionsShuffled,
-      AvailableUntil = req.AvailableUntil,
-      Questions = questions,
-      Course = course,
-      CourseBlock = block,
-    };
+
+    quiz.Title = req.Title;
+    quiz.Description = req.Description;
+    quiz.TimeLimit = req.TimeLimit;
+    quiz.IsQuestionsShuffled = req.IsQuestionsShuffled;
+    quiz.AvailableUntil = req.AvailableUntil;
+    quiz.Questions = questions;
+    quiz.Course = course;
+    quiz.CourseBlock = block;
 
     await _db.QuizContents.AddAsync(quiz, ct);
     await _db.SaveChangesAsync(ct);
