@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contracts;
+using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Backend.Modules.Courses.Contracts;
 
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
 
-public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto> {
+public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto, QuizMapper> {
   private readonly AppDbContext _db;
 
   public GetCourseContents(AppDbContext db) {
@@ -54,24 +55,36 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       return $"{e.LastName} {e.FirstName[0]}.{patronymicInitials}";
     }).ToList();
 
-    var textContents = _db.TextContents
-      .Where(e => e.Id == req.Id)
+    var textContents = await _db.TextContents
+      .Where(e => e.Course.Id == req.Id)
       .Include(e => e.Block)
+      .Include(e => e.Content)
       .GroupBy(e => e.Block.Name)
       .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
 
-    var fileContents = _db.FileContents
-      .Where(e => e.Id == req.Id)
+    var fileContents = await _db.FileContents
+      .Where(e => e.Course.Id == req.Id)
       .Include(e => e.Block)
+      .Include(e => e.File)
       .GroupBy(e => e.Block.Name)
       .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
+
+    var quizzes = await _db.QuizContents
+      .Where(e => e.Course.Id == req.Id)
+      .GroupBy(e => e.CourseBlock.Name)
+      .ToDictionaryAsync(
+        e => e.Key,
+        e => e.Select(q => Map.FromEntity(q)).ToList(),
+        cancellationToken: ct
+      );
 
     var dto = new CourseContentsDto {
       Name = course.Name,
       Semester = course.Semester,
       Owners = owners,
-      TextContents = await textContents,
-      FileContents = await fileContents,
+      TextContents = textContents,
+      FileContents = fileContents,
+      Quizzes = quizzes,
     };
 
     await SendAsync(dto, cancellation: ct);

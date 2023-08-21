@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 
 using Uni.Backend.Modules.CourseContents.File.Contracts;
+using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 
 
@@ -12,4 +13,5 @@ public class CourseContentsDto {
   public required List<string> Owners { [UsedImplicitly] get; set; }
   public required Dictionary<string, List<TextContent>> TextContents { [UsedImplicitly] get; set; }
   public required Dictionary<string, List<FileContent>> FileContents { [UsedImplicitly] get; set; }
+  public required Dictionary<string, List<QuizDto>> Quizzes { [UsedImplicitly] get; set; }
 }

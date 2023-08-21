@@ -7,13 +7,13 @@ public class StaticFile {
   public required string Id { get; set; }
 
   [JsonIgnore]
-  public required string Checksum { get; set; }
+  public string? Checksum { get; set; }
 
   public required string VisibleName { get; set; }
 
   [JsonIgnore]
-  public required string FileName { get; set; }
+  public string? FileName { get; set; }
 
   [JsonIgnore]
-  public required string FilePath { get; set; }
+  public string? FilePath { get; set; }
 }
