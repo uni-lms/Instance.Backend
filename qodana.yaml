@@ -19,3 +19,4 @@ exclude:
   - name: "ClassNeverInstantiated.Global"
   - name: "ReplaceSliceWithRangeIndexer"
   - name: "ReplaceSubstringWithRangeIndexer"
+  - name: "LoopCanBeConvertedToQuery"

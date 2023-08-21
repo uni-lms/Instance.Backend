@@ -76,7 +76,7 @@ public class CreateQuiz : Endpoint<CreateQuizRequest, QuizDto, QuizMapper> {
 
     foreach (var question in req.Questions) {
       var choices = question.Choices.Select(choice => new QuestionChoice
-        { Text = choice.Text, IsCorrect = choice.IsCorrect, AmountOfPoints = choice.AmountOfPoints, }).ToList();
+        { Text = choice.Text, IsCorrect = choice.IsCorrect, AmountOfPoints = choice.AmountOfPoints }).ToList();
 
       var questionToCreate = new MultipleChoiceQuestion {
         Text = question.Text,

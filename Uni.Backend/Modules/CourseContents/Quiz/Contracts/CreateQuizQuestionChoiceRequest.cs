@@ -1,7 +1,10 @@
-﻿namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+﻿using JetBrains.Annotations;
+
+
+namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 
 public class CreateQuizQuestionChoiceRequest {
-  public required string Text { get; set; }
-  public int AmountOfPoints { get; set; }
-  public bool IsCorrect { get; set; }
+  public required string Text { get; [UsedImplicitly] set; }
+  public int AmountOfPoints { get; [UsedImplicitly] set; }
+  public bool IsCorrect { get; [UsedImplicitly] set; }
 }

@@ -1,9 +1,12 @@
-﻿namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts; 
+﻿using JetBrains.Annotations;
+
+
+namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts; 
 
 public class CreateQuizQuestionRequest {
-  public required string Text { get; set; }
-  public int MaximumPoints { get; set; }
-  public bool IsMultipleChoicesAllowed { get; set; }
-  public bool IsGivingPointsForIncompleteAnswersEnabled { get; set; }
-  public required List<CreateQuizQuestionChoiceRequest> Choices { get; set; }
+  public required string Text { get; [UsedImplicitly] set; }
+  public int MaximumPoints { get; [UsedImplicitly] set; }
+  public bool IsMultipleChoicesAllowed { get; [UsedImplicitly] set; }
+  public bool IsGivingPointsForIncompleteAnswersEnabled { get; [UsedImplicitly] set; }
+  public required List<CreateQuizQuestionChoiceRequest> Choices { get; [UsedImplicitly] set; }
 }
