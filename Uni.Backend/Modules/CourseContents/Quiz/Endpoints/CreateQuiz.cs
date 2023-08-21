@@ -98,6 +98,7 @@ public class CreateQuiz : Endpoint<CreateQuizRequest, QuizDto, QuizMapper> {
       Questions = questions,
       Course = course,
       CourseBlock = block,
+      AmountOfAllowedAttempts = req.AmountOfAllowedAttempts,
     };
 
     await _db.QuizContents.AddAsync(quiz, ct);

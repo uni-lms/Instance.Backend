@@ -104,6 +104,7 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
     quiz.TimeLimit = req.TimeLimit;
     quiz.IsQuestionsShuffled = req.IsQuestionsShuffled;
     quiz.AvailableUntil = req.AvailableUntil;
+    quiz.AmountOfAllowedAttempts = req.AmountOfAllowedAttempts;
     quiz.Questions = questions;
     quiz.Course = course;
     quiz.CourseBlock = block;

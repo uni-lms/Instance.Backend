@@ -18,4 +18,5 @@ public class UpdateQuizRequest {
   public bool IsQuestionsShuffled { get; [UsedImplicitly] set; }
   public DateTime AvailableUntil { get; [UsedImplicitly] set; }
   public required List<CreateQuizQuestionRequest> Questions { get; [UsedImplicitly] set; }
+  public int AmountOfAllowedAttempts { get; set; }
 }

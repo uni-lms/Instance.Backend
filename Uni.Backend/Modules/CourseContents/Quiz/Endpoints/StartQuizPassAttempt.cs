@@ -46,6 +46,14 @@ public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPa
 
     var user = await _db.Users.AsNoTracking().Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
 
+    var amountOfSavedAttempts = await _db.QuizPassAttempts
+      .Where(e => e.User.Email == user.Email && e.Quiz.Id == quiz.Id)
+      .CountAsync(ct);
+
+    if (amountOfSavedAttempts >= quiz.AmountOfAllowedAttempts) {
+      ThrowError("You can't start another attempt for the quiz, limit exceeded", 409);
+    }
+
     var attempt = new QuizPassAttempt {
       Quiz = quiz,
       AccruedPoints = Enumerable.Empty<AccruedPoint>().ToList(),

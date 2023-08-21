@@ -15,4 +15,5 @@ public class QuizContent : BaseModel {
   public required Course Course { get; set; }
   public required CourseBlock CourseBlock { get; set; }
   public bool IsVisibleToStudents { get; set; }
+  public int AmountOfAllowedAttempts { get; set; }
 }
