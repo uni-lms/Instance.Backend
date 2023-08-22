@@ -47,7 +47,7 @@ public class GetFileInfo : Endpoint<SearchFileRequest, FileResponse> {
     }
 
     await SendAsync(new FileResponse {
-      Checksum = file.Checksum,
+      Checksum = file.Checksum!,
       FileId = file.Id,
       VisibleName = file.VisibleName,
     }, cancellation: ct);

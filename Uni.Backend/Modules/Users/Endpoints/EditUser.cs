@@ -67,7 +67,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper> {
         .Where(e => e.Id == user.Avatar.Id)
         .FirstOrDefaultAsync(ct);
 
-      File.Delete(currentAvatar!.FilePath);
+      File.Delete(currentAvatar!.FilePath!);
       _db.StaticFiles.Remove(currentAvatar);
     }
 

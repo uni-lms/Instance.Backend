@@ -39,7 +39,7 @@ public class DeleteFile : Endpoint<SearchFileRequest> {
       ThrowError("File was not found", 404);
     }
 
-    File.Delete(file.FilePath);
+    File.Delete(file.FilePath!);
     _db.StaticFiles.Remove(file);
     await _db.SaveChangesAsync(ct);
 

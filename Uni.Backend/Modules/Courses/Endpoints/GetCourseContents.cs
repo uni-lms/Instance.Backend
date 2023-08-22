@@ -59,14 +59,14 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       .Where(e => e.Course.Id == req.Id)
       .Include(e => e.Block)
       .Include(e => e.Content)
-      .GroupBy(e => e.Block.Name)
+      .GroupBy(e => e.Block!.Name)
       .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
 
     var fileContents = await _db.FileContents
       .Where(e => e.Course.Id == req.Id)
       .Include(e => e.Block)
       .Include(e => e.File)
-      .GroupBy(e => e.Block.Name)
+      .GroupBy(e => e.Block!.Name)
       .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
 
     var quizzes = await _db.QuizContents

@@ -17,6 +17,6 @@ public class CreateQuizRequest {
   public TimeSpan TimeLimit { get; [UsedImplicitly] set; }
   public bool IsQuestionsShuffled { get; [UsedImplicitly] set; }
   public DateTime AvailableUntil { get; [UsedImplicitly] set; }
-  public int AmountOfAllowedAttempts { get; set; }
+  public int AmountOfAllowedAttempts { get; [UsedImplicitly] set; }
   public required List<CreateQuizQuestionRequest> Questions { get; [UsedImplicitly] set; }
 }
