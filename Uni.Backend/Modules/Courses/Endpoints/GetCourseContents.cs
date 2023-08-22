@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contracts;
+using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Backend.Modules.Courses.Contracts;
+using Uni.Backend.Modules.Static.Contracts;
 
 
 namespace Uni.Backend.Modules.Courses.Endpoints;
@@ -67,7 +69,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       .Include(e => e.Block)
       .Include(e => e.File)
       .GroupBy(e => e.Block!.Name)
-      .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
+      .ToDictionaryAsync(e => e.Key, e => e.Select(k => FileContentToDto(k)).ToList(), ct);
 
     var quizzes = await _db.QuizContents
       .Where(e => e.Course.Id == req.Id)
@@ -88,5 +90,15 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
     };
 
     await SendAsync(dto, cancellation: ct);
+  }
+
+  private FileContentDto FileContentToDto(FileContent e) {
+    return new FileContentDto {
+      IsVisibleToStudents = e.IsVisibleToStudents,
+      File = new StaticFileDto {
+        Id = e.File.Id,
+        VisibleName = e.File.VisibleName,
+      }
+    };
   }
 }
