@@ -11,7 +11,7 @@ public class CourseContentsDto {
   public required string Name { [UsedImplicitly] get; set; }
   public int Semester { [UsedImplicitly] get; set; }
   public required List<string> Owners { [UsedImplicitly] get; set; }
-  public required Dictionary<string, List<TextContent>> TextContents { [UsedImplicitly] get; set; }
+  public required Dictionary<string, List<TextContentDto>> TextContents { [UsedImplicitly] get; set; }
   public required Dictionary<string, List<FileContentDto>> FileContents { [UsedImplicitly] get; set; }
   public required Dictionary<string, List<QuizDto>> Quizzes { [UsedImplicitly] get; set; }
 }

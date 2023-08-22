@@ -8,6 +8,7 @@ using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
 
@@ -62,14 +63,14 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       .Include(e => e.Block)
       .Include(e => e.Content)
       .GroupBy(e => e.Block!.Name)
-      .ToDictionaryAsync(e => e.Key, e => e.ToList(), ct);
+      .ToDictionaryAsync(e => e.Key, e => e.Select(TextContentToDto).ToList(), ct);
 
     var fileContents = await _db.FileContents
       .Where(e => e.Course.Id == req.Id)
       .Include(e => e.Block)
       .Include(e => e.File)
       .GroupBy(e => e.Block!.Name)
-      .ToDictionaryAsync(e => e.Key, e => e.Select(k => FileContentToDto(k)).ToList(), ct);
+      .ToDictionaryAsync(e => e.Key, e => e.Select(FileContentToDto).ToList(), ct);
 
     var quizzes = await _db.QuizContents
       .Where(e => e.Course.Id == req.Id)
@@ -98,6 +99,16 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       File = new StaticFileDto {
         Id = e.File.Id,
         VisibleName = e.File.VisibleName,
+      }
+    };
+  }
+
+  private TextContentDto TextContentToDto(TextContent e) {
+    return new TextContentDto {
+      IsVisibleToStudents = e.IsVisibleToStudents,
+      Content = new StaticFileDto {
+        Id = e.Content.Id,
+        VisibleName = e.Content.VisibleName,
       }
     };
   }
