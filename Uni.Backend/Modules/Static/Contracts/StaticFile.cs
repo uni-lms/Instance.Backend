@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-
-namespace Uni.Backend.Modules.Static.Contracts;
+﻿namespace Uni.Backend.Modules.Static.Contracts;
 
 public class StaticFile {
   public required string Id { get; set; }

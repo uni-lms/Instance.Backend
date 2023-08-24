@@ -99,7 +99,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       File = new StaticFileDto {
         Id = e.File.Id,
         VisibleName = e.File.VisibleName,
-      }
+      },
     };
   }
 
@@ -109,7 +109,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       Content = new StaticFileDto {
         Id = e.Content.Id,
         VisibleName = e.Content.VisibleName,
-      }
+      },
     };
   }
 }

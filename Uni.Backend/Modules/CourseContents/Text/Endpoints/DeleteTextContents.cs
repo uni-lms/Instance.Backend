@@ -59,7 +59,7 @@ public class DeleteTextContents : Endpoint<SearchEntityRequest> {
       ThrowError(_ => User, "Access forbidden", 403);
     }
 
-    System.IO.File.Delete(textContent.Content.FilePath!);
+    System.IO.File.Delete(textContent.Content.FilePath);
 
     _db.StaticFiles.Remove(textContent.Content);
     _db.TextContents.Remove(textContent);
