@@ -17,6 +17,7 @@ public class DownloadFile : Endpoint<SearchFileRequest> {
 
   public override void Configure() {
     Version(1);
+    AllowAnonymous();
     Get("/static/{FileId}/download");
     Options(x => x.WithTags("Static"));
     Description(b => b
