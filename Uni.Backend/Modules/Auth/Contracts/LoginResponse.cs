@@ -1,7 +1,9 @@
-﻿namespace Uni.Backend.Modules.Auth.Contracts;
+﻿using JetBrains.Annotations;
 
-public class LoginResponse
-{
-    public required string Email { get; set; }
-    public required string Token { get; set; }
+
+namespace Uni.Backend.Modules.Auth.Contracts;
+
+public class LoginResponse {
+  public required string Email { [UsedImplicitly] get; set; }
+  public required string Token { [UsedImplicitly] get; set; }
 }

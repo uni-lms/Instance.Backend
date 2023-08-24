@@ -1,6 +1,3 @@
 ﻿namespace Namespace.Modules.ModuleName.Contracts;
 
-public class ModuleNamesMapper
-{
-    
-}
+public class ModuleNamesMapper { }

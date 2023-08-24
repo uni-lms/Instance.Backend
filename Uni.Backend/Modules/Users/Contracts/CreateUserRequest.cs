@@ -1,11 +1,13 @@
-﻿namespace Uni.Backend.Modules.Users.Contracts;
+﻿using JetBrains.Annotations;
 
-public class CreateUserRequest
-{
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
-    public required string Patronymic { get; set; }
-    public DateOnly DateOfBirth { get; set; }
-    public required string Email { get; set; }
-    public required Guid Gender { get; set; }
+
+namespace Uni.Backend.Modules.Users.Contracts;
+
+public class CreateUserRequest {
+  public required string FirstName { get; [UsedImplicitly] set; }
+  public required string LastName { get; [UsedImplicitly] set; }
+  public required string Patronymic { get; [UsedImplicitly] set; }
+  public DateOnly DateOfBirth { get; [UsedImplicitly] set; }
+  public required string Email { get; [UsedImplicitly] set; }
+  public required Guid Gender { get; [UsedImplicitly] set; }
 }

@@ -1,0 +1,23 @@
+﻿version: "1.0"
+
+profile:
+  name: "qodana.starter"
+
+linter: "jetbrains/qodana-dotnet:latest"
+exclude:
+  - name: "All"
+    paths:
+      - "Uni.Templates"
+  - name: "ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator"
+  - name: "UnusedType.Global"
+  - name: "ParameterTypeCanBeEnumerable.Local"
+  - name: "ReturnTypeCanBeEnumerable.Global"
+  - name: "UnusedMember.Global"
+  - name: "CollectionNeverUpdated.Global"
+  - name: "MemberCanBeMadeStatic.Global"
+  - name: "MemberCanBeMadeStatic.Local"
+  - name: "ClassNeverInstantiated.Global"
+  - name: "ReplaceSliceWithRangeIndexer"
+  - name: "ReplaceSubstringWithRangeIndexer"
+  - name: "LoopCanBeConvertedToQuery"
+  - name: "ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator"

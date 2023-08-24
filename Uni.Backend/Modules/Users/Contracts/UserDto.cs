@@ -1,12 +1,14 @@
-﻿namespace Uni.Backend.Modules.Users.Contracts;
+﻿using JetBrains.Annotations;
 
-public class UserDto
-{
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
-    public string? Patronymic { get; set; }
-    public DateOnly? DateOfBirth { get; set; }
-    public string? Email { get; set; }
-    public string? RoleName { get; set; }
-    public string? GenderName { get; set; }
+
+namespace Uni.Backend.Modules.Users.Contracts;
+
+public class UserDto {
+  public required string FirstName { [UsedImplicitly] get; set; }
+  public required string LastName { [UsedImplicitly] get; set; }
+  public string? Patronymic { [UsedImplicitly] get; set; }
+  public DateOnly? DateOfBirth { [UsedImplicitly] get; set; }
+  public string? Email { [UsedImplicitly] get; set; }
+  public string? RoleName { get; set; }
+  public string? GenderName { get; set; }
 }

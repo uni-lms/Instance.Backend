@@ -1,11 +1,13 @@
-﻿namespace Uni.Backend.Modules.Courses.Contract;
+﻿using JetBrains.Annotations;
 
-public class CreateCourseRequest
-{
-    public required string Name { get; set; }
-    public required string Abbreviation { get; set; }
-    public required List<Guid> AssignedGroups { get; set; }
-    public required List<Guid> Blocks { get; set; }
-    public required List<Guid> Owners { get; set; }
-    public int Semester { get; set; }
+
+namespace Uni.Backend.Modules.Courses.Contracts;
+
+public class CreateCourseRequest {
+  public required string Name { get; [UsedImplicitly] set; }
+  public required string Abbreviation { get; [UsedImplicitly] set; }
+  public required List<Guid> AssignedGroups { get; [UsedImplicitly] set; }
+  public required List<Guid> Blocks { get; [UsedImplicitly] set; }
+  public required List<Guid> Owners { get; set; }
+  public int Semester { get; [UsedImplicitly] set; }
 }
