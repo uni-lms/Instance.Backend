@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-using Uni.Backend.Data;
+﻿using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.Courses.Contracts;
 

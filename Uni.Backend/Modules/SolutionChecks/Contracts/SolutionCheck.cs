@@ -1,5 +1,4 @@
 ﻿using Uni.Backend.Data;
-using Uni.Backend.Modules.Assignments.Contracts;
 using Uni.Backend.Modules.AssignmentSolutions.Contracts;
 using Uni.Backend.Modules.SolutionComments.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
