@@ -3,6 +3,7 @@ using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Genders.Contracts;
 using Uni.Backend.Modules.Roles.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
+using Uni.Backend.Modules.Teams.Contracts;
 
 
 namespace Uni.Backend.Modules.Users.Contracts;
@@ -19,4 +20,5 @@ public class User : BaseModel {
   public Role? Role { get; set; }
   public StaticFile? Avatar { get; set; }
   public List<Course>? OwnedCourses { get; set; }
+  public List<Team>? Teams { get; set; }
 }

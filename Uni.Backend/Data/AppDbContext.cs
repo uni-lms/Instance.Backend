@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Uni.Backend.Modules.Assignments.Contracts;
+using Uni.Backend.Modules.AssignmentSolutions.Contracts;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
@@ -8,13 +10,18 @@ using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Genders.Contracts;
 using Uni.Backend.Modules.Groups.Contracts;
 using Uni.Backend.Modules.Roles.Contracts;
+using Uni.Backend.Modules.SolutionChecks.Contracts;
+using Uni.Backend.Modules.SolutionComments.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
+using Uni.Backend.Modules.Teams.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
 
 
 namespace Uni.Backend.Data;
 
 public class AppDbContext : DbContext {
+  public virtual DbSet<Assignment> Assignments => Set<Assignment>();
+  public virtual DbSet<AssignmentSolution> AssignmentSolutions => Set<AssignmentSolution>();
   public virtual DbSet<Course> Courses => Set<Course>();
   public virtual DbSet<Group> Groups => Set<Group>();
   public virtual DbSet<Role> Roles => Set<Role>();
@@ -29,6 +36,9 @@ public class AppDbContext : DbContext {
   public virtual DbSet<QuestionChoice> QuestionChoices => Set<QuestionChoice>();
   public virtual DbSet<QuizPassAttempt> QuizPassAttempts => Set<QuizPassAttempt>();
   public virtual DbSet<AccruedPoint> AccruedPoints => Set<AccruedPoint>();
+  public virtual DbSet<SolutionCheck> SolutionChecks => Set<SolutionCheck>();
+  public virtual DbSet<SolutionComment> SolutionComments => Set<SolutionComment>();
+  public virtual DbSet<Team> Teams => Set<Team>();
 
   public AppDbContext(DbContextOptions<AppDbContext> contextOptions) : base(contextOptions) { }
 
