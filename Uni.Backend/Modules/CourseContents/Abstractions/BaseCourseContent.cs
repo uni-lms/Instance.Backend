@@ -10,8 +10,7 @@ namespace Uni.Backend.Modules.CourseContents.Abstractions;
 public abstract class BaseCourseContent : BaseModel {
   public required Course Course { get; init; }
 
-  [JsonIgnore]
-  public CourseBlock? Block { get; set; }
+  public required CourseBlock Block { get; set; }
 
   public bool IsVisibleToStudents { get; set; }
 }
