@@ -29,7 +29,7 @@ public class GetAllRoles : EndpointWithoutRequest<List<Role>> {
       x.Summary = "Gets all available user roles";
       x.Description = "<b>Allowed scopes:</b> Any authorized user";
       x.Responses[200] = "List of roles fetched successfully";
-      x.Responses[200] = "Unauthorized";
+      x.Responses[401] = "Unauthorized";
       x.Responses[500] = "Some other error occured";
     });
   }
