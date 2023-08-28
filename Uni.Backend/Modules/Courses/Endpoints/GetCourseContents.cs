@@ -1,9 +1,11 @@
 ﻿using System.Net.Mime;
+using System.Security.Claims;
 
 using FastEndpoints;
 
 using Microsoft.EntityFrameworkCore;
 
+using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contracts;
 using Uni.Backend.Modules.CourseContents.File.Contracts;
@@ -43,6 +45,8 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
   }
 
   public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct) {
+    var isStudent = User.HasClaim(ClaimTypes.Role, UserRoles.Student);
+    
     var course = await _db.Courses
       .AsNoTracking()
       .Where(e => e.Id == req.Id)
@@ -59,21 +63,21 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
     }).ToList();
 
     var textContents = await _db.TextContents
-      .Where(e => e.Course.Id == req.Id)
+      .Where(e => e.Course.Id == req.Id && (!isStudent || e.IsVisibleToStudents))
       .Include(e => e.Block)
       .Include(e => e.Content)
       .GroupBy(e => e.Block.Name)
       .ToDictionaryAsync(e => e.Key, e => e.Select(TextContentToDto).ToList(), ct);
 
     var fileContents = await _db.FileContents
-      .Where(e => e.Course.Id == req.Id)
+      .Where(e => e.Course.Id == req.Id && (!isStudent || e.IsVisibleToStudents))
       .Include(e => e.Block)
       .Include(e => e.File)
       .GroupBy(e => e.Block.Name)
       .ToDictionaryAsync(e => e.Key, e => e.Select(FileContentToDto).ToList(), ct);
 
     var quizzes = await _db.QuizContents
-      .Where(e => e.Course.Id == req.Id)
+      .Where(e => e.Course.Id == req.Id && (!isStudent || e.IsVisibleToStudents))
       .GroupBy(e => e.CourseBlock.Name)
       .ToDictionaryAsync(
         e => e.Key,
