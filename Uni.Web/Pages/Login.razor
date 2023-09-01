@@ -1,0 +1,42 @@
+﻿@page "/login"
+@layout EmptyLayout
+
+<PageTitle>Вход в систему | UNI Demo</PageTitle>
+
+<div class="d-flex flex-column align-content-center justify-center flex-wrap pa-5">
+    <MudText Typo="Typo.h3" Class="mb-5">Вход в систему</MudText>
+    <MudCard>
+        <MudCardContent Class="pa-3">
+            <MudTextField @bind-Value="Email" Label="Электронная почта" InputType="InputType.Email" Required="true" RequiredError="Укажите адрес электронной почты"/>
+            <MudTextField @bind-Value="Password" Label="Пароль" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" Required="true" RequiredError="Введите пароль"/>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary">Войти</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Secondary">Восстановить пароль</MudButton>
+        </MudCardActions>
+    </MudCard>
+</div>
+
+@code {
+
+    public string Email { get; set; }
+    public string Password { get; set; }
+
+    bool _isShow;
+    InputType _passwordInput = InputType.Password;
+    string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void TogglePasswordVisibility() {
+        @if (_isShow) {
+            _isShow = false;
+            _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+            _passwordInput = InputType.Password;
+        }
+        else {
+            _isShow = true;
+            _passwordInputIcon = Icons.Material.Filled.Visibility;
+            _passwordInput = InputType.Text;
+        }
+    }
+
+}
