@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Version>1.0.0-alpha.1</Version>
         <NoWarn>CS0108;CS0114</NoWarn>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -31,6 +32,12 @@
         <PackageReference Include="Serilog" Version="3.0.1"/>
         <PackageReference Include="Serilog.AspNetCore" Version="7.0.0"/>
         <PackageReference Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
