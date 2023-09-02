@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Uni.Backend/Uni.Backend.csproj", "Uni.Backend/"]
-RUN dotnet restore "Uni.Backend/Uni.Backend.csproj"
+COPY ["Uni.Backend.csproj", "Uni.Backend.csproj"]
+RUN dotnet restore "Uni.Backend.csproj"
 COPY . .
 WORKDIR "/src/Uni.Backend"
 RUN dotnet build "Uni.Backend.csproj" -c Release -o /app/build
