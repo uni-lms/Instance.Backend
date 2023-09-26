@@ -12,8 +12,8 @@ using Uni.Backend.Data;
 namespace Uni.Backend.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230821082823_AddAmountOfAttemptsToQuiz")]
-    partial class AddAmountOfAttemptsToQuiz
+    [Migration("20230818205831_AddManyToManyToCourseAndBlock")]
+    partial class AddManyToManyToCourseAndBlock
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("CourseUser");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseBlocks.Contracts.CourseBlock", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseBlocks.Contracts.CourseBlock", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace Uni.Backend.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.File.Contracts.FileContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.File.Contracts.FileContent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,7 +136,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("FileContents");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.AccruedPoint", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.AccruedPoint", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,7 +160,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("AccruedPoints");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,7 +189,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("MultipleChoiceQuestions");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuestionChoice", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuestionChoice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,14 +215,11 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("QuestionChoices");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<int>("AmountOfAllowedAttempts")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("AvailableUntil")
                         .HasColumnType("timestamp with time zone");
@@ -237,9 +234,6 @@ namespace Uni.Backend.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<bool>("IsQuestionsShuffled")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsVisibleToStudents")
                         .HasColumnType("boolean");
 
                     b.Property<TimeSpan?>("TimeLimit")
@@ -258,7 +252,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("QuizContents");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,7 +279,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("QuizPassAttempts");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Text.Contract.TextContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Text.Contract.TextContent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -315,7 +309,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("TextContents");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Courses.Contracts.Course", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Courses.Contracts.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -337,7 +331,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Genders.Contracts.Gender", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Genders.Contracts.Gender", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -364,7 +358,7 @@ namespace Uni.Backend.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contracts.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contracts.Group", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -385,7 +379,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Roles.Contracts.Role", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Roles.Contracts.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -417,7 +411,7 @@ namespace Uni.Backend.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Static.Contracts.StaticFile", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Static.Contracts.StaticFile", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -443,7 +437,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("StaticFiles");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Users.Contracts.User", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Users.Contracts.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -502,13 +496,13 @@ namespace Uni.Backend.Data.Migrations
 
             modelBuilder.Entity("CourseCourseBlock", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseBlocks.Contracts.CourseBlock", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseBlocks.Contracts.CourseBlock", null)
                         .WithMany()
                         .HasForeignKey("BlocksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Courses.Contracts.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contracts.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -517,13 +511,13 @@ namespace Uni.Backend.Data.Migrations
 
             modelBuilder.Entity("CourseGroup", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Groups.Contracts.Group", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Groups.Contracts.Group", null)
                         .WithMany()
                         .HasForeignKey("AssignedGroupsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Courses.Contracts.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contracts.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -532,34 +526,34 @@ namespace Uni.Backend.Data.Migrations
 
             modelBuilder.Entity("CourseUser", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Courses.Contracts.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contracts.Course", null)
                         .WithMany()
                         .HasForeignKey("OwnedCoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Users.Contracts.User", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Users.Contracts.User", null)
                         .WithMany()
                         .HasForeignKey("OwnersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.File.Contracts.FileContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.File.Contracts.FileContent", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseBlocks.Contracts.CourseBlock", "Block")
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseBlocks.Contracts.CourseBlock", "Block")
                         .WithMany()
                         .HasForeignKey("BlockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Courses.Contracts.Course", "Course")
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contracts.Course", "Course")
                         .WithMany("FileContents")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Static.Contracts.StaticFile", "File")
+                    b.HasOne("Uni.Instance.Backend.Modules.Static.Contracts.StaticFile", "File")
                         .WithMany()
                         .HasForeignKey("FileId");
 
@@ -570,44 +564,44 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("File");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.AccruedPoint", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.AccruedPoint", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", "Question")
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", null)
                         .WithMany("AccruedPoints")
                         .HasForeignKey("QuizPassAttemptId");
 
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", null)
                         .WithMany("Questions")
                         .HasForeignKey("QuizContentId");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuestionChoice", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuestionChoice", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", null)
                         .WithMany("Choices")
                         .HasForeignKey("MultipleChoiceQuestionId");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseBlocks.Contracts.CourseBlock", "CourseBlock")
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseBlocks.Contracts.CourseBlock", "CourseBlock")
                         .WithMany()
                         .HasForeignKey("CourseBlockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Courses.Contracts.Course", "Course")
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contracts.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -618,15 +612,15 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("CourseBlock");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", "Quiz")
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", "Quiz")
                         .WithMany()
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Users.Contracts.User", "User")
+                    b.HasOne("Uni.Instance.Backend.Modules.Users.Contracts.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -637,21 +631,21 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Text.Contract.TextContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Text.Contract.TextContent", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.CourseBlocks.Contracts.CourseBlock", "Block")
+                    b.HasOne("Uni.Instance.Backend.Modules.CourseBlocks.Contracts.CourseBlock", "Block")
                         .WithMany()
                         .HasForeignKey("BlockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Static.Contracts.StaticFile", "Content")
+                    b.HasOne("Uni.Instance.Backend.Modules.Static.Contracts.StaticFile", "Content")
                         .WithMany()
                         .HasForeignKey("ContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Uni.Backend.Modules.Courses.Contracts.Course", "Course")
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contracts.Course", "Course")
                         .WithMany("TextContents")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -664,21 +658,21 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Users.Contracts.User", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Users.Contracts.User", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Static.Contracts.StaticFile", "Avatar")
+                    b.HasOne("Uni.Instance.Backend.Modules.Static.Contracts.StaticFile", "Avatar")
                         .WithMany()
                         .HasForeignKey("AvatarId");
 
-                    b.HasOne("Uni.Backend.Modules.Genders.Contracts.Gender", "Gender")
+                    b.HasOne("Uni.Instance.Backend.Modules.Genders.Contracts.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId");
 
-                    b.HasOne("Uni.Backend.Modules.Groups.Contracts.Group", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Groups.Contracts.Group", null)
                         .WithMany("Students")
                         .HasForeignKey("GroupId");
 
-                    b.HasOne("Uni.Backend.Modules.Roles.Contracts.Role", "Role")
+                    b.HasOne("Uni.Instance.Backend.Modules.Roles.Contracts.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
 
@@ -689,29 +683,29 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.MultipleChoiceQuestion", b =>
                 {
                     b.Navigation("Choices");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizContent", b =>
                 {
                     b.Navigation("Questions");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts.QuizPassAttempt", b =>
                 {
                     b.Navigation("AccruedPoints");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Courses.Contracts.Course", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Courses.Contracts.Course", b =>
                 {
                     b.Navigation("FileContents");
 
                     b.Navigation("TextContents");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contracts.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contracts.Group", b =>
                 {
                     b.Navigation("Students");
                 });

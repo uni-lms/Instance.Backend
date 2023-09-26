@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Uni.Backend.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230725201656_AddAvatarToUser")]
-    partial class AddAvatarToUser
+    [Migration("20230725205004_AddListOfContentTypesToCourse")]
+    partial class AddListOfContentTypesToCourse
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,49 @@ namespace Uni.Backend.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Uni.Backend.Modules.Courses.Contract.Course", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContentTypes.Contracts.CourseContentType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CourseContentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e6cb3460-fb09-43c1-84b4-3de4542470f5"),
+                            Name = "LabWorks"
+                        },
+                        new
+                        {
+                            Id = new Guid("90f395b7-aba3-4720-a338-d0260801c185"),
+                            Name = "Lectures"
+                        },
+                        new
+                        {
+                            Id = new Guid("a37250cc-47f0-4ac9-9069-9709db0c89e9"),
+                            Name = "CourseProject"
+                        },
+                        new
+                        {
+                            Id = new Guid("e777af32-eedb-4078-9fdd-2f4d3f489087"),
+                            Name = "FinalCertification"
+                        });
+                });
+
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Courses.Contract.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +89,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Genders.Contracts.Gender", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Genders.Contracts.Gender", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +116,7 @@ namespace Uni.Backend.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contract.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contract.Group", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +142,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Roles.Contract.Role", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Roles.Contract.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +174,7 @@ namespace Uni.Backend.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Static.Contracts.StaticFile", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Static.Contracts.StaticFile", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -158,7 +200,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("StaticFiles");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Users.Contract.User", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Users.Contract.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,32 +262,39 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contract.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.CourseContentTypes.Contracts.CourseContentType", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Courses.Contract.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contract.Course", null)
+                        .WithMany("ContentTypes")
+                        .HasForeignKey("CourseId");
+                });
+
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contract.Group", b =>
+                {
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contract.Course", null)
                         .WithMany("AssignedGroups")
                         .HasForeignKey("CourseId");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Users.Contract.User", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Users.Contract.User", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Static.Contracts.StaticFile", "Avatar")
+                    b.HasOne("Uni.Instance.Backend.Modules.Static.Contracts.StaticFile", "Avatar")
                         .WithMany()
                         .HasForeignKey("AvatarId");
 
-                    b.HasOne("Uni.Backend.Modules.Courses.Contract.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contract.Course", null)
                         .WithMany("Owners")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("Uni.Backend.Modules.Genders.Contracts.Gender", "Gender")
+                    b.HasOne("Uni.Instance.Backend.Modules.Genders.Contracts.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId");
 
-                    b.HasOne("Uni.Backend.Modules.Groups.Contract.Group", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Groups.Contract.Group", null)
                         .WithMany("Students")
                         .HasForeignKey("GroupId");
 
-                    b.HasOne("Uni.Backend.Modules.Roles.Contract.Role", "Role")
+                    b.HasOne("Uni.Instance.Backend.Modules.Roles.Contract.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -258,14 +307,16 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Courses.Contract.Course", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Courses.Contract.Course", b =>
                 {
                     b.Navigation("AssignedGroups");
+
+                    b.Navigation("ContentTypes");
 
                     b.Navigation("Owners");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contract.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contract.Group", b =>
                 {
                     b.Navigation("Students");
                 });

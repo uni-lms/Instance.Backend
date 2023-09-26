@@ -25,7 +25,7 @@ namespace Uni.Backend.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Uni.Backend.Modules.Courses.Contract.Course", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Courses.Contract.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contract.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contract.Group", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Roles.Contract.Role", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Roles.Contract.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,7 +105,7 @@ namespace Uni.Backend.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Users.Contract.User", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Users.Contract.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,24 +151,24 @@ namespace Uni.Backend.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contract.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contract.Group", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Courses.Contract.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contract.Course", null)
                         .WithMany("AssignedGroups")
                         .HasForeignKey("CourseId");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Users.Contract.User", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Users.Contract.User", b =>
                 {
-                    b.HasOne("Uni.Backend.Modules.Courses.Contract.Course", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Courses.Contract.Course", null)
                         .WithMany("Owners")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("Uni.Backend.Modules.Groups.Contract.Group", null)
+                    b.HasOne("Uni.Instance.Backend.Modules.Groups.Contract.Group", null)
                         .WithMany("Students")
                         .HasForeignKey("GroupId");
 
-                    b.HasOne("Uni.Backend.Modules.Roles.Contract.Role", "Role")
+                    b.HasOne("Uni.Instance.Backend.Modules.Roles.Contract.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -177,14 +177,14 @@ namespace Uni.Backend.Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Courses.Contract.Course", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Courses.Contract.Course", b =>
                 {
                     b.Navigation("AssignedGroups");
 
                     b.Navigation("Owners");
                 });
 
-            modelBuilder.Entity("Uni.Backend.Modules.Groups.Contract.Group", b =>
+            modelBuilder.Entity("Uni.Instance.Backend.Modules.Groups.Contract.Group", b =>
                 {
                     b.Navigation("Students");
                 });
