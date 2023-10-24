@@ -1,10 +1,10 @@
-using Uni.Backend.Extensions;
-
 using FastEndpoints;
 using FastEndpoints.Swagger;
 
 using Serilog;
 using Serilog.Events;
+
+using Uni.Backend.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +31,9 @@ app.UseSerilogRequestLogging();
 app.ConfigureAuthorization();
 app.UseDefaultExceptionHandler();
 app.ConfigureFastEndpoints();
-app.UseSwaggerGen();
+app.UseSwaggerGen(c => {
+  c.Path = "/api/swagger/{documentName}/swagger.json";
+});
 app.ApplyMigrations();
 
 app.Run();
