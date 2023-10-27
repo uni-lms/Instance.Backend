@@ -8,5 +8,13 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/uni</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="uni@80.90.187.249" uuid="8ecf9730-4d6c-4f28-b6f4-baff048f2451">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://80.90.187.249:5432/uni?password=impeach&amp;user=dadyarri</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
