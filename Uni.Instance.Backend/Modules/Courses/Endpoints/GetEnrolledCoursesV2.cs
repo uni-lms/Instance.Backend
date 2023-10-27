@@ -70,7 +70,7 @@ public class GetEnrolledCoursesV2 : Endpoint<EnrolledCoursesFilterRequest, List<
     var groupOfUser = await _db.Groups.AsNoTracking().Where(e => e.Students.Contains(user)).FirstOrDefaultAsync(ct);
 
     if (groupOfUser is null) {
-      ThrowError(_ => "Group", "User doesn't exist in any of groups");
+      ThrowError("User doesn't exist in any of groups");
     }
 
     var filteredCourses = req.Filter switch {
