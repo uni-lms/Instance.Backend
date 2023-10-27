@@ -73,7 +73,7 @@ public static class BuilderExtensions {
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
     builder.Services.SwaggerDocument(o => {
       o.AutoTagPathSegmentIndex = 0;
-      o.MaxEndpointVersion = 1;
+      o.MaxEndpointVersion = 2;
       o.ShortSchemaNames = true;
       o.TagDescriptions = Tags;
       o.DocumentSettings = s => DocumentSettings(s, "v1");
