@@ -9,11 +9,12 @@ using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
+using Uni.Instance.Backend.Modules.Courses.Contracts;
 
 using Group = Uni.Backend.Modules.Groups.Contracts.Group;
 
 
-namespace Uni.Backend.Modules.Courses.Endpoints;
+namespace Uni.Instance.Backend.Modules.Courses.Endpoints;
 
 public class UpdateCourse : Endpoint<UpdateCourseRequest, CourseDto, CoursesMapper> {
   private readonly AppDbContext _db;

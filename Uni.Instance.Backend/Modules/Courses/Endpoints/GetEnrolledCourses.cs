@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Courses.Contracts;
+using Uni.Instance.Backend.Modules.Courses.Contracts;
 
 
-namespace Uni.Backend.Modules.Courses.Endpoints;
+namespace Uni.Instance.Backend.Modules.Courses.Endpoints;
 
 public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<CourseDto>, CoursesMapper> {
   private static readonly string[] AllowedFilters = { "archived", "current", "upcoming" };
