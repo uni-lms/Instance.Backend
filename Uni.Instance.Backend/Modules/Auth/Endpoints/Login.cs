@@ -56,7 +56,6 @@ public class Login : Endpoint<LoginRequest, LoginResponse> {
       if (_authService.ValidateCredentials(user, req)) {
         var jwtToken = JWTBearer.CreateToken(
           signingKey: _securityOptions.SigningKey,
-          expireAt: DateTime.UtcNow.AddMinutes(15),
           priviledges: u => {
             u.Roles.Add(user.Role!.Name);
             u.Claims.Add(new Claim(ClaimTypes.Name, user.Email));
