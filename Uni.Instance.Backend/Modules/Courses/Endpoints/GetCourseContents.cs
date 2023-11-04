@@ -98,7 +98,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
     foreach (var fileContent in fileContents) {
       var item = new CourseItemDto {
         Id = fileContent.Id,
-        Type = CourseItemType.Text,
+        Type = CourseItemType.File,
         VisibleName = fileContent.File.VisibleName,
       };
       var block = blocks.First(e => e.Title == fileContent.Block.Name);
@@ -108,7 +108,7 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
     foreach (var quizContent in quizzes) {
       var item = new CourseItemDto {
         Id = quizContent.Id,
-        Type = CourseItemType.Text,
+        Type = CourseItemType.Quiz,
         VisibleName = quizContent.Title,
       };
       var block = blocks.First(e => e.Title == quizContent.CourseBlock.Name);
