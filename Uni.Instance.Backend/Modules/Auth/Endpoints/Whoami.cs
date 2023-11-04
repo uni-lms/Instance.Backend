@@ -3,12 +3,21 @@ using System.Security.Claims;
 
 using FastEndpoints;
 
-using Uni.Backend.Modules.Auth.Contracts;
+using Microsoft.EntityFrameworkCore;
+
+using Uni.Backend.Data;
+using Uni.Instance.Backend.Modules.Auth.Contracts;
 
 
-namespace Uni.Backend.Modules.Auth.Endpoints;
+namespace Uni.Instance.Backend.Modules.Auth.Endpoints;
 
 public class Whoami : EndpointWithoutRequest<WhoamiResponse> {
+  private readonly AppDbContext _db;
+
+  public Whoami(AppDbContext db) {
+    _db = db;
+  }
+
   public override void Configure() {
     Version(1);
     Get("/auth/whoami");
@@ -27,10 +36,20 @@ public class Whoami : EndpointWithoutRequest<WhoamiResponse> {
   }
 
   public override async Task HandleAsync(CancellationToken ct) {
-    var result = new WhoamiResponse {
-      Email = User.Identity?.Name ?? "",
-      Role = User.FindAll(ClaimTypes.Role).ToList()[0].Value,
-    };
-    await SendAsync(result, cancellation: ct);
+    var email = User.Identity?.Name;
+
+    var user = await _db.Users.Where(e => e.Email == email).FirstOrDefaultAsync(ct);
+
+    if (user is not null) {
+      var result = new WhoamiResponse {
+        Email = email ?? "",
+        Role = User.FindAll(ClaimTypes.Role).ToList()[0].Value,
+        FullName = $"{user.FirstName} {user.LastName}",
+      };
+      await SendAsync(result, cancellation: ct);
+    }
+    else {
+      await SendNotFoundAsync(ct);
+    }
   }
 }
