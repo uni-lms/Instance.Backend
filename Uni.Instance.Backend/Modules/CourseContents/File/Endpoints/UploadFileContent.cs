@@ -67,7 +67,6 @@ public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
     }
 
     var block = await _db.CourseBlocks
-      .AsNoTracking()
       .Where(e => e.Id == req.BlockId)
       .FirstOrDefaultAsync(ct);
 

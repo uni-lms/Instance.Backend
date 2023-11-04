@@ -66,7 +66,6 @@ public class UpdateFileContent : Endpoint<UpdateContentRequest, FileContent> {
     }
 
     var block = await _db.CourseBlocks
-      .AsNoTracking()
       .Where(e => e.Id == req.Block)
       .FirstOrDefaultAsync(ct);
 

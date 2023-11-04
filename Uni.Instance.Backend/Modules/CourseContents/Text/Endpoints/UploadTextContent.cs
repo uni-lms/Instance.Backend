@@ -67,7 +67,6 @@ public class UploadTextContent : Endpoint<UploadContentRequest, TextContent> {
     }
 
     var block = await _db.CourseBlocks
-      .AsNoTracking()
       .Where(e => e.Id == req.BlockId)
       .FirstOrDefaultAsync(ct);
 
@@ -75,7 +74,7 @@ public class UploadTextContent : Endpoint<UploadContentRequest, TextContent> {
       ThrowError("Course block was not found");
     }
 
-    if (!course.Blocks.Contains(block)) {
+    if (course.Blocks.All(e => e.Id != block.Id)) {
       ThrowError("This block wasn't enabled in the course", 409);
     }
 
