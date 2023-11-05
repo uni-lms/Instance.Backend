@@ -19,7 +19,6 @@ public class GetTextContentInfo : Endpoint<SearchEntityRequest, GetTextContentIn
 
   public override void Configure() {
     Version(1);
-    Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Get("/materials/text/{id}/info");
     Options(x => x.WithTags("Course Materials. Text"));
     Description(b => b
