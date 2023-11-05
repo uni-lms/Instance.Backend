@@ -50,9 +50,11 @@ public class GetTextContent : Endpoint<SearchEntityRequest> {
     if (textContent is null) {
       ThrowError(e => e.Id, "Text content was not found", 404);
     }
-    
+
     new FileExtensionContentTypeProvider().TryGetContentType(textContent.Content.FileName, out var contentType);
 
-    await SendFileAsync(new FileInfo(textContent.Content.FilePath), contentType ?? "", cancellation: ct);
+    await SendBytesAsync(
+      await File.ReadAllBytesAsync(textContent.Content.FilePath, ct), contentType ?? "",
+      cancellation: ct);
   }
 }
