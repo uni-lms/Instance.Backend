@@ -59,6 +59,7 @@ public class GetFileContentInfo : Endpoint<SearchEntityRequest, GetFileContentIn
       VisibleName = fileContent.File.VisibleName,
       FileSize = fileInfo.Length,
       Extension = fileInfo.Extension.ToUpper(),
+      FileId = fileContent.File.Id,
     }, cancellation: ct);
   }
 }

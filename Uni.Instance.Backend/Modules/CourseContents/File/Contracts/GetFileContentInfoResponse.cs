@@ -5,4 +5,5 @@ public class GetFileContentInfoResponse {
   public required string VisibleName { get; set; }
   public required long FileSize { get; set; }
   public required string Extension { get; set; }
+  public required string FileId { get; set; }
 }
