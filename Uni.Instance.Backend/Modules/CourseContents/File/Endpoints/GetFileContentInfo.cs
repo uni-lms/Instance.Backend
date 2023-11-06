@@ -53,14 +53,12 @@ public class GetFileContentInfo : Endpoint<SearchEntityRequest, GetFileContentIn
       ThrowError(e => e.Id, "File content was not found", 404);
     }
 
-    var filePath = fileContent.File.FilePath;
-    new FileExtensionContentTypeProvider().TryGetContentType(filePath, out var contentType);
-
+    var fileInfo = new FileInfo(fileContent.File.FilePath);
     await SendAsync(new GetFileContentInfoResponse {
       CourseAbbreviation = fileContent.Course.Abbreviation,
       VisibleName = fileContent.File.VisibleName,
-      FileSize = new FileInfo(filePath).Length,
-      MimeType = contentType!,
+      FileSize = fileInfo.Length,
+      Extension = fileInfo.Extension.ToUpper(),
     }, cancellation: ct);
   }
 }
