@@ -52,6 +52,8 @@ public class GetFileContentInfo : Endpoint<SearchEntityRequest, GetFileContentIn
     if (fileContent is null) {
       ThrowError(e => e.Id, "File content was not found", 404);
     }
+    
+    new FileExtensionContentTypeProvider().TryGetContentType(fileContent.File.FileName, out var contentType);
 
     var fileInfo = new FileInfo(fileContent.File.FilePath);
     await SendAsync(new GetFileContentInfoResponse {
@@ -60,6 +62,8 @@ public class GetFileContentInfo : Endpoint<SearchEntityRequest, GetFileContentIn
       FileSize = fileInfo.Length,
       Extension = fileInfo.Extension.ToUpper(),
       FileId = fileContent.File.Id,
+      FileName = fileContent.File.FileName,
+      MimeType = contentType!,
     }, cancellation: ct);
   }
 }
