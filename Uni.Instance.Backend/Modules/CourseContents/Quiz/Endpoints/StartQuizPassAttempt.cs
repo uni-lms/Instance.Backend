@@ -45,7 +45,7 @@ public class StartQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttemp
       ThrowError(e => e.Id, "Quiz was not found", 404);
     }
 
-    var user = await _db.Users.AsNoTracking().Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
+    var user = await _db.Users.Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
 
     var amountOfSavedAttempts = await _db.QuizPassAttempts
       .Where(e => e.User.Email == user.Email && e.Quiz.Id == quiz.Id)
