@@ -65,6 +65,7 @@ public class GetQuizInfo : Endpoint<SearchEntityRequest, QuizDetails> {
       AmountOfQuestions = quizContent.Questions.Count,
       AmountOfAttempts = quizContent.AmountOfAllowedAttempts,
       Attempts = await attempts.Select(e => new AttemptInfo {
+        Id = e.Id,
         StartedAt = e.StartedAt,
         FinishedAt = e.FinishedAt,
         AccruedPoints = e.AccruedPoints.Sum(k => k.AmountOfPoints),
