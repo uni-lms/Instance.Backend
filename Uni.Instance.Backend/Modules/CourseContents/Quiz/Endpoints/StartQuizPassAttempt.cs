@@ -6,9 +6,9 @@ using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
-namespace Uni.Backend.Modules.CourseContents.Quiz.Endpoints;
+namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Endpoints;
 
-public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPassAttempt> {
+public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPassAttemptDto> {
   private readonly AppDbContext _db;
 
   public StartQuizPassAttempt(AppDbContext db) {
@@ -61,9 +61,14 @@ public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPa
       StartedAt = DateTime.UtcNow,
     };
 
+
     await _db.QuizPassAttempts.AddAsync(attempt, ct);
     await _db.SaveChangesAsync(ct);
+    
+    var response = new QuizPassAttemptDto {
+      Id = attempt.Id,
+    };
 
-    await SendOkAsync(attempt, cancellation: ct);
+    await SendOkAsync(response, cancellation: ct);
   }
 }
