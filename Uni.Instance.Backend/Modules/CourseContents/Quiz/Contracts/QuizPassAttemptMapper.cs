@@ -12,7 +12,6 @@ public partial class QuizPassAttemptMapper : ResponseMapper<QuizPassAttemptDto, 
   public QuizPassAttemptDto FromEntity(QuizPassAttempt e) {
     var dto = QuizPassAttemptToDto(e);
 
-    dto.TimeSpent = CalculateSpentTime(e.StartedAt, e.FinishedAt);
     dto.Points = CalculateAccruedPoints(e.AccruedPoints);
 
     return dto;
