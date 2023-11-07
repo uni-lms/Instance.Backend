@@ -3,12 +3,13 @@
 using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
+using Uni.Backend.Modules.Common.Contracts;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
 namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Endpoints;
 
-public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPassAttemptDto> {
+public class StartQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttemptDto> {
   private readonly AppDbContext _db;
 
   public StartQuizPassAttempt(AppDbContext db) {
@@ -37,11 +38,11 @@ public class StartQuizPassAttempt : Endpoint<StartQuizPassAttemptRequest, QuizPa
     });
   }
 
-  public override async Task HandleAsync(StartQuizPassAttemptRequest req, CancellationToken ct) {
-    var quiz = await _db.QuizContents.Where(e => e.Id == req.Quiz).FirstOrDefaultAsync(ct);
+  public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct) {
+    var quiz = await _db.QuizContents.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
 
     if (quiz is null) {
-      ThrowError(e => e.Quiz, "Quiz was not found", 404);
+      ThrowError(e => e.Id, "Quiz was not found", 404);
     }
 
     var user = await _db.Users.AsNoTracking().Where(e => e.Email == User.Identity!.Name).FirstAsync(ct);
