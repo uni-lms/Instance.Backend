@@ -26,7 +26,7 @@ public partial class QuizPassAttemptMapper : ResponseMapper<QuizPassAttemptDto, 
   }
 
   [UsedImplicitly]
-  private TimeSpan CalculateSpentTime(DateTime startedAt, DateTime finishedAt) {
+  private TimeSpan? CalculateSpentTime(DateTime startedAt, DateTime? finishedAt) {
     return finishedAt - startedAt;
   }
 }

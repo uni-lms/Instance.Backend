@@ -18,7 +18,7 @@ public partial class QuizPassAttemptDetailsMapper : ResponseMapper<QuizPassAttem
           MaximumPoints = e.Question.MaximumPoints,
         })
         .ToList(),
-      TimeSpent = CalculateSpentTime(entity.StartedAt, entity.FinishedAt),
+      TimeSpent = CalculateSpentTime(entity.StartedAt, entity?.FinishedAt),
     };
 
 
@@ -26,7 +26,7 @@ public partial class QuizPassAttemptDetailsMapper : ResponseMapper<QuizPassAttem
   }
 
   [UsedImplicitly]
-  private TimeSpan CalculateSpentTime(DateTime startedAt, DateTime finishedAt) {
+  private TimeSpan? CalculateSpentTime(DateTime startedAt, DateTime? finishedAt) {
     return finishedAt - startedAt;
   }
 }

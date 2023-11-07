@@ -9,5 +9,5 @@ public class QuizPassAttempt : BaseModel {
   public required QuizContent Quiz { get; set; }
   public required List<AccruedPoint> AccruedPoints { get; set; }
   public DateTime StartedAt { get; set; }
-  public DateTime FinishedAt { get; set; }
+  public DateTime? FinishedAt { get; set; }
 }
