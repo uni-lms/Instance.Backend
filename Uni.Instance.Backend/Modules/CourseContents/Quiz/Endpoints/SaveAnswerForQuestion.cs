@@ -69,7 +69,7 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
         ThrowError(e => e.Choices, "Choice was not found");
       }
 
-      if (data.IsCorrect && choice.QuestionId == question.Id) {
+      if (data.IsCorrect) {
         points += data.AmountOfPoints;
       }
     }
