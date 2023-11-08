@@ -18,7 +18,7 @@ public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNum
 
   public override void Configure() {
     Version(1);
-    Get("/quiz-attempt/${AttemptId}/question/${Question}");
+    Get("/quiz-attempt/{AttemptId}/question/{Question}");
     Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
