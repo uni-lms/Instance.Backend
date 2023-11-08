@@ -85,7 +85,15 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
       AmountOfPoints = points,
     };
 
-    attempt.AccruedPoints.Add(accruedPoints);
+    var previousAnswer = attempt.AccruedPoints.FirstOrDefault(e => e.Question == question);
+    
+    if (previousAnswer is not null) {
+      previousAnswer.AmountOfPoints = points;
+    }
+    else {
+      attempt.AccruedPoints.Add(accruedPoints);
+    }
+
     await _db.SaveChangesAsync(ct);
 
     var accruedPointsDto = new AccruedPointDto {
