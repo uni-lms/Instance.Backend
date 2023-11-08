@@ -8,5 +8,5 @@ public class SaveAnswerForQuestionRequest {
   public Guid AttemptId { get; set; }
 
   public Guid QuestionId { get; set; }
-  public required List<QuestionChoiceDto> Choices { get; set; }
+  public required List<QuestionChoiceRequest> Choices { get; set; }
 }
