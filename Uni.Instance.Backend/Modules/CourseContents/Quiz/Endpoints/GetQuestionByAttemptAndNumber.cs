@@ -3,13 +3,12 @@
 using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
-using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
 namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Endpoints;
 
-public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNumberRequest, MultipleChoiceQuestion> {
+public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNumberRequest, QuestionInfoDto> {
   private readonly AppDbContext _db;
 
   public GetQuestionByAttemptAndNumber(AppDbContext db) {
@@ -56,6 +55,19 @@ public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNum
       ThrowError(e => e.Question, "Question was not found", 404);
     }
 
-    await SendAsync(question, cancellation: ct);
+    var questionDto = new QuestionInfoDto {
+      Id = question.Id,
+      QuizTitle = quizPassAttempt.Quiz.Title,
+      QuestionTitle = question.Text,
+      SequenceNumber = question.SequenceNumber,
+      AmountOfQuestions = quizPassAttempt.Quiz.Questions.Count,
+      IsMultipleChoicesAllowed = question.IsMultipleChoicesAllowed,
+      Choices = question.Choices.Select(it => new QuestionChoiceDto {
+        Id = it.Id,
+        Title = it.Text,
+      }).ToList(),
+    };
+
+    await SendAsync(questionDto, cancellation: ct);
   }
 }
