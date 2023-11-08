@@ -84,7 +84,7 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
 
     var questions = new List<MultipleChoiceQuestion>();
 
-    foreach (var question in req.Questions) {
+    foreach (var (question, ind) in req.Questions.Select((q, i) => (q, i))) {
       var choices = question.Choices.Select(choice => new QuestionChoice
         { Text = choice.Text, IsCorrect = choice.IsCorrect, AmountOfPoints = choice.AmountOfPoints }).ToList();
 
@@ -94,7 +94,7 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
         IsMultipleChoicesAllowed = question.IsMultipleChoicesAllowed,
         IsGivingPointsForIncompleteAnswersEnabled = question.IsGivingPointsForIncompleteAnswersEnabled,
         MaximumPoints = question.MaximumPoints,
-        SequenceNumber = question.SequenceNumber,
+        SequenceNumber = ind + 1,
       };
 
       questions.Add(questionToCreate);

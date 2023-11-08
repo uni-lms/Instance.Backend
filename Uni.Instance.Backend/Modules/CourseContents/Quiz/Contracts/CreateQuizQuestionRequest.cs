@@ -9,5 +9,4 @@ public class CreateQuizQuestionRequest {
   public bool IsMultipleChoicesAllowed { get; [UsedImplicitly] set; }
   public bool IsGivingPointsForIncompleteAnswersEnabled { get; [UsedImplicitly] set; }
   public required List<CreateQuizQuestionChoiceRequest> Choices { get; [UsedImplicitly] set; }
-  public int SequenceNumber { get; set; }
 }
