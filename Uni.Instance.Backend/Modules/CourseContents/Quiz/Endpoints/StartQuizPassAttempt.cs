@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contracts;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
 namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Endpoints;

@@ -3,7 +3,7 @@ using Uni.Backend.Modules.CourseBlocks.Contracts;
 using Uni.Backend.Modules.Courses.Contracts;
 
 
-namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 public class QuizContent : BaseModel {
   public required string Title { get; set; }

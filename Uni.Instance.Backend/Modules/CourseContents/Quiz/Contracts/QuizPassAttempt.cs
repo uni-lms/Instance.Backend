@@ -1,5 +1,6 @@
 ﻿using Uni.Backend.Data;
 using Uni.Backend.Modules.Users.Contracts;
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
 namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;

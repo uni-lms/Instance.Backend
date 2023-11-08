@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Configuration;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
 namespace Uni.Backend.Modules.CourseContents.Quiz.Endpoints;
@@ -93,6 +94,7 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
         IsMultipleChoicesAllowed = question.IsMultipleChoicesAllowed,
         IsGivingPointsForIncompleteAnswersEnabled = question.IsGivingPointsForIncompleteAnswersEnabled,
         MaximumPoints = question.MaximumPoints,
+        SequenceNumber = question.SequenceNumber,
       };
 
       questions.Add(questionToCreate);

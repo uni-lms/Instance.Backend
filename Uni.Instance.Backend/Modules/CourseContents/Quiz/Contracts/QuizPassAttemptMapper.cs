@@ -4,6 +4,8 @@ using JetBrains.Annotations;
 
 using Riok.Mapperly.Abstractions;
 
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
+
 
 namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 
