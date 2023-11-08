@@ -18,7 +18,7 @@ public class StartQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttemp
 
   public override void Configure() {
     Version(1);
-    Post("/materials/quiz/{id}/start-attempt");
+    Post("/materials/quiz/start-attempt");
     Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
