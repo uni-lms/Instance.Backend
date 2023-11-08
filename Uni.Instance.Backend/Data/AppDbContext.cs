@@ -15,6 +15,7 @@ using Uni.Backend.Modules.SolutionComments.Contracts;
 using Uni.Backend.Modules.Static.Contracts;
 using Uni.Backend.Modules.Teams.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
 namespace Uni.Backend.Data;
