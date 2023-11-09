@@ -94,6 +94,7 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
     
     if (previousAnswer is not null) {
       previousAnswer.AmountOfPoints = points;
+      previousAnswer.SelectedChoices = selectedChoices;
     }
     else {
       attempt.AccruedPoints.Add(accruedPoints);
