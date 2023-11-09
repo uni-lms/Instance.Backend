@@ -42,6 +42,7 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
     var attempt = await _db.QuizPassAttempts
       .Where(e => e.Id == req.AttemptId)
       .Include(e => e.AccruedPoints)
+      .ThenInclude(e => e.SelectedChoices)
       .FirstOrDefaultAsync(ct);
 
 
@@ -75,7 +76,7 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
         points += data.AmountOfPoints;
       }
 
-      if (selectedChoices.All(e => e.Id != data.Id)){
+      if (selectedChoices.All(e => e.Id != data.Id)) {
         selectedChoices.Add(data);
       }
     }
@@ -93,10 +94,11 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
     };
 
     var previousAnswer = attempt.AccruedPoints.FirstOrDefault(e => e.Question == question);
-    
+
     if (previousAnswer is not null) {
       previousAnswer.AmountOfPoints = points;
-      previousAnswer.SelectedChoices = selectedChoices;
+      previousAnswer.SelectedChoices.Clear();
+      previousAnswer.SelectedChoices.AddRange(selectedChoices);
     }
     else {
       attempt.AccruedPoints.Add(accruedPoints);
