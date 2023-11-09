@@ -18,7 +18,7 @@ public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttem
 
   public override void Configure() {
     Version(1);
-    Patch("/quiz-attempt/{id}/finish");
+    Patch("/quiz-attempt/finish");
     Options(x => x.WithTags("Course Materials. Quizzes"));
     Description(b => b
       .ClearDefaultProduces()
