@@ -3,6 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
+using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
@@ -43,6 +44,10 @@ public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNum
       .Include(e => e.Quiz)
       .ThenInclude(e => e.Questions)
       .ThenInclude(e => e.Choices)
+      .Include(e => e.AccruedPoints)
+      .ThenInclude(e => e.SelectedChoices)
+      .Include(e => e.AccruedPoints)
+      .ThenInclude(e => e.Question)
       .FirstOrDefaultAsync(ct);
 
     if (quizPassAttempt is null) {
@@ -53,6 +58,18 @@ public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNum
 
     if (question is null) {
       ThrowError(e => e.Question, "Question was not found", 404);
+    }
+
+    var accrued = quizPassAttempt.AccruedPoints
+      .FirstOrDefault(e => e.Question.Id == question.Id);
+
+    var selectedChoices = new List<QuestionChoiceDto>();
+
+    if (accrued is not null) {
+      selectedChoices = accrued.SelectedChoices.Select(e => new QuestionChoiceDto {
+        Id = e.Id,
+        Title = e.Text,
+      }).ToList();
     }
 
     var questionDto = new QuestionInfoDto {
@@ -66,6 +83,7 @@ public class GetQuestionByAttemptAndNumber : Endpoint<GetQuestionByAttemptAndNum
         Id = it.Id,
         Title = it.Text,
       }).ToList(),
+      SelectedChoices = selectedChoices,
     };
 
     await SendAsync(questionDto, cancellation: ct);

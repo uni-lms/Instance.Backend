@@ -60,6 +60,8 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
 
     var points = 0;
 
+    var selectedChoices = new List<QuestionChoice>();
+
     foreach (var choice in req.Choices) {
       var data = await _db.QuestionChoices
         .Where(e => e.Id == choice.Id)
@@ -72,6 +74,8 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
       if (data.IsCorrect) {
         points += data.AmountOfPoints;
       }
+      
+      selectedChoices.Add(data);
     }
 
     var maximumPoints = question.Choices.Where(e => e.IsCorrect).Sum(e => e.AmountOfPoints);
@@ -83,6 +87,7 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
     var accruedPoints = new AccruedPoint {
       Question = question,
       AmountOfPoints = points,
+      SelectedChoices = selectedChoices,
     };
 
     var previousAnswer = attempt.AccruedPoints.FirstOrDefault(e => e.Question == question);
