@@ -9,7 +9,7 @@ using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Endpoints;
 
-public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, AttemptInfo> {
+public class FinishQuizPassAttempt : Endpoint<SearchEntityByIdFromRoute, AttemptInfo> {
   private readonly AppDbContext _db;
 
   public FinishQuizPassAttempt(AppDbContext db) {
@@ -38,7 +38,7 @@ public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, AttemptInfo> 
     });
   }
 
-  public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct) {
+  public override async Task HandleAsync(SearchEntityByIdFromRoute req, CancellationToken ct) {
     var attempt = await _db.QuizPassAttempts
       .Where(e => e.Id == req.Id)
       .Include(e => e.AccruedPoints)
