@@ -74,8 +74,10 @@ public class SaveAnswerForQuestion : Endpoint<SaveAnswerForQuestionRequest, Accr
       if (data.IsCorrect) {
         points += data.AmountOfPoints;
       }
-      
-      selectedChoices.Add(data);
+
+      if (selectedChoices.All(e => e.Id != data.Id)){
+        selectedChoices.Add(data);
+      }
     }
 
     var maximumPoints = question.Choices.Where(e => e.IsCorrect).Sum(e => e.AmountOfPoints);
