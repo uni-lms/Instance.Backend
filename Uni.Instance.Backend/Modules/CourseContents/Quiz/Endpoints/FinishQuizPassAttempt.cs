@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Common.Contracts;
-using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
-namespace Uni.Backend.Modules.CourseContents.Quiz.Endpoints;
+namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Endpoints;
 
-public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttempt> {
+public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, AttemptInfo> {
   private readonly AppDbContext _db;
 
   public FinishQuizPassAttempt(AppDbContext db) {
@@ -41,6 +41,7 @@ public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttem
   public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct) {
     var attempt = await _db.QuizPassAttempts
       .Where(e => e.Id == req.Id)
+      .Include(e => e.AccruedPoints)
       .FirstOrDefaultAsync(ct);
 
 
@@ -51,6 +52,13 @@ public class FinishQuizPassAttempt : Endpoint<SearchEntityRequest, QuizPassAttem
     attempt.FinishedAt = DateTime.UtcNow;
 
     await _db.SaveChangesAsync(ct);
-    await SendOkAsync(attempt, cancellation: ct);
+
+    var attemptDto = new AttemptInfo {
+      Id = attempt.Id,
+      StartedAt = attempt.StartedAt,
+      FinishedAt = attempt.FinishedAt,
+      AccruedPoints = attempt.AccruedPoints.Sum(e => e.AmountOfPoints),
+    };
+    await SendOkAsync(attemptDto, cancellation: ct);
   }
 }
