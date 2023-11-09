@@ -42,6 +42,7 @@ public class FinishQuizPassAttempt : Endpoint<SearchEntityByIdFromRoute, Attempt
     var attempt = await _db.QuizPassAttempts
       .Where(e => e.Id == req.Id)
       .Include(e => e.AccruedPoints)
+      .Include(e => e.Quiz)
       .FirstOrDefaultAsync(ct);
 
 
@@ -58,6 +59,7 @@ public class FinishQuizPassAttempt : Endpoint<SearchEntityByIdFromRoute, Attempt
       StartedAt = attempt.StartedAt,
       FinishedAt = attempt.FinishedAt,
       AccruedPoints = attempt.AccruedPoints.Sum(e => e.AmountOfPoints),
+      QuizId = attempt.Quiz.Id,
     };
     await SendOkAsync(attemptDto, cancellation: ct);
   }

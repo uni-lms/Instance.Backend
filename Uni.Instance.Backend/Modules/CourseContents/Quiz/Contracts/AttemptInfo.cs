@@ -5,4 +5,5 @@ public class AttemptInfo {
   public DateTime StartedAt { get; set; }
   public DateTime? FinishedAt { get; set; }
   public int AccruedPoints { get; set; }
+  public Guid QuizId { get; set; }
 }
