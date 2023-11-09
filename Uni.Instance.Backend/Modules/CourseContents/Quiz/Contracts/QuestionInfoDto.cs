@@ -10,4 +10,5 @@ public class QuestionInfoDto: BaseModel {
   public int AmountOfQuestions { get; set; }
   public bool IsMultipleChoicesAllowed { get; set; }
   public required List<QuestionChoiceDto> Choices { get; set; }
+  public required List<QuestionChoiceDto> SelectedChoices { get; set; }
 }
