@@ -12,7 +12,7 @@ using Uni.Instance.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Instance.Backend.Modules.Courses.Endpoints;
 
-public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, CoursesMapper> {
+public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseTutorDto>, CoursesMapper> {
   private readonly AppDbContext _db;
 
   public GetCoursesOwnedByMe(AppDbContext db) {
@@ -56,7 +56,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseDto>, Cours
     }
 
     var courses = user.OwnedCourses!
-      .Select(e => Map.FromEntity(e))
+      .Select(e => Map.FromEntityToTutorDto(e))
       .ToList();
 
     await SendAsync(courses, cancellation: ct);

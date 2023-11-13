@@ -5,6 +5,8 @@ using Riok.Mapperly.Abstractions;
 using Uni.Backend.Modules.Courses.Contracts;
 using Uni.Backend.Modules.Users.Contracts;
 
+using Group = Uni.Backend.Modules.Groups.Contracts.Group;
+
 
 namespace Uni.Instance.Backend.Modules.Courses.Contracts;
 
@@ -22,6 +24,15 @@ public partial class CoursesMapper : ResponseMapper<CourseDto, Course> {
       Tutors = r.Owners.Select(UserDtoToString).ToList(),
     };
   }
+  public CourseTutorDto FromEntityToTutorDto(Course r) {
+    return new CourseTutorDto {
+      Abbreviation = r.Abbreviation,
+      Name = r.Name,
+      Id = r.Id,
+      Semester = r.Semester,
+      Groups = r.AssignedGroups.Select(GroupToString).ToList(),
+    };
+  }
 
   private string UserDtoToString(User u) {
     var patronymic = "";
@@ -30,5 +41,9 @@ public partial class CoursesMapper : ResponseMapper<CourseDto, Course> {
     }
 
     return $"{u.LastName} {u.FirstName[0]}.{patronymic}";
+  }
+
+  private string GroupToString(Group g) {
+    return g.Name;
   }
 }
