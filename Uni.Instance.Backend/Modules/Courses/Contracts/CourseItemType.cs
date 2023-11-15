@@ -3,5 +3,6 @@
 public enum CourseItemType {
   File,
   Text,
-  Quiz
+  Quiz,
+  Task,
 }

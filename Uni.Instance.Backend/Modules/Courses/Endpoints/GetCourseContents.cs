@@ -85,6 +85,11 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
       .Include(quizContent => quizContent.CourseBlock)
       .ToListAsync(ct);
 
+    var assignments = await _db.Assignments
+      .Where(e => e.Course.Id == req.Id && (!isStudent || e.IsVisibleToStudents))
+      .Include(e => e.Block)
+      .ToListAsync(ct);
+
     foreach (var textContent in textContents) {
       var item = new CourseItemDto {
         Id = textContent.Id,
@@ -112,6 +117,16 @@ public class GetCourseContents : Endpoint<SearchEntityRequest, CourseContentsDto
         VisibleName = quizContent.Title,
       };
       var block = blocks.First(e => e.Title == quizContent.CourseBlock.Name);
+      block.Items.Add(item);
+    }
+
+    foreach (var assignment in assignments) {
+      var item = new CourseItemDto {
+        Id = assignment.Id,
+        Type = CourseItemType.Task,
+        VisibleName = assignment.Title,
+      };
+      var block = blocks.First(e => e.Title == assignment.Block.Name);
       block.Items.Add(item);
     }
 
