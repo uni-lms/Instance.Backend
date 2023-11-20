@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Assignments.Contracts;
 using Uni.Backend.Modules.Common.Contracts;
+using Uni.Backend.Modules.SolutionChecks.Contracts;
 
 
 namespace Uni.Instance.Backend.Modules.Assignments.Endpoints;
@@ -70,8 +71,16 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       .ToListAsync(ct);
 
     var rating = 0;
+    var status = SolutionCheckStatus.NotSent;
     if (solutions.Count > 0) {
       rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
+
+      var temp = (solutions.MinBy(e => e.UpdatedAt)?.Checks).MinBy(e => e.CheckedAt)?.Status;
+
+      if (temp is not null) {
+        status = temp.GetValueOrDefault(SolutionCheckStatus.NotSent);
+      }
+
     }
 
     var dto = new AssignmentDto {
@@ -81,6 +90,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       Id = assignment.Id,
       MaximumPoints = assignment.MaximumPoints,
       Rating = rating,
+      Status = status,
     };
 
     await SendAsync(dto, cancellation: ct);

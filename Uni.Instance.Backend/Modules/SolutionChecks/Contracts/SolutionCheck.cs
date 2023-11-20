@@ -8,7 +8,9 @@ namespace Uni.Backend.Modules.SolutionChecks.Contracts;
 
 public class SolutionCheck: BaseModel {
   public required User CheckedBy { get; set; }
+  public required DateTime CheckedAt { get; set; }
   public required AssignmentSolution Solution { get; set; }
+  public required SolutionCheckStatus Status { get; set; }
   public required List<SolutionComment> Comments { get; set; }
   public int Points { get; set; }
 }
