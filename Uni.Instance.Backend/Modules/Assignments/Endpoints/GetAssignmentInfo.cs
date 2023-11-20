@@ -70,15 +70,20 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       .Include(e => e.Checks)
       .ToListAsync(ct);
 
+    var defaultStatus = SolutionCheckStatus.NotSent;
+    if (assignment.AvailableUntil <= DateTime.Now) {
+      defaultStatus = SolutionCheckStatus.Overdue;
+    }
+
     var rating = 0;
-    var status = SolutionCheckStatus.NotSent;
+    var status = defaultStatus;
     if (solutions.Count > 0) {
       rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
 
       var temp = (solutions.MinBy(e => e.UpdatedAt)?.Checks).MinBy(e => e.CheckedAt)?.Status;
 
       if (temp is not null) {
-        status = temp.GetValueOrDefault(SolutionCheckStatus.NotSent);
+        status = temp.GetValueOrDefault(defaultStatus);
       }
 
     }
