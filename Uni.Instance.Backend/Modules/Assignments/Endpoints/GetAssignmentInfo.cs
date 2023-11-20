@@ -9,9 +9,9 @@ using Uni.Backend.Modules.Assignments.Contracts;
 using Uni.Backend.Modules.Common.Contracts;
 
 
-namespace Uni.Instance.Backend.Modules.Assignments.Endpoints; 
+namespace Uni.Instance.Backend.Modules.Assignments.Endpoints;
 
-public class GetAssignmentInfo: Endpoint<SearchEntityRequest, AssignmentDto> {
+public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
   private readonly AppDbContext _db;
 
   public GetAssignmentInfo(AppDbContext db) {
@@ -20,7 +20,7 @@ public class GetAssignmentInfo: Endpoint<SearchEntityRequest, AssignmentDto> {
 
   public override void Configure() {
     Version(1);
-    Post("/assignments/{id}");
+    Get("/assignments/{id}");
     Options(x => x.WithTags("Assignments"));
     Description(b => b
       .Produces<Assignment>(200, MediaTypeNames.Application.Json)
@@ -39,13 +39,39 @@ public class GetAssignmentInfo: Endpoint<SearchEntityRequest, AssignmentDto> {
   }
 
   public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct) {
-    var assignment = await _db.Assignments
+    if (User.Identity is null) {
+      ThrowError(_ => User, "Not authorized", 401);
+    }
+
+    var user = await _db.Users
       .AsNoTracking()
+      .Where(e => e.Email == User.Identity.Name)
+      .FirstOrDefaultAsync(ct);
+
+    if (user is null) {
+      ThrowError(_ => User.Identity!.Name!, "User not found", 404);
+    }
+
+    var assignment = await _db.Assignments
       .Where(e => e.Id == req.Id)
       .FirstOrDefaultAsync(ct);
 
     if (assignment is null) {
-      ThrowError(e => e.Id, "Assignment was not found");
+      ThrowError(e => e.Id, "Assignment was not found", 404);
+    }
+
+    var solutions = await _db.AssignmentSolutions
+      .Include(e => e.Author)
+      .Include(e => e.Team)
+      .ThenInclude(e => e.Members)
+      .Where(e => e.Assignment.Id == req.Id && ((e.Author != null && e.Author.Id == user.Id) ||
+        (e.Team != null && e.Team.Members.Contains(user))))
+      .Include(e => e.Checks)
+      .ToListAsync(ct);
+
+    var rating = 0;
+    if (solutions.Count > 0) {
+      rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
     }
 
     var dto = new AssignmentDto {
@@ -53,6 +79,8 @@ public class GetAssignmentInfo: Endpoint<SearchEntityRequest, AssignmentDto> {
       Description = assignment.Description,
       AvailableUntil = assignment.AvailableUntil,
       Id = assignment.Id,
+      MaximumPoints = assignment.MaximumPoints,
+      Rating = rating,
     };
 
     await SendAsync(dto, cancellation: ct);

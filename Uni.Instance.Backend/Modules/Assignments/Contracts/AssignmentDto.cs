@@ -8,4 +8,6 @@ public class AssignmentDto {
   public required string Title { [UsedImplicitly] get; set; }
   public string? Description { [UsedImplicitly] get; set; }
   public DateTime AvailableUntil { [UsedImplicitly] get; set; }
+  public required int MaximumPoints { [UsedImplicitly] get; set; }
+  public required int Rating { [UsedImplicitly] get; set; }
 }
