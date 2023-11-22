@@ -78,7 +78,14 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
     var rating = 0;
     var status = defaultStatus;
     if (solutions.Count > 0) {
-      rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
+      var amountOfChecks = 0;
+      foreach (var solution in solutions) {
+        amountOfChecks += solution.Checks.Count;
+      }
+
+      if (amountOfChecks > 0) {
+        rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
+      }
 
       var temp = (solutions.MinBy(e => e.UpdatedAt)?.Checks).MinBy(e => e.CheckedAt)?.Status;
 
