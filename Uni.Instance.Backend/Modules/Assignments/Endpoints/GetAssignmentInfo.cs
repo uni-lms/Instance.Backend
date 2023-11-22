@@ -71,7 +71,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       .ToListAsync(ct);
 
     var defaultStatus = SolutionCheckStatus.NotSent;
-    if (assignment.AvailableUntil <= DateTime.Now) {
+    if (assignment.AvailableUntil <= DateTime.UtcNow) {
       defaultStatus = SolutionCheckStatus.Overdue;
     }
 
