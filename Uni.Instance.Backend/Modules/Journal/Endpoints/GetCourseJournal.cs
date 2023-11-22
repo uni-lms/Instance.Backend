@@ -74,6 +74,7 @@ public class GetCourseJournal : Endpoint<SearchEntityRequest, JournalDto> {
     foreach (var quiz in quizzes) {
       var attempt = await _db.QuizPassAttempts
         .Where(e => e.Quiz.Id == quiz.Id && e.User.Id == user.Id)
+        .Include(e => e.AccruedPoints)
         .OrderByDescending(e => e.StartedAt)
         .FirstOrDefaultAsync(ct);
 
