@@ -2,6 +2,7 @@
 
 using JetBrains.Annotations;
 
+using Uni.Backend.Modules.AssignmentSolutions.Contracts;
 using Uni.Backend.Modules.SolutionChecks.Contracts;
 
 
@@ -18,4 +19,5 @@ public class AssignmentDto {
 
   public required int MaximumPoints { [UsedImplicitly] get; set; }
   public required int Rating { [UsedImplicitly] get; set; }
+  public required List<SolutionDto> Solutions { get; set; }
 }

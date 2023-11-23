@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Uni.Backend.Data;
 using Uni.Backend.Modules.Assignments.Contracts;
+using Uni.Backend.Modules.AssignmentSolutions.Contracts;
 using Uni.Backend.Modules.Common.Contracts;
 using Uni.Backend.Modules.SolutionChecks.Contracts;
 
@@ -67,7 +68,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       .ThenInclude(e => e.Members)
       .Where(e => e.Assignment.Id == req.Id && ((e.Author != null && e.Author.Id == user.Id) ||
         (e.Team != null && e.Team.Members.Contains(user))))
-      .Include(e => e.Checks)
+      .Include(e => e.Checks).Include(assignmentSolution => assignmentSolution.Files)
       .ToListAsync(ct);
 
     var defaultStatus = SolutionCheckStatus.NotSent;
@@ -92,8 +93,30 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       if (temp is not null) {
         status = temp.GetValueOrDefault(defaultStatus);
       }
-
     }
+
+    var solutionDtos = solutions.Select(e => {
+        var status = "Не проверено";
+        if (solutions.Count > 0) {
+          var amountOfChecks = 0;
+          foreach (var solution in solutions) {
+            amountOfChecks += solution.Checks.Count;
+          }
+
+          if (amountOfChecks > 0) {
+            rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
+            status = $"{rating} / {assignment.MaximumPoints}";
+          }
+        }
+
+        return new SolutionDto {
+          Id = e.Id,
+          AmountOfFiles = e.Files.Count,
+          DateTime = e.UpdatedAt,
+          Status = status,
+        };
+      }
+    ).ToList();
 
     var dto = new AssignmentDto {
       Title = assignment.Title,
@@ -103,6 +126,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
       MaximumPoints = assignment.MaximumPoints,
       Rating = rating,
       Status = status,
+      Solutions = solutionDtos,
     };
 
     await SendAsync(dto, cancellation: ct);
