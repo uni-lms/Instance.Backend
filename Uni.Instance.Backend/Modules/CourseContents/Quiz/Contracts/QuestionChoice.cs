@@ -8,5 +8,5 @@ public class QuestionChoice : BaseModel {
   public required string Text { get; set; }
   public int AmountOfPoints { get; set; }
   public bool IsCorrect { get; set; }
-  public List<AccruedPoint> AccruedPoints { get; set; }
+  public required List<AccruedPoint> AccruedPoints { get; set; }
 }
