@@ -97,7 +97,7 @@ public class GetCourseJournal : Endpoint<SearchEntityRequest, JournalDto> {
       var solutions = await _db.AssignmentSolutions
         .Include(e => e.Author)
         .Include(e => e.Team)
-        .ThenInclude(e => e.Members)
+        .ThenInclude(e => e!.Members)
         .Where(e => e.Assignment.Id == req.Id && ((e.Author != null && e.Author.Id == user.Id) ||
           (e.Team != null && e.Team.Members.Contains(user))))
         .Include(e => e.Checks)

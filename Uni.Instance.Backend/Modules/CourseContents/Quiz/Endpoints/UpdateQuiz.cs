@@ -85,8 +85,12 @@ public class UpdateQuiz : Endpoint<UpdateQuizRequest, QuizDto, QuizMapper> {
     var questions = new List<MultipleChoiceQuestion>();
 
     foreach (var (question, ind) in req.Questions.Select((q, i) => (q, i))) {
-      var choices = question.Choices.Select(choice => new QuestionChoice
-        { Text = choice.Text, IsCorrect = choice.IsCorrect, AmountOfPoints = choice.AmountOfPoints }).ToList();
+      var choices = question.Choices.Select(choice => new QuestionChoice {
+        Text = choice.Text,
+        IsCorrect = choice.IsCorrect,
+        AmountOfPoints = choice.AmountOfPoints,
+        AccruedPoints = Enumerable.Empty<AccruedPoint>().ToList(),
+      }).ToList();
 
       var questionToCreate = new MultipleChoiceQuestion {
         Text = question.Text,

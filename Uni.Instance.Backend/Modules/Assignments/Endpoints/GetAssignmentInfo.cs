@@ -65,7 +65,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
     var solutions = await _db.AssignmentSolutions
       .Include(e => e.Author)
       .Include(e => e.Team)
-      .ThenInclude(e => e.Members)
+      .ThenInclude(e => e!.Members)
       .Where(e => e.Assignment.Id == req.Id && ((e.Author != null && e.Author.Id == user.Id) ||
         (e.Team != null && e.Team.Members.Contains(user))))
       .Include(e => e.Checks).Include(assignmentSolution => assignmentSolution.Files)
@@ -88,7 +88,8 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
         rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
       }
 
-      var temp = (solutions.MinBy(e => e.UpdatedAt)?.Checks).MinBy(e => e.CheckedAt)?.Status;
+      ArgumentNullException.ThrowIfNull(solutions);
+      var temp = solutions.MinBy(e => e.UpdatedAt)?.Checks.MinBy(e => e.CheckedAt)?.Status;
 
       if (temp is not null) {
         status = temp.GetValueOrDefault(defaultStatus);
@@ -96,7 +97,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
     }
 
     var solutionDtos = solutions.Select(e => {
-        var status = "Не проверено";
+        var st = "Не проверено";
         if (solutions.Count > 0) {
           var amountOfChecks = 0;
           foreach (var solution in solutions) {
@@ -104,8 +105,8 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
           }
 
           if (amountOfChecks > 0) {
-            rating = solutions.Max(e => e.Checks.Max(sc => sc.Points));
-            status = $"{rating} / {assignment.MaximumPoints}";
+            rating = solutions.Max(s => s.Checks.Max(sc => sc.Points));
+            st = $"{rating} / {assignment.MaximumPoints}";
           }
         }
 
@@ -113,7 +114,7 @@ public class GetAssignmentInfo : Endpoint<SearchEntityRequest, AssignmentDto> {
           Id = e.Id,
           AmountOfFiles = e.Files.Count,
           DateTime = e.UpdatedAt,
-          Status = status,
+          Status = st,
         };
       }
     ).ToList();
