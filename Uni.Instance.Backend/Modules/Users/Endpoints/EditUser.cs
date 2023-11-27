@@ -49,47 +49,6 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper> {
     user.FirstName = req.FirstName;
     user.LastName = req.LastName;
     user.Patronymic = req.Patronymic;
-    user.DateOfBirth = req.DateOfBirth;
-
-    var newGender = await _db.Genders
-      .AsNoTracking()
-      .Where(e => e.Id == req.Gender)
-      .FirstOrDefaultAsync(ct);
-
-    if (newGender is null) {
-      ThrowError(e => e.Gender, "Gender was not found", 404);
-    }
-
-    user.Gender = newGender;
-
-    if (user.Avatar is not null) {
-      var currentAvatar = await _db.StaticFiles
-        .Where(e => e.Id == user.Avatar.Id)
-        .FirstOrDefaultAsync(ct);
-
-      File.Delete(currentAvatar!.FilePath);
-      _db.StaticFiles.Remove(currentAvatar);
-    }
-
-    if (req.Avatar is not null) {
-      var fileSaveResult = await _staticService.SaveFile(req.Avatar, ct);
-
-      if (!fileSaveResult.IsSuccess) {
-        ThrowError("File is empty", 422);
-      }
-
-      var checksum = await StaticService.GetChecksum(req.Avatar, ct);
-      var staticFile = new StaticFile {
-        Id = fileSaveResult.FileId!,
-        Checksum = checksum,
-        FileName = req.Avatar.FileName,
-        FilePath = fileSaveResult.FilePath!,
-        VisibleName = Path.GetFileNameWithoutExtension(fileSaveResult.FilePath!),
-      };
-
-      await _db.StaticFiles.AddAsync(staticFile, ct);
-      user.Avatar = staticFile;
-    }
 
     await _db.SaveChangesAsync(ct);
 

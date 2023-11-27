@@ -15,7 +15,4 @@ public class EditUserRequest {
   public required string FirstName { get; [UsedImplicitly] set; }
   public required string LastName { get; [UsedImplicitly] set; }
   public string? Patronymic { get; [UsedImplicitly] set; }
-  public Guid Gender { get; [UsedImplicitly] set; }
-  public DateOnly DateOfBirth { get; [UsedImplicitly] set; }
-  public IFormFile? Avatar { get; [UsedImplicitly] set; }
 }
