@@ -12,16 +12,14 @@ namespace Uni.Backend.Modules.Users.Endpoints;
 
 public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper> {
   private readonly AppDbContext _db;
-  private readonly StaticService _staticService;
 
-  public EditUser(AppDbContext db, StaticService staticService) {
+  public EditUser(AppDbContext db) {
     _db = db;
-    _staticService = staticService;
   }
 
   public override void Configure() {
     Version(1);
-    Put("/users");
+    Patch("/users");
     AllowFileUploads();
     Options(x => x.WithTags("Users"));
     Description(b => b
