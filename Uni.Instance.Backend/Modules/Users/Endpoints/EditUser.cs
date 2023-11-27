@@ -21,7 +21,7 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper> {
 
   public override void Configure() {
     Version(1);
-    Put("/users/{id}");
+    Put("/users");
     AllowFileUploads();
     Options(x => x.WithTags("Users"));
     Description(b => b

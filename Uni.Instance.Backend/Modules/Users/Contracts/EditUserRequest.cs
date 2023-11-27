@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Uni.Backend.Modules.Users.Contracts;
 
 public class EditUserRequest {
-  [FromRoute]
-  [BindFrom("id")]
   public Guid Id { get; [UsedImplicitly] set; }
 
   public required string FirstName { get; [UsedImplicitly] set; }
