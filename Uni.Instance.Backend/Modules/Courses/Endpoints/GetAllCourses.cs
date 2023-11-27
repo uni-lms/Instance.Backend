@@ -12,7 +12,7 @@ using Uni.Instance.Backend.Modules.Courses.Contracts;
 
 namespace Uni.Instance.Backend.Modules.Courses.Endpoints;
 
-public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapper> {
+public class GetAllCourses : EndpointWithoutRequest<List<CourseDtoV2>, CoursesMapper> {
   private readonly AppDbContext _db;
 
   public GetAllCourses(AppDbContext db) {
@@ -25,7 +25,7 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
     Roles(UserRoles.Administrator);
     Options(x => x.WithTags("Courses"));
     Description(b => b
-      .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
+      .Produces<List<CourseDtoV2>>(200, MediaTypeNames.Application.Json)
       .ProducesProblemFE(401)
       .ProducesProblemFE(403)
       .ProducesProblemFE(500));
@@ -47,7 +47,7 @@ public class GetAllCourses : EndpointWithoutRequest<List<CourseDto>, CoursesMapp
       .ThenInclude(e => e.Role)
       .ToListAsync(ct);
 
-    var result = courses.Select(e => Map.FromEntity(e)).ToList();
+    var result = courses.Select(e => Map.FromEntityToV2(e)).ToList();
 
     await SendAsync(result, cancellation: ct);
   }

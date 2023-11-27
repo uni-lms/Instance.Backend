@@ -10,9 +10,7 @@ using Group = Uni.Backend.Modules.Groups.Contracts.Group;
 
 namespace Uni.Instance.Backend.Modules.Courses.Contracts;
 
-[Mapper]
-public partial class CoursesMapper : ResponseMapper<CourseDto, Course> {
-  public partial CourseDto FromEntity(Course r);
+public class CoursesMapper : ResponseMapper<CourseDtoV2, Course> {
 
   public CourseDtoV2 FromEntityToV2(Course r) {
     return new CourseDtoV2 {

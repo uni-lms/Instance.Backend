@@ -16,7 +16,7 @@ using Group = Uni.Backend.Modules.Groups.Contracts.Group;
 
 namespace Uni.Instance.Backend.Modules.Courses.Endpoints;
 
-public class UpdateCourse : Endpoint<UpdateCourseRequest, CourseDto, CoursesMapper> {
+public class UpdateCourse : Endpoint<UpdateCourseRequest, CourseDtoV2, CoursesMapper> {
   private readonly AppDbContext _db;
 
   public UpdateCourse(AppDbContext db) {
@@ -113,6 +113,6 @@ public class UpdateCourse : Endpoint<UpdateCourseRequest, CourseDto, CoursesMapp
     course.Blocks = blocks;
 
     await _db.SaveChangesAsync(ct);
-    await SendAsync(Map.FromEntity(course), cancellation: ct);
+    await SendAsync(Map.FromEntityToV2(course), cancellation: ct);
   }
 }

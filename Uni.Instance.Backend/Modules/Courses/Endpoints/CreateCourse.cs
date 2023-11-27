@@ -18,7 +18,7 @@ using Group = Uni.Backend.Modules.Groups.Contracts.Group;
 
 namespace Uni.Instance.Backend.Modules.Courses.Endpoints;
 
-public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapper> {
+public class CreateCourse : Endpoint<CreateCourseRequest, CourseDtoV2, CoursesMapper> {
   private readonly AppDbContext _db;
 
   public CreateCourse(AppDbContext db) {
@@ -32,7 +32,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
     Options(x => x.WithTags("Courses"));
     Description(b => b
       .ClearDefaultProduces()
-      .Produces<CourseDto>(201, MediaTypeNames.Application.Json)
+      .Produces<CourseDtoV2>(201, MediaTypeNames.Application.Json)
       .ProducesProblemFE(401)
       .ProducesProblemFE(403)
       .ProducesProblemFE(404)
@@ -108,7 +108,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDto, CoursesMapp
     await SendCreatedAtAsync(
       "/v1/courses",
       null,
-      Map.FromEntity(course),
+      Map.FromEntityToV2(course),
       cancellation: ct
     );
   }

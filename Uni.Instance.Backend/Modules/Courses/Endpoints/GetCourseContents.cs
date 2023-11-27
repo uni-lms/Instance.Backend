@@ -13,6 +13,7 @@ using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Backend.Modules.CourseContents.Text.Contract;
 using Uni.Backend.Modules.Static.Contracts;
 using Uni.Instance.Backend.Modules.CourseBlocks.Contracts;
+using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 using Uni.Instance.Backend.Modules.Courses.Contracts;
 
 

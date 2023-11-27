@@ -28,7 +28,7 @@ public class GetEnrolledCoursesV2 : Endpoint<EnrolledCoursesFilterRequest, List<
     Get("/courses/enrolled");
     Options(x => x.WithTags("Courses"));
     Description(b => b
-      .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
+      .Produces<List<CourseDtoV2>>(200, MediaTypeNames.Application.Json)
       .ProducesProblemFE(401)
       .ProducesProblemFE(403)
       .ProducesProblemFE(500));

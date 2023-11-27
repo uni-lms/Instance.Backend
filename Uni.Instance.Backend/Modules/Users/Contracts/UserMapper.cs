@@ -5,8 +5,16 @@ using Riok.Mapperly.Abstractions;
 
 namespace Uni.Backend.Modules.Users.Contracts;
 
-[Mapper]
 public partial class UserMapper : ResponseMapper<UserDto, User> {
-  [MapProperty(new[] { nameof(User.Role), nameof(User.Role.Name) }, new[] { nameof(UserDto.RoleName) })]
-  public partial UserDto FromEntity(User e);
+  public UserDto FromEntity(User e) {
+    var dto = new UserDto {
+      Id = e.Id,
+      FirstName = e.FirstName,
+      LastName = e.LastName,
+      Patronymic = e.Patronymic,
+      RoleName = e.Role?.Name,
+    };
+
+    return dto;
+  }
 }

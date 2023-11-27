@@ -2,12 +2,22 @@
 
 using Riok.Mapperly.Abstractions;
 
-using Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
+using Uni.Backend.Modules.CourseContents.Quiz.Contracts;
 
 
-namespace Uni.Backend.Modules.CourseContents.Quiz.Contracts;
+namespace Uni.Instance.Backend.Modules.CourseContents.Quiz.Contracts;
 
 [Mapper]
 public partial class QuizMapper : ResponseMapper<QuizDto, QuizContent> {
-  public partial QuizDto FromEntity(QuizContent e);
+  public override QuizDto FromEntity(QuizContent e) {
+    var dto = new QuizDto {
+      Title = e.Title,
+      AvailableUntil = e.AvailableUntil,
+      Description = e.Description,
+      Id = e.Id,
+      IsVisibleToStudents = e.IsVisibleToStudents,
+    };
+
+    return dto;
+  }
 }

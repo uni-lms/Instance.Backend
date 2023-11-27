@@ -18,8 +18,15 @@ public partial class QuizPassAttemptMapper : ResponseMapper<QuizPassAttemptDto, 
 
     return dto;
   }
-  
-  private partial QuizPassAttemptDto QuizPassAttemptToDto(QuizPassAttempt e);
+
+  private QuizPassAttemptDto QuizPassAttemptToDto(QuizPassAttempt e) {
+    var dto = new QuizPassAttemptDto {
+      Id = e.Id,
+      Points = CalculateAccruedPoints(e.AccruedPoints),
+    };
+
+    return dto;
+  }
 
   [UsedImplicitly]
   private int CalculateAccruedPoints(List<AccruedPoint> points) {

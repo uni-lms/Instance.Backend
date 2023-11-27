@@ -25,7 +25,7 @@ public class GetCoursesOwnedByMe : EndpointWithoutRequest<List<CourseTutorDto>, 
     Roles(UserRoles.MinimumRequired(UserRoles.Tutor));
     Options(x => x.WithTags("Courses"));
     Description(b => b
-      .Produces<List<CourseDto>>(200, MediaTypeNames.Application.Json)
+      .Produces<List<CourseTutorDto>>(200, MediaTypeNames.Application.Json)
       .ProducesProblemFE(401)
       .ProducesProblemFE(403)
       .ProducesProblemFE(500));
