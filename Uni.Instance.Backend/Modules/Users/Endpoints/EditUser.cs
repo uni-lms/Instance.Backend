@@ -20,7 +20,6 @@ public class EditUser : Endpoint<EditUserRequest, UserDto, UserMapper> {
   public override void Configure() {
     Version(1);
     Patch("/users");
-    AllowFileUploads();
     Options(x => x.WithTags("Users"));
     Description(b => b
       .Produces(200)
