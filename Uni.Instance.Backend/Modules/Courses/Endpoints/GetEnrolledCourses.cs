@@ -21,7 +21,7 @@ public class GetEnrolledCourses : Endpoint<EnrolledCoursesFilterRequest, List<Co
   }
 
   public override void Configure() {
-    Version(1);
+    Version(1, deprecateAt: 2);
     Roles(UserRoles.Student);
     Get("/courses/enrolled");
     Options(x => x.WithTags("Courses"));
