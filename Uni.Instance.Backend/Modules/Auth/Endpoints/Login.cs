@@ -57,10 +57,8 @@ public class Login : Endpoint<LoginRequest, LoginResponse> {
         var jwtToken = JWTBearer.CreateToken(
           signingKey: _securityOptions.SigningKey,
           expireAt: DateTime.UtcNow.AddMonths(99),
-          priviledges: u => {
-            u.Roles.Add(user.Role!.Name);
-            u.Claims.Add(new Claim(ClaimTypes.Name, user.Email));
-          }
+          roles: new[] { user.Role!.Name },
+          claims: new[] { (ClaimTypes.Name, user.Email) }
         );
 
         await SendAsync(new LoginResponse {
