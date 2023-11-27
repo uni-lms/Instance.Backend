@@ -29,6 +29,7 @@ public static class BuilderExtensions {
 
     ArgumentNullException.ThrowIfNull(signingKey);
 
+    builder.Services.AddAuthorization();
     builder.Services.AddFastEndpoints();
     builder.Services.AddJWTBearerAuth(signingKey);
   }
