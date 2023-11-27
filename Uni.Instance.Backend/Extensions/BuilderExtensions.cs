@@ -76,6 +76,7 @@ public static class BuilderExtensions {
       o.AutoTagPathSegmentIndex = 0;
       o.MaxEndpointVersion = 2;
       o.ShortSchemaNames = true;
+      o.ShowDeprecatedOps = true;
       o.TagDescriptions = Tags;
       o.DocumentSettings = s => DocumentSettings(s, "v1");
     });
