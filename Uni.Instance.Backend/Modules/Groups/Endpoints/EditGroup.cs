@@ -39,7 +39,10 @@ public class EditGroup : Endpoint<EditGroupRequest, GroupDto, GroupMapper> {
   }
 
   public override async Task HandleAsync(EditGroupRequest req, CancellationToken ct) {
-    var group = await _db.Groups.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+    var group = await _db.Groups
+      .Include(e => e.Students)
+      .Where(e => e.Id == req.Id)
+      .FirstOrDefaultAsync(ct);
 
     if (group is null) {
       ThrowError(e => e.Id, "Group was not found", 404);
