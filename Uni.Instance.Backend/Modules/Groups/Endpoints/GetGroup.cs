@@ -44,6 +44,7 @@ public class GetGroup: Endpoint<SearchEntityRequest, GroupDto, GroupMapper> {
   public override async Task HandleAsync(SearchEntityRequest req, CancellationToken ct) {
     var result = await _db.Groups.AsNoTracking()
       .Where(e => e.Id == req.Id)
+      .Include(e => e.Students)
       .Select(e => Map.FromEntity(e)).FirstOrDefaultAsync(ct);
 
     if (result is null) {
