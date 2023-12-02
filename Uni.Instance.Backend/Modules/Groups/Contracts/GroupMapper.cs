@@ -9,6 +9,8 @@ namespace Uni.Backend.Modules.Groups.Contracts;
 public partial class GroupMapper : ResponseMapper<GroupDto, Group> {
   public GroupDto FromEntity(Group e) {
     var dto = new GroupDto {
+      Id = e.Id,
+      AmountOfStudents = e.Students.Count,
       Name = e.Name,
       CurrentSemester = e.CurrentSemester,
       MaxSemester = e.MaxSemester,
