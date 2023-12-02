@@ -50,5 +50,6 @@ public class EditGroup : Endpoint<EditGroupRequest, GroupDto, GroupMapper> {
     group.MaxSemester = req.MaxSemester;
 
     await _db.SaveChangesAsync(ct);
+    await SendAsync(Map.FromEntity(group), cancellation: ct);
   }
 }
