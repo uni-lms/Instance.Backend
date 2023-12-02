@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Uni.Backend.Modules.Groups.Contracts;
 
 public class EditGroupRequest {
-  [FromRoute]
-  [BindFrom("id")]
   public Guid Id { get; [UsedImplicitly] set; }
 
   public required string Name { get; [UsedImplicitly] set; }

@@ -19,7 +19,7 @@ public class EditGroup : Endpoint<EditGroupRequest, GroupDto, GroupMapper> {
   public override void Configure() {
     Version(1);
     Roles(UserRoles.Administrator);
-    Put("/groups/{id}");
+    Put("/groups");
     Options(x => x.WithTags("Groups"));
     Description(b => b
       .Produces(200)
