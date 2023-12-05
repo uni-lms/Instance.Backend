@@ -8,6 +8,5 @@ public class CreateCourseRequest {
   public required string Abbreviation { get; [UsedImplicitly] set; }
   public required List<Guid> AssignedGroups { get; [UsedImplicitly] set; }
   public required List<Guid> Blocks { get; [UsedImplicitly] set; }
-  public required List<Guid> Owners { get; set; }
   public int Semester { get; [UsedImplicitly] set; }
 }
