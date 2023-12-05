@@ -62,7 +62,7 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDtoV2, CoursesMa
     }
 
     var assignedGroups = new List<Group>();
-    var enabledBlocks = new List<CourseBlock>();
+    var enabledBlocks = await _db.CourseBlocks.ToListAsync(ct);
     var owners = new List<User> { user };
 
     foreach (var groupId in req.AssignedGroups) {
@@ -75,18 +75,6 @@ public class CreateCourse : Endpoint<CreateCourseRequest, CourseDtoV2, CoursesMa
       }
 
       assignedGroups.Add(group);
-    }
-
-    foreach (var blockId in req.Blocks) {
-      var block = await _db.CourseBlocks
-        .FindAsync(new object?[] { blockId }, cancellationToken: ct);
-
-      if (block is null) {
-        AddError(e => e.Blocks, $"Block {blockId} was not found");
-        continue;
-      }
-
-      enabledBlocks.Add(block);
     }
 
     ThrowIfAnyErrors(404);
