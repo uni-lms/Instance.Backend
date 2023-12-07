@@ -15,7 +15,7 @@ using Uni.Backend.Modules.Static.Services;
 
 namespace Uni.Backend.Modules.CourseContents.File.Endpoints;
 
-public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
+public class UploadFileContent : Endpoint<UploadContentRequest, FileContentDto> {
   private readonly AppDbContext _db;
   private readonly StaticService _staticService;
 
@@ -32,7 +32,7 @@ public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
     Options(x => x.WithTags("Course Materials. Files"));
     Description(b => b
       .ClearDefaultProduces()
-      .Produces<FileContent>(201, MediaTypeNames.Application.Json)
+      .Produces<FileContentDto>(201, MediaTypeNames.Application.Json)
       .ProducesProblemFE(401)
       .ProducesProblemFE(403)
       .ProducesProblemFE(404)
@@ -98,10 +98,18 @@ public class UploadFileContent : Endpoint<UploadContentRequest, FileContent> {
         File = file,
       };
 
+      var contentDto = new FileContentDto {
+        IsVisibleToStudents = req.IsVisibleToStudents,
+        File = new StaticFileDto {
+          Id = file.Id,
+          VisibleName = file.VisibleName,
+        },
+      };
+
       await _db.FileContents.AddAsync(content, ct);
       await _db.SaveChangesAsync(ct);
 
-      await SendCreatedAtAsync($"/courses/{req.CourseId}/file", null, content, cancellation: ct);
+      await SendCreatedAtAsync($"/courses/{req.CourseId}/file", null, contentDto, cancellation: ct);
     }
     else {
       ThrowError("Unable to save file", 500);
