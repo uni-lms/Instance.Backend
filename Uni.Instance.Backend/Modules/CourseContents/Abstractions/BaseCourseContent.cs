@@ -8,7 +8,6 @@ using Uni.Backend.Modules.Courses.Contracts;
 namespace Uni.Backend.Modules.CourseContents.Abstractions;
 
 public abstract class BaseCourseContent : BaseModel {
-  [JsonIgnore]
   public required Course Course { get; set; }
 
   public required CourseBlock Block { get; set; }
