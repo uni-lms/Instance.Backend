@@ -4,3 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 **/uploads
+**/appsettings.json
+.idea/.idea.Uni/.idea/deployment.xml
+.idea/.idea.Uni/.idea/sshConfigs.xml
+.idea/.idea.Uni/.idea/webServers.xml
