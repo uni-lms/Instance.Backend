@@ -20,4 +20,5 @@ public sealed class User : BaseModel {
 
   public required byte[] PasswordHash { get; set; }
   public required byte[] PasswordSalt { get; set; }
+  public required Role Role { get; set; }
 }
