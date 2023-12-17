@@ -64,6 +64,7 @@ public static class BuilderExtensions {
 
     void Tags(IDictionary<string, string> t) {
       t[ApiTags.Internal.Tag] = ApiTags.Internal.Description;
+      t[ApiTags.Auth.Tag] = ApiTags.Auth.Description;
     }
   }
 }
