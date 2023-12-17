@@ -1,4 +1,6 @@
-﻿using FastEndpoints;
+﻿using System.Reflection;
+
+using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 
@@ -57,8 +59,8 @@ public static class BuilderExtensions {
       s.Version = version;
     }
 
-    void Tags(Dictionary<string, string> t) {
-      
+    void Tags(IDictionary<string, string> t) {
+      t[ApiTags.Internal.Tag] = ApiTags.Internal.Description;
     }
   }
 }
