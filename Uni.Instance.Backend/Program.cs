@@ -19,6 +19,7 @@ builder.Host.UseSerilog();
 builder.ConfigureFastEndpoints();
 builder.ConfigureDatabase();
 builder.MapConfiguration();
+builder.RegisterServices();
 builder.ConfigureSwaggerDocuments();
 
 var app = builder.Build();

@@ -9,6 +9,7 @@ using NSwag.Generation.AspNetCore;
 
 using Uni.Instance.Backend.Configuration;
 using Uni.Instance.Backend.Data;
+using Uni.Instance.Backend.Endpoints.Internal.Services;
 
 
 namespace Uni.Instance.Backend.Extensions;
@@ -36,6 +37,10 @@ public static class BuilderExtensions {
     builder.Services.Configure<SecurityConfiguration>(builder.Configuration.GetRequiredSection("Security"));
     builder.Services.AddSingleton(resolver =>
       resolver.GetRequiredService<IOptions<SecurityConfiguration>>().Value);
+  }
+
+  public static void RegisterServices(this WebApplicationBuilder builder) {
+    builder.Services.AddSingleton<PingService>();
   }
 
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
