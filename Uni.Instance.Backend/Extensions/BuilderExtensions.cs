@@ -56,19 +56,18 @@ public static class BuilderExtensions {
       o.TagDescriptions = Tags;
       o.DocumentSettings = s => DocumentSettings(s, "v2");
     });
-    return;
+  }
 
-    void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s, string version) {
-      const string title = "UNI API";
-      s.Title = title;
-      s.Description = "API of the learning management system \"UNI\"";
-      s.DocumentName = $"{title} {version}";
-      s.Version = version;
-    }
+  private static void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s, string version) {
+    const string title = "UNI API";
+    s.Title = title;
+    s.Description = "API of the learning management system \"UNI\"";
+    s.DocumentName = $"{title} {version}";
+    s.Version = version;
+  }
 
-    void Tags(IDictionary<string, string> t) {
-      t[ApiTags.Internal.Tag] = ApiTags.Internal.Description;
-      t[ApiTags.Auth.Tag] = ApiTags.Auth.Description;
-    }
+  private static void Tags(IDictionary<string, string> t) {
+    t[ApiTags.Internal.Tag] = ApiTags.Internal.Description;
+    t[ApiTags.Auth.Tag] = ApiTags.Auth.Description;
   }
 }

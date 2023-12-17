@@ -9,14 +9,14 @@ namespace Uni.Instance.Backend.Data.Migrations
     public partial class AddRole : Migration
     {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.AddColumn<Guid>(
                 name: "RoleId",
                 table: "Users",
                 type: "uuid",
                 nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+                defaultValue: Guid.Empty
+            );
 
             migrationBuilder.CreateTable(
                 name: "Roles",

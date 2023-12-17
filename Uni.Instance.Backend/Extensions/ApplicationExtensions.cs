@@ -15,7 +15,9 @@ using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Uni.Instance.Backend.Extensions;
 
+#pragma warning disable S2094
 internal class ExceptionHandler { }
+#pragma warning restore S2094
 
 public static class ApplicationExtensions {
   public static void ConfigureAuthorization(this WebApplication app) {
@@ -55,26 +57,23 @@ public static class ApplicationExtensions {
     ILogger? logger = null,
     bool logStructuredException = false
   ) {
-    app.UseExceptionHandler(errApp =>
-    {
-      errApp.Run(async ctx =>
-      {
+    app.UseExceptionHandler(errApp => {
+      errApp.Run(async ctx => {
         var exHandlerFeature = ctx.Features.Get<IExceptionHandlerFeature>();
-        if (exHandlerFeature is not null)
-        {
+        if (exHandlerFeature is not null) {
           logger ??= ctx.Resolve<ILogger<ExceptionHandler>>();
           var http = exHandlerFeature.Endpoint?.DisplayName?.Split(" => ")[0];
           var type = exHandlerFeature.Error.GetType().Name;
           var error = exHandlerFeature.Error.Message;
           var msg =
             """
-             =================================
-             {http}
-             TYPE: {type}
-             REASON: {error}
-             ---------------------------------
-             {exHandlerFeature.Error.StackTrace}
-             """;
+            =================================
+            {http}
+            TYPE: {type}
+            REASON: {error}
+            ---------------------------------
+            {exHandlerFeature.Error.StackTrace}
+            """;
 
           if (logStructuredException) {
             logger.LogError("{Http}{Type}{Reason}{Exception}", http, type, error, exHandlerFeature.Error);

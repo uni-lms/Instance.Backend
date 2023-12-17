@@ -59,9 +59,8 @@ public static class ArdalisExtensions {
         statusCode = 503;
         break;
       }
-      default: {
-        throw new ArgumentOutOfRangeException();
-      }
+      default:
+        throw new ArgumentOutOfRangeException(nameof(result), "Unknown status");
     }
 
     await ep.HttpContext.Response.SendAsync(result, statusCode, cancellation: cancellation);
