@@ -60,7 +60,7 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     await db.SaveChangesAsync(cancellation);
 
     var response = new LoginResponse {
-      Token = GenerateJwt(user),
+      AccessToken = GenerateAccessToken(user),
     };
 
     return Result.Success(response);
@@ -107,9 +107,9 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
       return Result.Unauthorized();
     }
 
-    var token = GenerateJwt(user);
+    var token = GenerateAccessToken(user);
     return Result.Success(new LoginResponse {
-      Token = token,
+      AccessToken = token,
     });
   }
 
@@ -129,7 +129,7 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(plainPassword));
   }
 
-  private string GenerateJwt(User user) {
+  private string GenerateAccessToken(User user) {
     return JWTBearer.CreateToken(
       signingKey: configuration.SigningKey,
       expireAt: DateTime.UtcNow.AddMinutes(40),
