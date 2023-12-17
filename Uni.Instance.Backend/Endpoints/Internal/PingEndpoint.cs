@@ -1,16 +1,14 @@
 ﻿using FastEndpoints;
 
-using JetBrains.Annotations;
+using FluentResults;
 
-using Uni.Instance.Backend.Endpoints.Internal.Data;
+using JetBrains.Annotations;
 
 
 namespace Uni.Instance.Backend.Endpoints.Internal;
 
 [UsedImplicitly]
-public sealed class PingEndpoint : Endpoint<EmptyRequest, PingReponse> {
-  private static readonly PingReponse PingReponse = new() { Value = "Pong" };
-
+public sealed class PingEndpoint : Endpoint<EmptyRequest, Result<string>> {
   public override void Configure() {
     Version(2);
     Get("/internal/ping");
@@ -18,7 +16,7 @@ public sealed class PingEndpoint : Endpoint<EmptyRequest, PingReponse> {
     AllowAnonymous();
   }
 
-  public override async Task<PingReponse> ExecuteAsync(EmptyRequest req, CancellationToken ct) {
-    return PingReponse;
+  public override async Task<Result<string>> ExecuteAsync(EmptyRequest req, CancellationToken ct) {
+    return Result.Ok("pong");
   }
 }
