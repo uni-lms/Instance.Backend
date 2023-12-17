@@ -1,3 +1,5 @@
+using FastEndpoints.Swagger;
+
 using Serilog;
 using Serilog.Events;
 
@@ -23,6 +25,7 @@ var app = builder.Build();
 app.UseSerilogRequestLogging();
 app.ConfigureAuthorization();
 app.ConfigureFastEndpoints();
+app.UseSwaggerGen(c => { c.Path = "/swagger/{documentName}/swagger.json"; });
 app.ApplyMigrations();
 
 app.Run();
