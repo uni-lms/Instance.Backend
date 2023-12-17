@@ -2,6 +2,7 @@
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +10,7 @@ using NSwag.Generation.AspNetCore;
 
 using Uni.Instance.Backend.Configuration;
 using Uni.Instance.Backend.Data;
+using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Endpoints.Internal.Services;
 
 
@@ -41,6 +43,8 @@ public static class BuilderExtensions {
 
   public static void RegisterServices(this WebApplicationBuilder builder) {
     builder.Services.AddSingleton<PingService>();
+    builder.Services.AddTransient<AuthService>();
+    builder.Services.AddTransient<IClaimsTransformation, UserRoleHydrator>();
   }
 
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
