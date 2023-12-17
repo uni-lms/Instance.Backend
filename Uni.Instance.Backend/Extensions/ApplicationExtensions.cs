@@ -7,15 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 using Serilog;
 
-using Uni.Backend.Data;
-using Uni.Instance.Backend.Modules.Error.Contract;
+using Uni.Instance.Backend.Data;
+using Uni.Instance.Backend.Data.Common;
 
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 
-namespace Uni.Backend.Extensions;
+namespace Uni.Instance.Backend.Extensions;
 
+#pragma warning disable S2094
 internal class ExceptionHandler { }
+#pragma warning restore S2094
 
 public static class ApplicationExtensions {
   public static void ConfigureAuthorization(this WebApplication app) {
@@ -39,10 +41,14 @@ public static class ApplicationExtensions {
 
     Log.Logger.Information("Checking if has pending migrations...");
 
-    if (!context.Database.GetPendingMigrations().Any()) return;
+    var pendingMigrations = context.Database.GetPendingMigrations().ToList();
+    if (pendingMigrations.Count == 0) {
+      return;
+    }
+
     Log.Logger.Information(
-      "Found pending migrations: {GetPendingMigrations}, migrating...",
-      context.Database.GetPendingMigrations());
+      "Found pending migrations: {PendingMigrations}, migrating...",
+      pendingMigrations);
     context.Database.Migrate();
   }
 
@@ -51,26 +57,23 @@ public static class ApplicationExtensions {
     ILogger? logger = null,
     bool logStructuredException = false
   ) {
-    app.UseExceptionHandler(errApp =>
-    {
-      errApp.Run(async ctx =>
-      {
+    app.UseExceptionHandler(errApp => {
+      errApp.Run(async ctx => {
         var exHandlerFeature = ctx.Features.Get<IExceptionHandlerFeature>();
-        if (exHandlerFeature is not null)
-        {
+        if (exHandlerFeature is not null) {
           logger ??= ctx.Resolve<ILogger<ExceptionHandler>>();
           var http = exHandlerFeature.Endpoint?.DisplayName?.Split(" => ")[0];
           var type = exHandlerFeature.Error.GetType().Name;
           var error = exHandlerFeature.Error.Message;
           var msg =
             """
-             =================================
-             {http}
-             TYPE: {type}
-             REASON: {error}
-             ---------------------------------
-             {exHandlerFeature.Error.StackTrace}
-             """;
+            =================================
+            {http}
+            TYPE: {type}
+            REASON: {error}
+            ---------------------------------
+            {exHandlerFeature.Error.StackTrace}
+            """;
 
           if (logStructuredException) {
             logger.LogError("{Http}{Type}{Reason}{Exception}", http, type, error, exHandlerFeature.Error);

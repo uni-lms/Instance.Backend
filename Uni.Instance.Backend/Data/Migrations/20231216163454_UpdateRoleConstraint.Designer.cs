@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Uni.Instance.Backend.Data;
@@ -11,9 +12,11 @@ using Uni.Instance.Backend.Data;
 namespace Uni.Instance.Backend.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231216163454_UpdateRoleConstraint")]
+    partial class UpdateRoleConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,23 +39,6 @@ namespace Uni.Instance.Backend.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("9a6bcced-f1d3-4155-b691-480718ee78e4"),
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("c82073b9-126c-4b4e-8edc-bc3d0cea56f1"),
-                            Name = "Tutor"
-                        },
-                        new
-                        {
-                            Id = new Guid("c0aa6455-626c-49de-94fc-616b4a6b5605"),
-                            Name = "Student"
-                        });
                 });
 
             modelBuilder.Entity("Uni.Instance.Backend.Data.Models.User", b =>
