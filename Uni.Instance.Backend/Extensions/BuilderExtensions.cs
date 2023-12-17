@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using FastEndpoints;
+﻿using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 
@@ -39,7 +37,7 @@ public static class BuilderExtensions {
     builder.Services.AddSingleton(resolver =>
       resolver.GetRequiredService<IOptions<SecurityConfiguration>>().Value);
   }
-  
+
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
     builder.Services.SwaggerDocument(o => {
       o.AutoTagPathSegmentIndex = 0;
