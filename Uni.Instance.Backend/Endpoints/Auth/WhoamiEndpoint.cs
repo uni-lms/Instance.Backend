@@ -2,8 +2,9 @@
 
 using FastEndpoints;
 
+using JetBrains.Annotations;
+
 using Uni.Instance.Backend.Configuration;
-using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Extensions;
@@ -11,7 +12,8 @@ using Uni.Instance.Backend.Extensions;
 
 namespace Uni.Instance.Backend.Endpoints.Auth;
 
-public class WhoamiEndpoint(AppDbContext db, AuthService service) : EndpointWithoutRequest<Result<WhoamiResponse>> {
+[UsedImplicitly]
+public class WhoamiEndpoint(AuthService service) : EndpointWithoutRequest<Result<WhoamiResponse>> {
   public override void Configure() {
     Version(2);
     Get("/auth/whoami");
