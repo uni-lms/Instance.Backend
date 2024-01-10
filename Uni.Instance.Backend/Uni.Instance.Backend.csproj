@@ -38,4 +38,11 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Endpoints\Internal\Data\"/>
+        <Folder Include="Endpoints\Internal\Endpoints\"/>
+        <Folder Include="Endpoints\Internal\Services\"/>
+        <Folder Include="Endpoints\Internal\Validation\"/>
+    </ItemGroup>
+
 </Project>
