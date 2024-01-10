@@ -10,7 +10,7 @@ using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Extensions;
 
 
-namespace Uni.Instance.Backend.Endpoints.Auth;
+namespace Uni.Instance.Backend.Endpoints.Auth.Endpoints.Whoami;
 
 [UsedImplicitly]
 public class WhoamiEndpoint(AuthService service) : EndpointWithoutRequest<Result<WhoamiResponse>> {
