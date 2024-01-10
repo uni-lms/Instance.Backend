@@ -3,7 +3,7 @@
 
 namespace Uni.Instance.Backend.Endpoints.Auth.Data;
 
-public sealed class SignUpRequest {
+public sealed class SignupRequest {
   public required string Email { get; [UsedImplicitly] set; }
   public required string FirstName { get; [UsedImplicitly] set; }
   public required string LastName { get; [UsedImplicitly] set; }

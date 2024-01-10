@@ -25,7 +25,7 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
   public async Task<Result<LoginResponse>> SignUpAsync(
     bool validationFailed,
     IEnumerable<ValidationFailure> validationFailures,
-    SignUpRequest req,
+    SignupRequest req,
     CancellationToken cancellation = default
   ) {
     if (validationFailed) {

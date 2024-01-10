@@ -7,7 +7,7 @@ using Uni.Instance.Backend.Endpoints.Auth.Data;
 
 namespace Uni.Instance.Backend.Endpoints.Auth.Validation;
 
-public class SignUpRequestValidation : Validator<SignUpRequest> {
+public class SignUpRequestValidation : Validator<SignupRequest> {
   public SignUpRequestValidation() {
     RuleFor(e => e.Email).NotEmpty().EmailAddress().MaximumLength(50);
     RuleFor(e => e.FirstName).NotEmpty().MaximumLength(30);
