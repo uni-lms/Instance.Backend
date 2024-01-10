@@ -6,7 +6,7 @@ using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Extensions;
 
 
-namespace Uni.Instance.Backend.Endpoints.Auth;
+namespace Uni.Instance.Backend.Endpoints.Auth.Endpoints.Login;
 
 public class LoginEndpoint(AuthService service) : Endpoint<LoginRequest, LoginResponse> {
   public override void Configure() {
