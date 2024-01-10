@@ -4,6 +4,7 @@ using FastEndpoints;
 
 using JetBrains.Annotations;
 
+using Uni.Instance.Backend.Configuration;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
 
 
@@ -13,7 +14,7 @@ namespace Uni.Instance.Backend.Endpoints.Auth.Endpoints.Login;
 public class LoginEndpointSummary : Summary<LoginEndpoint> {
   public LoginEndpointSummary() {
     Summary = "Генерирует токен авторизации для пользователя по его почте и паролю";
-    Description = "<b>Может использоваться:</b> Анонимным пользователем";
+    Description = CanBeUsedBy.Anonymous;
     ExampleRequest = new LoginRequest {
       Email = "me@example.com",
       Password = "1234",

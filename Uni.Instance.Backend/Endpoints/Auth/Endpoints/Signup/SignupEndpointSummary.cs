@@ -4,6 +4,7 @@ using FastEndpoints;
 
 using JetBrains.Annotations;
 
+using Uni.Instance.Backend.Configuration;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
 
 
@@ -13,7 +14,7 @@ namespace Uni.Instance.Backend.Endpoints.Auth.Endpoints.Signup;
 public class SignupEndpointSummary : Summary<SignupEndpoint> {
   public SignupEndpointSummary() {
     Summary = "Создаёт нового пользователя и возвращает его токен доступа";
-    Description = "<b>Может использоваться:</b> Анонимным пользователем";
+    Description = CanBeUsedBy.Anonymous;
     ExampleRequest = new SignupRequest {
       Email = "foo@bar.com",
       Password = "p@ssW0rd",
