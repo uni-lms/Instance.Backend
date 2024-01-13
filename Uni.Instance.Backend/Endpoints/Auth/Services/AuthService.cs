@@ -142,4 +142,19 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
 
     return user is null ? string.Empty : user.Role.Name;
   }
+
+  public async Task<Result<DeleteResponse>> DeleteAccountAsync(string email) {
+    var user = await db.Users.Where(e => e.Email == email).FirstOrDefaultAsync();
+
+    if (user is null) {
+      return Result<DeleteResponse>.NotFound("User was not found");
+    }
+
+    db.Users.Remove(user);
+    await db.SaveChangesAsync();
+
+    return Result.Success(new DeleteResponse {
+      Email = user.Email,
+    });
+  }
 }
