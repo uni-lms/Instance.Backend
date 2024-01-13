@@ -45,4 +45,19 @@
         <Folder Include="Endpoints\Internal\Validation\"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Compile Update="Endpoints\Auth\Endpoints\Whoami\WhoamiEndpointSummary.cs">
+            <DependentUpon>WhoamiEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Endpoints\Auth\Endpoints\Delete\DeleteEndpointSummary.cs">
+            <DependentUpon>DeleteEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Endpoints\Auth\Endpoints\Login\LoginEndpointSummary.cs">
+            <DependentUpon>LoginEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Endpoints\Auth\Endpoints\Signup\SignupEndpointSummary.cs">
+            <DependentUpon>SignupEndpoint.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
 </Project>
