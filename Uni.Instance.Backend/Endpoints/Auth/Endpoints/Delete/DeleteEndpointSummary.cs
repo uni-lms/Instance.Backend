@@ -12,7 +12,7 @@ public class DeleteEndpointSummary : Summary<DeleteEndpoint> {
   public DeleteEndpointSummary() {
     Summary = "Безвозвратно удаляет аккаунт текущего пользователя";
     Description = CanBeUsedBy.AnyAuthorized;
-    Response<Result<DeleteResponse>>(200, "Успешное удаление аккаунта");
+    Response<Result<DeleteUserResponse>>(200, "Успешное удаление аккаунта");
     Response<Result<ErrorResponse>>(404, "Несуществующий пользователь");
   }
 }
