@@ -73,5 +73,6 @@ public static class BuilderExtensions {
     t[ApiTags.Internal.Tag] = ApiTags.Internal.Description;
     t[ApiTags.Auth.Tag] = ApiTags.Auth.Description;
     t[ApiTags.CourseSections.Tag] = ApiTags.CourseSections.Description;
+    t[ApiTags.Groups.Tag] = ApiTags.Groups.Description;
   }
 }
