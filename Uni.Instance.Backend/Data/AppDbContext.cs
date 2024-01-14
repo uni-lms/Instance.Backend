@@ -9,6 +9,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public virtual DbSet<User> Users => Set<User>();
   public virtual DbSet<Role> Roles => Set<Role>();
   public virtual DbSet<CourseSection> CourseSections => Set<CourseSection>();
+  public virtual DbSet<Course> Courses => Set<Course>();
+  public virtual DbSet<Group> Groups => Set<Group>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
     modelBuilder.Entity<User>().HasIndex(e => e.Email);
