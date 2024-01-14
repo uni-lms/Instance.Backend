@@ -10,7 +10,7 @@ using FluentValidation.Results;
 
 using Microsoft.EntityFrameworkCore;
 
-using Uni.Instance.Backend.Configuration;
+using Uni.Instance.Backend.Configuration.Models;
 using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Data.Models;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
