@@ -3,7 +3,7 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 
-using Uni.Instance.Backend.Configuration;
+using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Extensions;

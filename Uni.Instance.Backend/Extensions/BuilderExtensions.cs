@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using NSwag.Generation.AspNetCore;
 
 using Uni.Instance.Backend.Configuration;
+using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Services;
 

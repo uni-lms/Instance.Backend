@@ -2,7 +2,7 @@
 
 using FastEndpoints;
 
-using Uni.Instance.Backend.Configuration;
+using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
 
 

@@ -1,4 +1,4 @@
-﻿namespace Uni.Instance.Backend.Configuration;
+﻿namespace Uni.Instance.Backend.Configuration.Swagger;
 
 public static class ApiTags {
   public static readonly ApiTag Internal = new("Internal", "Внутренние служебные методы");

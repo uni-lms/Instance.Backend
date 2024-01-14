@@ -1,4 +1,4 @@
-﻿namespace Uni.Instance.Backend.Configuration;
+﻿namespace Uni.Instance.Backend.Configuration.Swagger;
 
 public static class CanBeUsedBy {
   private const string UsedBy = "<b>Может использоваться:</b>";
