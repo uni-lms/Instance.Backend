@@ -13,6 +13,7 @@ using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Endpoints.CourseSections.Services;
+using Uni.Instance.Backend.Endpoints.Groups.Services;
 
 
 namespace Uni.Instance.Backend.Extensions;
@@ -45,6 +46,7 @@ public static class BuilderExtensions {
   public static void RegisterServices(this WebApplicationBuilder builder) {
     builder.Services.AddTransient<AuthService>();
     builder.Services.AddTransient<CourseSectionsService>();
+    builder.Services.AddTransient<GroupsService>();
     builder.Services.AddTransient<IClaimsTransformation, UserRoleHydrator>();
   }
 
