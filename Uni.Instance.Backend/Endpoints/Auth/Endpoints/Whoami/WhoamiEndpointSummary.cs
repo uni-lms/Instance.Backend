@@ -16,6 +16,7 @@ public class WhoamiEndpointSummary : Summary<WhoamiEndpoint> {
     Summary = "Возвращает информацию о текущем пользователе";
     Description = CanBeUsedBy.AnyAuthorized;
     Response<Result<WhoamiResponse>>(200, "Успешное получение информации");
+    Response<Result<ErrorResponse>>(401, "Необходима авторизация");
     Response<Result<ErrorResponse>>(404, "Несуществующий пользователь");
   }
 }
