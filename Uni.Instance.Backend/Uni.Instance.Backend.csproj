@@ -58,6 +58,9 @@
         <Compile Update="Endpoints\Auth\Endpoints\Signup\SignupEndpointSummary.cs">
             <DependentUpon>SignupEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Endpoints\CourseSections\Endpoints\GetAll\GetAllCourseSectionsEndpointSummary.cs">
+            <DependentUpon>GetAllCourseSectionsEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

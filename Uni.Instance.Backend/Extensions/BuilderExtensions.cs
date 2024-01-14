@@ -12,6 +12,7 @@ using Uni.Instance.Backend.Configuration.Models;
 using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Services;
+using Uni.Instance.Backend.Endpoints.CourseSections.Services;
 
 
 namespace Uni.Instance.Backend.Extensions;
@@ -43,6 +44,7 @@ public static class BuilderExtensions {
 
   public static void RegisterServices(this WebApplicationBuilder builder) {
     builder.Services.AddTransient<AuthService>();
+    builder.Services.AddTransient<CourseSectionsService>();
     builder.Services.AddTransient<IClaimsTransformation, UserRoleHydrator>();
   }
 
@@ -68,5 +70,6 @@ public static class BuilderExtensions {
   private static void Tags(IDictionary<string, string> t) {
     t[ApiTags.Internal.Tag] = ApiTags.Internal.Description;
     t[ApiTags.Auth.Tag] = ApiTags.Auth.Description;
+    t[ApiTags.CourseSections.Tag] = ApiTags.CourseSections.Description;
   }
 }
