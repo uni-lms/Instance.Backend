@@ -74,9 +74,21 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
       return Result.NotFound("User was not found");
     }
 
+    var fullNameBuilder = new StringBuilder();
+    fullNameBuilder.Append(data.LastName);
+    fullNameBuilder.Append(' ');
+    fullNameBuilder.Append(data.FirstName[0]);
+    fullNameBuilder.Append('.');
+
+    if (data.Patronymic is not null) {
+      fullNameBuilder.Append(' ');
+      fullNameBuilder.Append(data.Patronymic[0]);
+      fullNameBuilder.Append('.');
+    }
+
     var response = new WhoamiResponse {
       Email = email!,
-      FullName = $"{data.FirstName}",
+      FullName = fullNameBuilder.ToString(),
       RoleName = user.ClaimValue(ClaimTypes.Role)!,
     };
 
