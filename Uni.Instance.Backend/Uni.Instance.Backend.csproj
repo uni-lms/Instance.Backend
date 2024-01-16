@@ -61,6 +61,9 @@
         <Compile Update="Endpoints\CourseSections\Endpoints\GetAll\GetAllCourseSectionsEndpointSummary.cs">
             <DependentUpon>GetAllCourseSectionsEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Endpoints\Groups\Endpoints\Edit\EditGroupEndpointSummary.cs">
+            <DependentUpon>EditGroupEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

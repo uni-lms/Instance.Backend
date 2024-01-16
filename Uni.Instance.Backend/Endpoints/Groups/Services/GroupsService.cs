@@ -2,6 +2,8 @@
 
 using FluentValidation.Results;
 
+using Microsoft.EntityFrameworkCore;
+
 using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Data.Models;
 using Uni.Instance.Backend.Endpoints.Groups.Data;
@@ -35,6 +37,33 @@ public class GroupsService(AppDbContext db) {
     return Result.Success(new CreateGroupResponse {
       Id = group.Id,
       Name = group.Name,
+    });
+  }
+
+  public async Task<Result<EditGroupResponse>> EditGroupAsync(
+    bool validationFailed,
+    IEnumerable<ValidationFailure> validationFailures,
+    EditGroupRequest req,
+    CancellationToken ct
+  ) {
+    if (validationFailed) {
+      return Result.Invalid(validationFailures.ToValidationErrors());
+    }
+
+    var group = await db.Groups.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (group is null) {
+      return Result.NotFound();
+    }
+
+    group.Name = req.Name;
+    group.EnteringYear = req.EnteringYear;
+    group.YearsOfStudy = req.YearsOfStudy;
+
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new EditGroupResponse {
+      Name = req.Name,
     });
   }
 }
