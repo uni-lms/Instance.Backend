@@ -1,5 +1,5 @@
 ﻿namespace Uni.Instance.Backend.Endpoints.Auth.Data;
 
-public class LoginResponse {
+public class LogInResponse {
   public required string AccessToken { get; set; }
 }

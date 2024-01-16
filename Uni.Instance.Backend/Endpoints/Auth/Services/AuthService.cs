@@ -16,16 +16,14 @@ using Uni.Instance.Backend.Data.Models;
 using Uni.Instance.Backend.Endpoints.Auth.Data;
 using Uni.Instance.Backend.Extensions;
 
-using LoginRequest = Uni.Instance.Backend.Endpoints.Auth.Data.LoginRequest;
-
 
 namespace Uni.Instance.Backend.Endpoints.Auth.Services;
 
 public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
-  public async Task<Result<LoginResponse>> SignUpAsync(
+  public async Task<Result<LogInResponse>> SignUpAsync(
     bool validationFailed,
     IEnumerable<ValidationFailure> validationFailures,
-    SignupRequest req,
+    SignUpRequest req,
     CancellationToken cancellation = default
   ) {
     if (validationFailed) {
@@ -59,7 +57,7 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     await db.Users.AddAsync(user, cancellation);
     await db.SaveChangesAsync(cancellation);
 
-    var response = new LoginResponse {
+    var response = new LogInResponse {
       AccessToken = GenerateAccessToken(user),
     };
 
@@ -95,10 +93,10 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     return Result.Success(response);
   }
 
-  public async Task<Result<LoginResponse>> LoginAsync(
+  public async Task<Result<LogInResponse>> LoginAsync(
     bool validationFailed,
     IEnumerable<ValidationFailure> validationFailures,
-    LoginRequest req,
+    LogInRequest req,
     CancellationToken cancellation = default
   ) {
     if (validationFailed) {
@@ -120,12 +118,12 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     }
 
     var token = GenerateAccessToken(user);
-    return Result.Success(new LoginResponse {
+    return Result.Success(new LogInResponse {
       AccessToken = token,
     });
   }
 
-  private bool IsValidPassword(User entity, LoginRequest req) {
+  private bool IsValidPassword(User entity, LogInRequest req) {
     return VerifyPasswordHash(req.Password, entity.PasswordHash, entity.PasswordSalt);
   }
 
