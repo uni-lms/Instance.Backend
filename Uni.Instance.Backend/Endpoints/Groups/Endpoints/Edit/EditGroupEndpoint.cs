@@ -11,7 +11,7 @@ namespace Uni.Instance.Backend.Endpoints.Groups.Endpoints.Edit;
 public class EditGroupEndpoint(GroupsService service) : Endpoint<EditGroupRequest> {
   public override void Configure() {
     Version(2);
-    Post("/groups/{id}");
+    Put("/groups/{id}");
     Roles(CanBeUsedBy.OnlyAdmin);
     Options(x => x.WithTags(ApiTags.Groups.Tag));
     DontThrowIfValidationFails();
