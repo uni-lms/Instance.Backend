@@ -15,6 +15,7 @@ public class CreateGroupEndpoint(GroupsService service) : Endpoint<CreateGroupRe
     Post("/groups");
     Roles(CanBeUsedBy.OnlyAdmin);
     Options(x => x.WithTags(ApiTags.Groups.Tag));
+    DontThrowIfValidationFails();
   }
 
   public override async Task HandleAsync(CreateGroupRequest req, CancellationToken ct) {

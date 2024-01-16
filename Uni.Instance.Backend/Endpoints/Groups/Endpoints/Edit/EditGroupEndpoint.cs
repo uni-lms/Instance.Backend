@@ -14,6 +14,7 @@ public class EditGroupEndpoint(GroupsService service) : Endpoint<EditGroupReques
     Post("/groups/{id}");
     Roles(CanBeUsedBy.OnlyAdmin);
     Options(x => x.WithTags(ApiTags.Groups.Tag));
+    DontThrowIfValidationFails();
   }
 
   public override async Task HandleAsync(EditGroupRequest req, CancellationToken ct) {
