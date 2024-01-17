@@ -1,4 +1,6 @@
-﻿using FastEndpoints;
+﻿using Ardalis.Result;
+
+using FastEndpoints;
 
 using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Endpoints.Users.Data;
@@ -8,7 +10,7 @@ using Uni.Instance.Backend.Extensions;
 
 namespace Uni.Instance.Backend.Endpoints.Users.Endpoints.Edit;
 
-public class EditUserEndpoint(UsersService service) : Endpoint<EditUserRequest> {
+public class EditUserEndpoint(UsersService service) : Endpoint<EditUserRequest, Result<EditUserResponse>> {
   public override void Configure() {
     Version(2);
     Put("/user/{id}");

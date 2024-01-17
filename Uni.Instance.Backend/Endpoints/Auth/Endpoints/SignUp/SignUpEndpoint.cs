@@ -1,4 +1,6 @@
-﻿using FastEndpoints;
+﻿using Ardalis.Result;
+
+using FastEndpoints;
 
 using JetBrains.Annotations;
 
@@ -11,7 +13,7 @@ using Uni.Instance.Backend.Extensions;
 namespace Uni.Instance.Backend.Endpoints.Auth.Endpoints.Signup;
 
 [UsedImplicitly]
-public class SignUpEndpoint(AuthService service) : Endpoint<SignUpRequest> {
+public class SignUpEndpoint(AuthService service) : Endpoint<SignUpRequest, Result<LogInResponse>> {
   public override void Configure() {
     Post("/auth/sign-up");
     Version(2);

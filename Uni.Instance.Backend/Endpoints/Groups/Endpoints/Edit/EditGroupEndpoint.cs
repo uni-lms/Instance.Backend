@@ -1,4 +1,6 @@
-﻿using FastEndpoints;
+﻿using Ardalis.Result;
+
+using FastEndpoints;
 
 using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Endpoints.Groups.Data;
@@ -8,7 +10,7 @@ using Uni.Instance.Backend.Extensions;
 
 namespace Uni.Instance.Backend.Endpoints.Groups.Endpoints.Edit;
 
-public class EditGroupEndpoint(GroupsService service) : Endpoint<EditGroupRequest> {
+public class EditGroupEndpoint(GroupsService service) : Endpoint<EditGroupRequest, Result<EditGroupResponse>> {
   public override void Configure() {
     Version(2);
     Put("/groups/{id}");
