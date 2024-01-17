@@ -14,6 +14,7 @@ using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Endpoints.Auth.Services;
 using Uni.Instance.Backend.Endpoints.CourseSections.Services;
 using Uni.Instance.Backend.Endpoints.Groups.Services;
+using Uni.Instance.Backend.Endpoints.Users.Services;
 
 
 namespace Uni.Instance.Backend.Extensions;
@@ -47,6 +48,7 @@ public static class BuilderExtensions {
     builder.Services.AddTransient<AuthService>();
     builder.Services.AddTransient<CourseSectionsService>();
     builder.Services.AddTransient<GroupsService>();
+    builder.Services.AddTransient<UsersService>();
     builder.Services.AddTransient<IClaimsTransformation, UserRoleHydrator>();
   }
 
@@ -74,5 +76,6 @@ public static class BuilderExtensions {
     t[ApiTags.Auth.Tag] = ApiTags.Auth.Description;
     t[ApiTags.CourseSections.Tag] = ApiTags.CourseSections.Description;
     t[ApiTags.Groups.Tag] = ApiTags.Groups.Description;
+    t[ApiTags.Users.Tag] = ApiTags.Users.Description;
   }
 }
