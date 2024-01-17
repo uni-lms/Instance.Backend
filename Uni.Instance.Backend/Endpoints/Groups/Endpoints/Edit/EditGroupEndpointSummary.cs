@@ -16,5 +16,6 @@ public class EditGroupEndpointSummary : Summary<EditGroupEndpoint> {
     Response<Result<ErrorResponse>>(400, "Ошибка валидации");
     Response<Result<ErrorResponse>>(401, "Неавторизованный доступ");
     Response<Result<ErrorResponse>>(403, "Доступ запрещён");
+    Response<Result<ErrorResponse>>(404, "Группа не найдена");
   }
 }
