@@ -39,7 +39,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Endpoints\Groups\Endpoints\GetAll\"/>
         <Folder Include="Endpoints\Internal\Data\"/>
         <Folder Include="Endpoints\Internal\Endpoints\"/>
         <Folder Include="Endpoints\Internal\Services\"/>

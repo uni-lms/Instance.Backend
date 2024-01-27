@@ -99,4 +99,15 @@ public class GroupsService(AppDbContext db) {
       Name = group.Name,
     });
   }
+
+  public async Task<Result<List<GroupDto>>> GetAllGroupsAsync(CancellationToken ct) {
+    var groups = await db.Groups.Select(e => new GroupDto {
+      Id = e.Id,
+      Name = e.Name,
+      EnteringYear = e.EnteringYear,
+      GraduationYear = e.EnteringYear + e.YearsOfStudy,
+    }).ToListAsync(ct);
+
+    return Result.Success(groups);
+  }
 }
