@@ -82,4 +82,14 @@ public class CoursesService(AppDbContext db) {
     };
     return Result.Success(courseDto);
   }
+
+  public async Task<Result<List<BaseCourseDto>>> GetAllCoursesAsync(CancellationToken ct) {
+    var courses = await db.Courses.Select(e => new BaseCourseDto {
+      Name = e.Name,
+      Abbreviation = e.Abbreviation,
+      Semester = e.Semester,
+    }).ToListAsync(ct);
+
+    return Result.Success(courses);
+  }
 }
