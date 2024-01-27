@@ -84,4 +84,19 @@ public class GroupsService(AppDbContext db) {
       Name = req.Name,
     });
   }
+
+  public async Task<Result<EditGroupResponse>> DeleteGroupAsync(SearchByIdModel req, CancellationToken ct) {
+    var group = await db.Groups.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (group is null) {
+      return Result.NotFound();
+    }
+
+    db.Groups.Remove(group);
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new EditGroupResponse {
+      Name = group.Name,
+    });
+  }
 }

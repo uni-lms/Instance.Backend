@@ -39,6 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Endpoints\Groups\Endpoints\GetAll\"/>
         <Folder Include="Endpoints\Internal\Data\"/>
         <Folder Include="Endpoints\Internal\Endpoints\"/>
         <Folder Include="Endpoints\Internal\Services\"/>
@@ -69,6 +70,9 @@
         </Compile>
         <Compile Update="Endpoints\Groups\Endpoints\Get\GetGroupEndpointSummary.cs">
             <DependentUpon>GetGroupEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Endpoints\Groups\Endpoints\Delete\DeleteGroupEndpointSummary.cs">
+            <DependentUpon>DeleteGroupEndpoint.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
