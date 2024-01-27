@@ -8,13 +8,13 @@ using Microsoft.Extensions.Options;
 
 using NSwag.Generation.AspNetCore;
 
+using Uni.Instance.Backend.Api.Auth.Services;
+using Uni.Instance.Backend.Api.CourseSections.Services;
+using Uni.Instance.Backend.Api.Groups.Services;
+using Uni.Instance.Backend.Api.Users.Services;
 using Uni.Instance.Backend.Configuration.Models;
 using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Data;
-using Uni.Instance.Backend.Endpoints.Auth.Services;
-using Uni.Instance.Backend.Endpoints.CourseSections.Services;
-using Uni.Instance.Backend.Endpoints.Groups.Services;
-using Uni.Instance.Backend.Endpoints.Users.Services;
 
 
 namespace Uni.Instance.Backend.Extensions;

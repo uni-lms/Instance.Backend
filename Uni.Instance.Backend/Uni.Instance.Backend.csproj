@@ -39,10 +39,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Endpoints\Internal\Data\"/>
-        <Folder Include="Endpoints\Internal\Endpoints\"/>
-        <Folder Include="Endpoints\Internal\Services\"/>
-        <Folder Include="Endpoints\Internal\Validation\"/>
+        <Folder Include="Api\Internal\Data\"/>
+        <Folder Include="Api\Internal\Endpoints\"/>
+        <Folder Include="Api\Internal\Services\"/>
+        <Folder Include="Api\Internal\Validation\"/>
     </ItemGroup>
 
     <ItemGroup>
