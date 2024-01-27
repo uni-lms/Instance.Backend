@@ -39,6 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Api\Course\Endpoints\"/>
         <Folder Include="Api\Internal\Data\"/>
         <Folder Include="Api\Internal\Endpoints\"/>
         <Folder Include="Api\Internal\Services\"/>
@@ -75,6 +76,9 @@
         </Compile>
         <Compile Update="Endpoints\Groups\Endpoints\Create\CreateGroupEndpointSummary.cs">
             <DependentUpon>CreateGroupEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Course\Endpoints\Create\CreateCourseEndpointSummary.cs">
+            <DependentUpon>CreateCourseEndpoint.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
