@@ -14,7 +14,7 @@ namespace Uni.Instance.Backend.Endpoints.Groups.Endpoints.Get;
 public class GetGroupEndpoint(GroupsService service) : Endpoint<SearchByIdModel, Result<List<GroupDto>>> {
   public override void Configure() {
     Version(2);
-    Get("/group/{id}");
+    Get("/groups/{id}");
     Options(x => x.WithTags(ApiTags.Groups.Tag));
     DontThrowIfValidationFails();
   }
