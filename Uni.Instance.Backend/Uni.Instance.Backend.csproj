@@ -74,6 +74,9 @@
         <Compile Update="Endpoints\Groups\Endpoints\Delete\DeleteGroupEndpointSummary.cs">
             <DependentUpon>DeleteGroupEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Endpoints\Groups\Endpoints\Create\CreateGroupEndpointSummary.cs">
+            <DependentUpon>CreateGroupEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
