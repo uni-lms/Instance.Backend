@@ -15,6 +15,7 @@ public class GetGroupEndpoint(GroupsService service) : Endpoint<SearchByIdModel,
   public override void Configure() {
     Version(2);
     Get("/groups/{id}");
+    Roles(CanBeUsedBy.TutorAndAbove);
     Options(x => x.WithTags(ApiTags.Groups.Tag));
     DontThrowIfValidationFails();
   }

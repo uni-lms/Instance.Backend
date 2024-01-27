@@ -14,7 +14,7 @@ namespace Uni.Instance.Backend.Endpoints.Groups.Endpoints.Get;
 public class GetGroupEndpointSummary : Summary<GetGroupEndpoint> {
   public GetGroupEndpointSummary() {
     Summary = "Возвращает модель группы по идентификатору";
-    Description = CanBeUsedBy.AnyAuthorized;
+    Description = CanBeUsedBy.AtLeastTutor;
     Response<Result<GroupDto>>(200, "Упрощённая модель группы");
     Response<Result<ErrorResponse>>(400, "Ошибка валидации");
     Response<Result<ErrorResponse>>(401, "Неавторизованный доступ");
