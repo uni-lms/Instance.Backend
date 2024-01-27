@@ -79,6 +79,6 @@ public static class BuilderExtensions {
     t[ApiTags.CourseSections.Tag] = ApiTags.CourseSections.Description;
     t[ApiTags.Groups.Tag] = ApiTags.Groups.Description;
     t[ApiTags.Users.Tag] = ApiTags.Users.Description;
-    t[ApiTags.Groups.Tag] = ApiTags.Courses.Description;
+    t[ApiTags.Courses.Tag] = ApiTags.Courses.Description;
   }
 }
