@@ -10,7 +10,7 @@ namespace Uni.Instance.Backend.Api.Course.Endpoints.Owned;
 public class GetOwnedCoursesEndpoint(CoursesService service) : Endpoint<EmptyRequest> {
   public override void Configure() {
     Version(2);
-    Post("/courses/owned");
+    Get("/courses/owned");
     Roles(CanBeUsedBy.OnlyTutor);
     Options(x => x.WithTags(ApiTags.Courses.Tag));
     DontThrowIfValidationFails();
