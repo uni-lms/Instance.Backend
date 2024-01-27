@@ -82,6 +82,9 @@
         <Compile Update="Api\Course\Endpoints\GetAll\GetAllCoursesEndpointSummary.cs">
             <DependentUpon>GetAllCoursesEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\Course\Endpoints\Delete\DeleteCourseEndpointSummary.cs">
+            <DependentUpon>DeleteCourseEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
