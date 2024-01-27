@@ -113,4 +113,30 @@ public class CoursesService(AppDbContext db) {
       Semester = course.Semester,
     });
   }
+
+  public async Task<Result<List<TutorCourseDto>>> GetOwnedCoursesAsync(ClaimsPrincipal user, CancellationToken ct) {
+    var userEmail = user.ClaimValue(ClaimTypes.Name);
+
+    if (userEmail is null) {
+      return Result.Unauthorized();
+    }
+
+    var userData = await db.Users.Where(e => e.Email == userEmail).FirstOrDefaultAsync(ct);
+
+    if (userData is null) {
+      return Result.NotFound();
+    }
+
+    var courses = await db.Courses
+      .Where(e => e.Owners.Contains(userData))
+      .Select(e => new TutorCourseDto {
+        Id = e.Id,
+        Name = e.Name,
+        Abbreviation = e.Abbreviation,
+        Semester = e.Semester,
+        AssignedGroups = e.AssignedGroups.Select(g => g.Name).ToList(),
+      }).ToListAsync(ct);
+
+    return Result.Success(courses);
+  }
 }
