@@ -8,7 +8,7 @@ using Uni.Instance.Backend.Extensions;
 
 namespace Uni.Instance.Backend.Api.Course.Endpoints.Create;
 
-public class CreateCourseEndpoint(CoursesService service) : Endpoint<CreateCourseRequest> {
+public class CreateCourseEndpoint(CoursesService service) : Endpoint<CreateCourseRequest, BaseCourseDto> {
   public override void Configure() {
     Version(2);
     Post("/course");

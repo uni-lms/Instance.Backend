@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 
+using Uni.Instance.Backend.Api.Course.Data;
 using Uni.Instance.Backend.Api.Course.Services;
 using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Extensions;
@@ -7,7 +8,7 @@ using Uni.Instance.Backend.Extensions;
 
 namespace Uni.Instance.Backend.Api.Course.Endpoints.GetAll;
 
-public class GetAllCoursesEndpoint(CoursesService service) : Endpoint<EmptyRequest> {
+public class GetAllCoursesEndpoint(CoursesService service) : Endpoint<EmptyRequest, List<BaseCourseDto>> {
   public override void Configure() {
     Version(2);
     Get("/course");

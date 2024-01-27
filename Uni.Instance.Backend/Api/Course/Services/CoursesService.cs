@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Uni.Instance.Backend.Api.Course.Data;
 using Uni.Instance.Backend.Data;
+using Uni.Instance.Backend.Data.Common;
 using Uni.Instance.Backend.Data.Models;
 using Uni.Instance.Backend.Extensions;
 
@@ -76,6 +77,7 @@ public class CoursesService(AppDbContext db) {
     await db.SaveChangesAsync(ct);
 
     var courseDto = new BaseCourseDto {
+      Id = course.Id,
       Name = course.Name,
       Abbreviation = course.Abbreviation,
       Semester = course.Semester,
@@ -85,11 +87,30 @@ public class CoursesService(AppDbContext db) {
 
   public async Task<Result<List<BaseCourseDto>>> GetAllCoursesAsync(CancellationToken ct) {
     var courses = await db.Courses.Select(e => new BaseCourseDto {
+      Id = e.Id,
       Name = e.Name,
       Abbreviation = e.Abbreviation,
       Semester = e.Semester,
     }).ToListAsync(ct);
 
     return Result.Success(courses);
+  }
+
+  public async Task<Result<BaseCourseDto>> DeleteCourseAsync(SearchByIdModel req, CancellationToken ct) {
+    var course = await db.Courses.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (course is null) {
+      return Result.NotFound();
+    }
+
+    db.Courses.Remove(course);
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new BaseCourseDto {
+      Id = course.Id,
+      Name = course.Name,
+      Abbreviation = course.Abbreviation,
+      Semester = course.Semester,
+    });
   }
 }
