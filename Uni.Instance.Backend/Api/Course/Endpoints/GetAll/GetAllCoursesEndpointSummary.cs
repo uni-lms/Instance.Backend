@@ -10,7 +10,7 @@ namespace Uni.Instance.Backend.Api.Course.Endpoints.GetAll;
 
 public class GetAllCoursesEndpointSummary : Summary<GetAllCoursesEndpoint> {
   public GetAllCoursesEndpointSummary() {
-    Summary = "Получить список всех курсов";
+    Summary = "Возвращает список всех курсов";
     Description = CanBeUsedBy.AtLeastTutor;
     Response<Result<List<BaseCourseDto>>>(200, "Список курсов успешно получен");
     Response<Result<ErrorResponse>>(401, "Неавторизованный доступ");
