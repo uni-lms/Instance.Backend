@@ -12,7 +12,7 @@ namespace Uni.Instance.Backend.Api.Course.Endpoints.Delete;
 public class DeleteCourseEndpoint(CoursesService service) : Endpoint<SearchByIdModel, BaseCourseDto> {
   public override void Configure() {
     Version(2);
-    Delete("/course/{id}");
+    Delete("/courses/{id}");
     Roles(CanBeUsedBy.TutorAndAbove);
     Options(x => x.WithTags(ApiTags.Courses.Tag));
     DontThrowIfValidationFails();

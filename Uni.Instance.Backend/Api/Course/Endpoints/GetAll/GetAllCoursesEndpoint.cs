@@ -11,7 +11,7 @@ namespace Uni.Instance.Backend.Api.Course.Endpoints.GetAll;
 public class GetAllCoursesEndpoint(CoursesService service) : Endpoint<EmptyRequest, List<BaseCourseDto>> {
   public override void Configure() {
     Version(2);
-    Get("/course");
+    Get("/courses");
     Roles(CanBeUsedBy.TutorAndAbove);
     Options(x => x.WithTags(ApiTags.Courses.Tag));
     DontThrowIfValidationFails();

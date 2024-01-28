@@ -11,7 +11,7 @@ namespace Uni.Instance.Backend.Api.Course.Endpoints.Create;
 public class CreateCourseEndpoint(CoursesService service) : Endpoint<CreateCourseRequest, BaseCourseDto> {
   public override void Configure() {
     Version(2);
-    Post("/course");
+    Post("/courses");
     Options(x => x.WithTags(ApiTags.Courses.Tag));
     DontThrowIfValidationFails();
   }
