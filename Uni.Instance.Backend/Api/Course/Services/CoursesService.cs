@@ -139,4 +139,46 @@ public class CoursesService(AppDbContext db) {
 
     return Result.Success(courses);
   }
+
+  public async Task<Result<List<StudentCourseDto>>> GetEnrolledCourses(
+    ClaimsPrincipal user,
+    EnrolledCoursesFilterRequest req,
+    CancellationToken ct
+  ) {
+    var userEmail = user.ClaimValue(ClaimTypes.Name);
+
+    if (userEmail is null) {
+      return Result.Unauthorized();
+    }
+
+    var userData = await db.Users.Where(e => e.Email == userEmail).FirstOrDefaultAsync(ct);
+
+    if (userData is null) {
+      return Result.NotFound();
+    }
+
+    var group = await db.Groups.Where(e => e.Students.Contains(userData)).FirstOrDefaultAsync(ct);
+
+    if (group is null) {
+      return Result.NotFound();
+    }
+
+    var currentSemester = group.GetCurrentSemester(DateTime.UtcNow);
+
+    var courses = await db.Courses
+      .Where(e => e.AssignedGroups.Contains(group))
+      .Select(e => new StudentCourseDto {
+        Id = e.Id,
+        Name = e.Name,
+        Abbreviation = e.Abbreviation,
+        Semester = e.Semester,
+        Owners = e.Owners.Select(u => u.ToString()).ToList(),
+      }).ToListAsync(ct);
+
+    var filteredCourses = courses
+      .Where(e => e.Semester.CompareTo(currentSemester) == (int)req.CourseType)
+      .ToList();
+
+    return Result.Success(filteredCourses);
+  }
 }
