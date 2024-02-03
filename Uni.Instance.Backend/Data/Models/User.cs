@@ -21,4 +21,9 @@ public sealed class User : BaseModel {
   public required byte[] PasswordHash { get; set; }
   public required byte[] PasswordSalt { get; set; }
   public required Role Role { get; set; }
+
+  public override string ToString() {
+    var patronymic = Patronymic is not null ? $" {Patronymic[0]}." : "";
+    return $"{LastName} {FirstName[0]}.{patronymic}";
+  }
 }
