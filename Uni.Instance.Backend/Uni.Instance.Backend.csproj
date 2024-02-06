@@ -91,6 +91,9 @@
         <Compile Update="Api\Course\Endpoints\Owned\GetOwnedCoursesEndpointSummary.cs">
             <DependentUpon>GetOwnedCoursesEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\Course\Endpoints\AddOwnerToCourse\AddOwnerToCourseEndpointSummary.cs">
+            <DependentUpon>AddOwnerToCourseEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

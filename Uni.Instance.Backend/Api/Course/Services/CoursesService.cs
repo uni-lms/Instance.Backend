@@ -181,4 +181,30 @@ public class CoursesService(AppDbContext db) {
 
     return Result.Success(filteredCourses);
   }
+
+  public async Task<Result<CourseOwnersResponse>> AddOwnerToCourse(ListOfGuidsRequest req, CancellationToken ct) {
+    var usersToAdd = db.Users.Where(e => req.Ids.Contains(e.Id)).AsEnumerable();
+
+    var course = await db.Courses.Where(e => e.Id == req.EntityId).Include(e => e.Owners).FirstOrDefaultAsync(ct);
+
+    if (course is null) {
+      return Result.NotFound();
+    }
+
+    HashSet<User> owners = [..usersToAdd, ..course.Owners];
+
+    course.Owners = owners.ToList();
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new CourseOwnersResponse {
+      CourseId = course.Id,
+      CourseName = course.Name,
+      Owners = owners.Select(e => new CourseOwner {
+        Id = e.Id,
+        FirstName = e.FirstName,
+        LastName = e.LastName,
+        Patronymic = e.Patronymic,
+      }).ToList(),
+    });
+  }
 }
