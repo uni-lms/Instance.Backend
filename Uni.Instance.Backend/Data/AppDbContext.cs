@@ -11,6 +11,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public virtual DbSet<CourseSection> CourseSections => Set<CourseSection>();
   public virtual DbSet<Course> Courses => Set<Course>();
   public virtual DbSet<Group> Groups => Set<Group>();
+  public virtual DbSet<CourseContentFile> FileContents => Set<CourseContentFile>();
+  public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
     modelBuilder.Entity<User>().HasIndex(e => e.Email);
