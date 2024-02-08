@@ -14,6 +14,9 @@ public static class ApiTags {
 
   public static readonly ApiTag Courses =
     new("Курсы", "Методы, связанные с управлением курсами");
+
+  public static readonly ApiTag CourseContentFile =
+    new("Файлы", "Методы, связанные с управлением файловым контентом на курсах");
 }
 
 public record ApiTag(string Tag, string Description);
