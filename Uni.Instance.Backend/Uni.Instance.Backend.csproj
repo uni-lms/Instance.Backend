@@ -35,10 +35,12 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Sqids" Version="3.1.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Api\CourseContent\File\Validation\"/>
         <Folder Include="Api\Internal\Data\"/>
         <Folder Include="Api\Internal\Endpoints\"/>
         <Folder Include="Api\Internal\Services\"/>
@@ -93,6 +95,9 @@
         </Compile>
         <Compile Update="Api\Course\Endpoints\AddOwnerToCourse\AddOwnerToCourseEndpointSummary.cs">
             <DependentUpon>AddOwnerToCourseEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Upload\UploadFileContentEndpointSummary.cs">
+            <DependentUpon>UploadFileContentEndpoint.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
