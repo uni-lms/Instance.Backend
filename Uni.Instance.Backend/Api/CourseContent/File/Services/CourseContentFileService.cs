@@ -68,6 +68,27 @@ public class CourseContentFileService(AppDbContext db, IHostEnvironment environm
     });
   }
 
+  public async Task<Result<UploadFileContentResponse>> EditFileAsync(EditFileContentRequest req, CancellationToken ct) {
+    var content = await db.FileContents.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (content is null) {
+      return Result.NotFound("Файл не был найден");
+    }
+
+    if (req.Title is not null) {
+      content.Title = req.Title;
+    }
+
+    content.IsVisibleToStudents = req.IsVisibleToStudents;
+
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new UploadFileContentResponse {
+      Id = content.Id,
+      Title = content.Title,
+    });
+  }
+
   private async Task<string> CalculateChecksumAsync(IFormFile file, CancellationToken ct = default) {
     using var md5 = MD5.Create();
     using var streamReader = new StreamReader(file.OpenReadStream());
