@@ -10,6 +10,7 @@ using NSwag.Generation.AspNetCore;
 
 using Uni.Instance.Backend.Api.Auth.Services;
 using Uni.Instance.Backend.Api.Course.Services;
+using Uni.Instance.Backend.Api.CourseContent.File.Services;
 using Uni.Instance.Backend.Api.CourseSections.Services;
 using Uni.Instance.Backend.Api.Groups.Services;
 using Uni.Instance.Backend.Api.Users.Services;
@@ -51,6 +52,7 @@ public static class BuilderExtensions {
     builder.Services.AddTransient<GroupsService>();
     builder.Services.AddTransient<UsersService>();
     builder.Services.AddTransient<CoursesService>();
+    builder.Services.AddTransient<CourseContentFileService>();
     builder.Services.AddTransient<IClaimsTransformation, UserRoleHydrator>();
   }
 
