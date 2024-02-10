@@ -5,6 +5,5 @@ public class UploadFileContentRequest {
   public Guid SectionId { get; set; }
   public required IFormFile Content { get; set; }
   public required string Title { get; set; }
-  public DateTime? AvailableSince { get; set; }
-  public DateTime? AvailableUntil { get; set; }
+  public bool IsVisibleToStudents { get; set; }
 }

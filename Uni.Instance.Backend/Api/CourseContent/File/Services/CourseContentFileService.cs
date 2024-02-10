@@ -56,9 +56,8 @@ public class CourseContentFileService(AppDbContext db, IHostEnvironment environm
       Title = req.Title,
       Course = course,
       Section = courseSection,
-      AvailableSince = req.AvailableSince,
-      AvailableUntil = req.AvailableUntil,
       File = existedFile,
+      IsVisibleToStudents = req.IsVisibleToStudents,
     };
 
     await db.FileContents.AddAsync(content, ct);
