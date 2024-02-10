@@ -12,7 +12,7 @@ public class UploadFileContentEndpointSummary : Summary<UploadFileContentEndpoin
   public UploadFileContentEndpointSummary() {
     Summary = "Добавляет новый файловый контент на курс";
     Description = CanBeUsedBy.AnyTutor;
-    Response<Result<UploadFileContentResponse>>(200, "Новые пользователи добавлены");
+    Response<Result<UploadFileContentResponse>>(200, "Новые контент добавлен");
     Response<Result<ErrorResponse>>(401, "Неавторизованный доступ");
     Response<Result<ErrorResponse>>(403, "Доступ запрещён");
     Response<Result<ErrorResponse>>(404, "Курс / раздел курса не найден");
