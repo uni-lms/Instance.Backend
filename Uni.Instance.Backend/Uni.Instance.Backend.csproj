@@ -108,6 +108,9 @@
         <Compile Update="Api\CourseContent\File\Endpoints\Get\GetFileContentInfoEndpointSummary.cs">
             <DependentUpon>GetFileContentInfoEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Download\DownloadFileContentEndpointSummary.cs">
+            <DependentUpon>DownloadFileContentEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
