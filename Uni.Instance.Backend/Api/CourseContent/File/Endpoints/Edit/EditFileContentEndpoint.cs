@@ -6,7 +6,7 @@ using Uni.Instance.Backend.Configuration.Swagger;
 using Uni.Instance.Backend.Extensions;
 
 
-namespace Uni.Instance.Backend.Api.CourseContent.File.Endpoints.Update;
+namespace Uni.Instance.Backend.Api.CourseContent.File.Endpoints.Edit;
 
 public class EditFileContentEndpoint(CourseContentFileService service) : Endpoint<EditFileContentRequest> {
   public override void Configure() {

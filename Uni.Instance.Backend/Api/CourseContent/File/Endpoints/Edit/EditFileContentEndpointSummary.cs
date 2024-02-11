@@ -6,7 +6,7 @@ using Uni.Instance.Backend.Api.CourseContent.File.Data;
 using Uni.Instance.Backend.Configuration.Swagger;
 
 
-namespace Uni.Instance.Backend.Api.CourseContent.File.Endpoints.Update;
+namespace Uni.Instance.Backend.Api.CourseContent.File.Endpoints.Edit;
 
 public class EditFileContentEndpointSummary : Summary<EditFileContentEndpoint> {
   public EditFileContentEndpointSummary() {
