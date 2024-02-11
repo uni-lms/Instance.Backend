@@ -12,6 +12,8 @@ using Uni.Instance.Backend.Data;
 using Uni.Instance.Backend.Data.Common;
 using Uni.Instance.Backend.Data.Models;
 
+using FileInfo = Uni.Instance.Backend.Api.CourseContent.File.Data.FileInfo;
+
 
 namespace Uni.Instance.Backend.Api.CourseContent.File.Services;
 
@@ -157,5 +159,18 @@ public class CourseContentFileService(
       FileId = fileId,
       FilePath = path,
     };
+  }
+
+  public static string BytesToString(long fileLength) {
+    string[] suf = ["Б", "КБ", "МБ", "ГБ", "ТБ"];
+
+    if (fileLength == 0) {
+      return $"0 {suf[0]}";
+    }
+
+    var bytes = Math.Abs(fileLength);
+    var place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+    var num = Math.Round(bytes / Math.Pow(1024, place), 1);
+    return $"{Math.Sign(fileLength) * num} {suf[place]}";
   }
 }
