@@ -99,7 +99,7 @@
         <Compile Update="Api\CourseContent\File\Endpoints\Upload\UploadFileContentEndpointSummary.cs">
             <DependentUpon>UploadFileContentEndpoint.cs</DependentUpon>
         </Compile>
-        <Compile Update="Api\CourseContent\File\Endpoints\Update\EditFileContentEndpointSummary.cs">
+        <Compile Update="Api\CourseContent\File\Endpoints\Edit\EditFileContentEndpointSummary.cs">
             <DependentUpon>EditFileContentEndpoint.cs</DependentUpon>
         </Compile>
         <Compile Update="Api\CourseContent\File\Endpoints\Delete\DeleteFileContentEndpointSummary.cs">
