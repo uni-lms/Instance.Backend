@@ -102,6 +102,9 @@
         <Compile Update="Api\CourseContent\File\Endpoints\Update\EditFileContentEndpointSummary.cs">
             <DependentUpon>EditFileContentEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Delete\DeleteFileContentEndpointSummary.cs">
+            <DependentUpon>DeleteFileContentEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

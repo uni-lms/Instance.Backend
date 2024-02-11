@@ -9,12 +9,17 @@ using Sqids;
 
 using Uni.Instance.Backend.Api.CourseContent.File.Data;
 using Uni.Instance.Backend.Data;
+using Uni.Instance.Backend.Data.Common;
 using Uni.Instance.Backend.Data.Models;
 
 
 namespace Uni.Instance.Backend.Api.CourseContent.File.Services;
 
-public class CourseContentFileService(AppDbContext db, IHostEnvironment environment) {
+public class CourseContentFileService(
+  AppDbContext db,
+  IHostEnvironment environment,
+  ILogger<CourseContentFileService> logger
+) {
   private readonly string _uploadsPath = Path.Combine(environment.ContentRootPath, "uploads");
 
   public async Task<Result<UploadFileContentResponse>> UploadFile(UploadFileContentRequest req, CancellationToken ct) {
@@ -82,6 +87,29 @@ public class CourseContentFileService(AppDbContext db, IHostEnvironment environm
     content.IsVisibleToStudents = req.IsVisibleToStudents;
 
     await db.SaveChangesAsync(ct);
+
+    return Result.Success(new UploadFileContentResponse {
+      Id = content.Id,
+      Title = content.Title,
+    });
+  }
+
+  public async Task<Result<UploadFileContentResponse>> DeleteFileAsync(SearchByIdModel req, CancellationToken ct) {
+    var content = await db.FileContents.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (content is null) {
+      return Result.NotFound("Файл не найден");
+    }
+
+    db.Remove(content.File);
+    db.Remove(content);
+
+    try {
+      System.IO.File.Delete(content.File.Filepath!);
+    }
+    catch (Exception e) {
+      logger.LogWarning("Произошла I/O ошибка: {Error}", e.Message);
+    }
 
     return Result.Success(new UploadFileContentResponse {
       Id = content.Id,
