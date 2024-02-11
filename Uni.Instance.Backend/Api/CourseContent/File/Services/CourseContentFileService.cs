@@ -3,6 +3,7 @@ using System.Text;
 
 using Ardalis.Result;
 
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
 using Sqids;
@@ -116,6 +117,30 @@ public class CourseContentFileService(
     return Result.Success(new UploadFileContentResponse {
       Id = content.Id,
       Title = content.Title,
+    });
+  }
+
+  public async Task<Result<FileInfo>> GetFileInfoAsync(SearchByIdModel req, CancellationToken ct) {
+    var content = await db.FileContents
+      .Where(e => e.Id == req.Id)
+      .Include(e => e.Course)
+      .Include(e => e.File)
+      .FirstOrDefaultAsync(ct);
+
+    if (content is null) {
+      return Result.NotFound("Файл не был найден");
+    }
+
+    var extension = Path.GetExtension(content.File.Filepath!);
+    new FileExtensionContentTypeProvider().TryGetContentType(content.File.Filepath!, out var contentType);
+    return Result.Success(new FileInfo {
+      Id = content.Id,
+      Title = content.Title,
+      FileSize = BytesToString(new System.IO.FileInfo(content.File.Filepath!).Length),
+      FileName = content.File.Filename,
+      Extension = extension,
+      ContentType = contentType!,
+      CourseAbbreviation = content.Course.Abbreviation,
     });
   }
 
