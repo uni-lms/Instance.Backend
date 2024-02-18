@@ -1,0 +1,138 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <WarningsAsErrors>true</WarningsAsErrors>
+        <NoWarn>CS1998</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FastEndpoints" Version="5.20.1.6-beta" />
+        <PackageReference Include="FastEndpoints.Security" Version="5.20.1.6-beta" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="5.20.1.6-beta" />
+        <PackageReference Include="Ardalis.Result" Version="7.2.0"/>
+        <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+        <PackageReference Include="Npgsql" Version="8.0.1" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+        <PackageReference Include="Serilog" Version="3.1.2-dev-02097" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.15.0.81779">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Sqids" Version="3.1.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Api\Content\File\Validation\"/>
+        <Folder Include="Api\Internal\Data\"/>
+        <Folder Include="Api\Internal\Endpoints\"/>
+        <Folder Include="Api\Internal\Services\"/>
+        <Folder Include="Api\Internal\Validation\"/>
+        <Folder Include="Data\Migrations\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Api\Course\Endpoints\Create\CreateCourseEndpointSummary.cs">
+            <DependentUpon>CreateCourseEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Course\Endpoints\GetAll\GetAllCoursesEndpointSummary.cs">
+            <DependentUpon>GetAllCoursesEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Course\Endpoints\Delete\DeleteCourseEndpointSummary.cs">
+            <DependentUpon>DeleteCourseEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Auth\Endpoints\Delete\DeleteEndpointSummary.cs">
+            <DependentUpon>DeleteEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Auth\Endpoints\LogIn\LogInEndpointSummary.cs">
+            <DependentUpon>LogInEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Auth\Endpoints\SignUp\SignUpEndpointSummary.cs">
+            <DependentUpon>SignUpEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Auth\Endpoints\Whoami\WhoamiEndpointSummary.cs">
+            <DependentUpon>WhoamiEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseSections\Endpoints\GetAll\GetAllCourseSectionsEndpointSummary.cs">
+            <DependentUpon>GetAllCourseSectionsEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Groups\Endpoints\Create\CreateGroupEndpointSummary.cs">
+            <DependentUpon>CreateGroupEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Groups\Endpoints\Delete\DeleteGroupEndpointSummary.cs">
+            <DependentUpon>DeleteGroupEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Groups\Endpoints\Edit\EditGroupEndpointSummary.cs">
+            <DependentUpon>EditGroupEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Groups\Endpoints\Get\GetGroupEndpointSummary.cs">
+            <DependentUpon>GetGroupEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Groups\Endpoints\GetAll\GetAllGroupsEndpointSummary.cs">
+            <DependentUpon>GetAllGroupsEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Users\Endpoints\Edit\EditUserEndpointSummary.cs">
+            <DependentUpon>EditUserEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Course\Endpoints\Owned\GetOwnedCoursesEndpointSummary.cs">
+            <DependentUpon>GetOwnedCoursesEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Course\Endpoints\AddOwnerToCourse\AddOwnerToCourseEndpointSummary.cs">
+            <DependentUpon>AddOwnerToCourseEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Upload\UploadFileContentEndpointSummary.cs">
+            <DependentUpon>UploadFileContentEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Edit\EditFileContentEndpointSummary.cs">
+            <DependentUpon>EditFileContentEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Delete\DeleteFileContentEndpointSummary.cs">
+            <DependentUpon>DeleteFileContentEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Get\GetFileContentInfoEndpointSummary.cs">
+            <DependentUpon>GetFileContentInfoEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\CourseContent\File\Endpoints\Download\DownloadFileContentEndpointSummary.cs">
+            <DependentUpon>DownloadFileContentEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Internships\Endpoints\InviteTutor\InviteTutorEndpointSummary.cs">
+            <DependentUpon>InviteTutorEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Internships\Endpoints\Create\CreateInternshipEndpointSummary.cs">
+            <DependentUpon>CreateIntershipEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Internships\Endpoints\Delete\DeleteInternshipEndpointSummary.cs">
+            <DependentUpon>DeleteInternshipEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Internships\Endpoints\Enrolled\GetEnrolledInternshipsEndpointSummary.cs">
+            <DependentUpon>GetEnrolledInternshipsEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Internships\Endpoints\GetAll\GetAllInternshipsEndpointSummary.cs">
+            <DependentUpon>GetAllInternshipsEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Internships\Endpoints\Owned\GetOwnedInternshipsEndpointSummary.cs">
+            <DependentUpon>GetOwnedInternshipsEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Remove="Data\Migrations\20240218102634_MigrateToAip.Designer.cs"/>
+        <Compile Remove="Data\Migrations\20240218103049_MigrateToAip.cs"/>
+        <Compile Remove="Data\Migrations\20240218103049_MigrateToAip.Designer.cs"/>
+    </ItemGroup>
+
+</Project>
