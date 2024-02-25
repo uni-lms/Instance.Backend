@@ -9,197 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="064ed425-3f88-4be5-a2eb-f968f87cc7ae" name="Changes" comment="start process of migrating from UNI to AIP">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/efCoreCommonOptions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/efCoreDialogsState.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Aip/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/aip.SHkBAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/aip.SHkBAA/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/aip.SHkBAA/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/aip.SHkBAA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/postgres.edMnLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/dataSources/edc529bd-9d6f-4a56-b56d-ee75568daec0/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Data/DeleteUserResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Data/EditFlowRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Data/FlowDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Data/IFlowRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Create/CreateFlowEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Create/CreateGroupEndpointSummary.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Delete/DeleteGroupEndpointSummary.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Edit/EditFlowEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/GetAll/GetAllGroupsEndpointSummary.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Data/CreateInternshipRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Data/InternshipDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Data/InternshipOwnersResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Create/CreateIntershipEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Delete/DeleteInternshipEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Enrolled/GetEnrolledInternshipsEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Enrolled/GetEnrolledInternshipsEndpointSummary.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/GetAll/GetAllInternshipsEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/InviteTutor/InviteTutorEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/InviteTutor/InviteTutorEndpointSummary.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Owned/GetOwnedInternshipsEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Validation/CreateCourseRequestValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Sections/Data/GetAllCourseSectionsResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Configuration/Swagger/ApiTag.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Configuration/Swagger/CanBeUsedBy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Common/BaseContent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/Initial.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/MoveToInternshipBasedRoleSystem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/RemakeRolesSystem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/FileContent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/Flow.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/Internship.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/InternshipUserRole.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/Section.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Extensions/ExceptionHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.sln.DotSettings" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Aip.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/efCoreCommonOptions.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/efCoreDialogsState.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uni/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend.Tests.Unit/BytesToStringTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend.Tests.Unit/BytesToStringTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend.Tests.Unit/GlobalUsings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend.Tests.Unit/GlobalUsings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend.Tests.Unit/GroupTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend.Tests.Unit/Uni.Instance.Backend.Tests.Unit.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend.Tests.Unit/Aip.Instance.Backend.Tests.Unit.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Data/DeleteUserResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Data/LogInRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Data/LogInRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Data/LogInResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Data/LogInResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Data/SignUpRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Data/SignUpRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Data/WhoamiResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Data/WhoamiResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/Delete/DeleteEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/Delete/DeleteUserEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/Delete/DeleteEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/Delete/DeleteEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/LogIn/LogInEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/LogIn/LogInEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/LogIn/LogInEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/LogIn/LogInEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/SignUp/SignUpEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/SignUp/SignUpEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/SignUp/SignUpEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/SignUp/SignUpEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/Whoami/WhoamiEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/Whoami/WhoamiEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Endpoints/Whoami/WhoamiEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Endpoints/Whoami/WhoamiEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Services/UserRoleHydrator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Validation/LoginRequestValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Validation/LoginRequestValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Auth/Validation/SignUpRequestValidation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Auth/Validation/SignUpRequestValidation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/BaseCourseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/CourseOwner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Data/InternshipOwner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/CourseOwnersResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/CourseTypes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/CreateCourseRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/EnrolledCoursesFilterRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/ListOfGuidsRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Common/Data/ListOfGuidsRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/StudentCourseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Data/TutorCourseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/AddOwnerToCourse/AddOwnerToCourseEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/AddOwnerToCourse/AddOwnerToCourseEndpointSummary.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Create/CreateCourseEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Create/CreateCourseEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Create/CreateInternshipEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Delete/DeleteCourseEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Delete/DeleteCourseEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Delete/DeleteInternshipEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Enrolled/GetEnrolledCoursesEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Enrolled/GetEnrolledCoursesEndpointSummary.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/GetAll/GetAllCoursesEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/GetAll/GetAllCoursesEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/GetAll/GetAllInternshipsEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Owned/GetOwnedCoursesEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Endpoints/Owned/GetOwnedCoursesEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Endpoints/Owned/GetOwnedInternshipsEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Services/CoursesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Internships/Services/InternshipsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Course/Validation/CreateCourseRequestValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Data/EditFileContentRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Data/EditFileContentRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Data/FileInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Data/FileInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Data/FileSaveResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Data/FileSaveResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Data/UploadFileContentRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Data/UploadFileContentRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Data/UploadFileContentResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Data/UploadFileContentResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Delete/DeleteFileContentEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Delete/DeleteFileContentEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Delete/DeleteFileContentEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Delete/DeleteFileContentEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Download/DownloadFileContentEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Download/DownloadFileContentEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Download/DownloadFileContentEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Download/DownloadFileContentEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Edit/EditFileContentEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Edit/EditFileContentEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Edit/EditFileContentEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Edit/EditFileContentEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Get/GetFileContentInfoEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Get/GetFileContentInfoEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Get/GetFileContentInfoEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Get/GetFileContentInfoEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Upload/UploadFileContentEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Upload/UploadFileContentEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Endpoints/Upload/UploadFileContentEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Endpoints/Upload/UploadFileContentEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseContent/File/Services/CourseContentFileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Content/File/Services/ContentFileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseSections/Data/GetAllCourseSectionsResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseSections/Endpoints/GetAll/GetAllCourseSectionsEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Sections/Endpoints/GetAll/GetAllCourseSectionsEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseSections/Endpoints/GetAll/GetAllCourseSectionsEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Sections/Endpoints/GetAll/GetAllCourseSectionsEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/CourseSections/Services/CourseSectionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Sections/Services/CourseSectionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Data/CreateGroupRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Data/CreateFlowRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Data/CreateGroupResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Data/CreateFlowResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Data/EditGroupRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Data/EditGroupResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Data/EditFlowResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Data/GroupDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Data/IGroupRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Create/CreateGroupEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Create/CreateGroupEndpointSummary.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Delete/DeleteGroupEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Delete/DeleteFlowEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Delete/DeleteGroupEndpointSummary.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Edit/EditGroupEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Edit/EditGroupEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Edit/EditGroupEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Get/GetGroupEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Get/GetFlowEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/Get/GetGroupEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/Get/GetGroupEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/GetAll/GetAllGroupsEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Endpoints/GetAll/GetAllFlowsEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Endpoints/GetAll/GetAllGroupsEndpointSummary.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Services/GroupsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Flows/Services/FlowsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Groups/Validation/GroupValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Users/Data/EditUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Users/Data/EditUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Users/Data/EditUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Users/Data/EditUserResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Users/Endpoints/Edit/EditUserEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Users/Endpoints/Edit/EditUserEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Users/Endpoints/Edit/EditUserEndpointSummary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Users/Endpoints/Edit/EditUserEndpointSummary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Users/Services/UsersService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Users/Services/UsersService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Api/Users/Validation/EditUserRequestValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Api/Users/Validation/EditUserRequestValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Configuration/Models/SecurityConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Configuration/Models/SecurityConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Configuration/Swagger/ApiTags.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Configuration/Swagger/ApiTags.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Configuration/Swagger/CanBeUsedBy.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/AppDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Common/BaseCourseContent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Common/BaseModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Common/BaseModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Common/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Common/Error.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Common/SearchByIdModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Common/SearchByIdModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216161757_AddUser.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216161757_AddUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216163229_AddRole.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216163229_AddRole.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216163454_UpdateRoleConstraint.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216163454_UpdateRoleConstraint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216164521_AddDefaultRolesList.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20231216164521_AddDefaultRolesList.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240114081956_AddCourseSectionsTable.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240114081956_AddCourseSectionsTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240114092007_AddGroupAndCourse.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240114092007_AddGroupAndCourse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240114100658_AddUniqueConstraintOnGroupName.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/MoveToInternshipBasedRoleSystem.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240114100658_AddUniqueConstraintOnGroupName.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240208122408_AddFileContent.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/RemakeRolesSystem.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240208122408_AddFileContent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240210172555_ReplaceAvailiabilityByDateWithFlag.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/Initial.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/20240210172555_ReplaceAvailiabilityByDateWithFlag.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/Course.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/CourseContentFile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/CourseSection.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/Group.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/Role.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/Role.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/StaticFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/StaticFile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Data/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Data/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Extensions/ApplicationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Extensions/ApplicationExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Extensions/ArdalisExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Extensions/ArdalisExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Extensions/BuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Extensions/BuilderExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/Uni.Instance.Backend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/Aip.Instance.Backend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.Instance.Backend/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.Instance.Backend/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uni.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Aip.sln" afterDir="false" />
-    </list>
+    <list default="true" id="064ed425-3f88-4be5-a2eb-f968f87cc7ae" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -313,15 +123,7 @@
       <workItem from="1707669929120" duration="10908000" />
       <workItem from="1708161067722" duration="3339000" />
       <workItem from="1708174406341" duration="884000" />
-      <workItem from="1708248713745" duration="11068000" />
-    </task>
-    <task id="LOCAL-00071" summary="update swagger responses list">
-      <option name="closed" value="true" />
-      <created>1705484825108</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1705484825108</updated>
+      <workItem from="1708248713745" duration="11888000" />
     </task>
     <task id="LOCAL-00072" summary="translate api tags to russian">
       <option name="closed" value="true" />
@@ -707,7 +509,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707682144372</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="start process of migrating from UNI to AIP">
+      <option name="closed" value="true" />
+      <created>1708261411557</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1708261411560</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
