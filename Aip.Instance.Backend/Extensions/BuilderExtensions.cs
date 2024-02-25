@@ -57,6 +57,7 @@ public static class BuilderExtensions {
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
     builder.Services.SwaggerDocument(o => {
       o.AutoTagPathSegmentIndex = 0;
+      o.MinEndpointVersion = 2;
       o.MaxEndpointVersion = 2;
       o.ShortSchemaNames = true;
       o.ShowDeprecatedOps = true;
@@ -66,9 +67,9 @@ public static class BuilderExtensions {
   }
 
   private static void DocumentSettings(AspNetCoreOpenApiDocumentGeneratorSettings s, string version) {
-    const string title = "UNI API";
+    const string title = "AIP API";
     s.Title = title;
-    s.Description = "API of the learning management system \"UNI\"";
+    s.Description = "API of the internship platform \"AIP\"";
     s.DocumentName = $"{title} {version}";
     s.Version = version;
   }
