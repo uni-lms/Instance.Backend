@@ -133,6 +133,9 @@
         <Compile Remove="Data\Migrations\20240218102634_MigrateToAip.Designer.cs"/>
         <Compile Remove="Data\Migrations\20240218103049_MigrateToAip.cs"/>
         <Compile Remove="Data\Migrations\20240218103049_MigrateToAip.Designer.cs"/>
+        <Compile Update="Api\Content\Common\Endpoints\Get\GetContentEndpointSummary.cs">
+            <DependentUpon>GetContentEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
