@@ -1,5 +1,6 @@
 ﻿using Aip.Instance.Backend.Api.Content.Text.Data;
 using Aip.Instance.Backend.Data;
+using Aip.Instance.Backend.Data.Common;
 using Aip.Instance.Backend.Data.Models;
 
 using Ardalis.Result;
@@ -43,5 +44,18 @@ public class TextContentService(AppDbContext db) {
     return Result.Success(new CreateTextContentResponse {
       Id = content.Id,
     });
+  }
+
+  public async Task<Result<SearchByIdModel>> DeleteTextContent(SearchByIdModel req, CancellationToken ct) {
+    var content = await db.TextContents.FirstOrDefaultAsync(e => e.Id == req.Id, ct);
+
+    if (content is null) {
+      return Result.NotFound(nameof(content));
+    }
+
+    db.TextContents.Remove(content);
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(req);
   }
 }

@@ -142,6 +142,9 @@
         <Compile Update="Api\Content\Text\Endpoints\Create\CreateTextContentEndpointSummary.cs">
             <DependentUpon>CreateTextContentEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\Content\Text\Endpoints\Delete\DeleteTextContentEndpointSummary.cs">
+            <DependentUpon>DeleteTextContentEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
