@@ -12,6 +12,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public virtual DbSet<Internship> Internships => Set<Internship>();
   public virtual DbSet<Flow> Groups => Set<Flow>();
   public virtual DbSet<FileContent> FileContents => Set<FileContent>();
+  public virtual DbSet<TextContent> TextContents => Set<TextContent>();
   public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
   public virtual DbSet<InternshipUserRole> InternshipBasedRoles => Set<InternshipUserRole>();
 

@@ -18,6 +18,9 @@ public static class ApiTags {
   public static readonly ApiTag FileContent =
     new("Файлы", "Методы, связанные с управлением файловым контентом на стажировках");
 
+  public static readonly ApiTag TextContent =
+    new("Текст", "Методы, связанные с управлением текстовым контентом на стажировках");
+
   public static readonly ApiTag Content =
     new("Контент", "Методы, связанные с управлением контентом на стажировках");
 }

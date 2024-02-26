@@ -136,6 +136,12 @@
         <Compile Update="Api\Content\Common\Endpoints\Get\GetContentEndpointSummary.cs">
             <DependentUpon>GetContentEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\Content\File\Endpoints\Upload\UploadFileContentEndpointSummary.cs">
+            <DependentUpon>UploadFileContentEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Content\Text\Endpoints\Create\CreateTextContentEndpointSummary.cs">
+            <DependentUpon>CreateTextContentEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
