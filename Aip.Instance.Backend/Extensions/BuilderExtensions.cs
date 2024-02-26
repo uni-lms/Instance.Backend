@@ -84,5 +84,6 @@ public static class BuilderExtensions {
     t[ApiTags.Users.Tag] = ApiTags.Users.Description;
     t[ApiTags.Internships.Tag] = ApiTags.Internships.Description;
     t[ApiTags.FileContent.Tag] = ApiTags.FileContent.Description;
+    t[ApiTags.Content.Tag] = ApiTags.Content.Description;
   }
 }

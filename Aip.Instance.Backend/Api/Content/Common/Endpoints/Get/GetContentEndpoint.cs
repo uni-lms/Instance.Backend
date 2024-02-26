@@ -12,7 +12,7 @@ public class GetContentEndpoint(ContentService service) : Endpoint<SearchByIdMod
   public override void Configure() {
     Version(2);
     Get("/content/{id}");
-    Options(x => x.WithTags(ApiTags.FileContent.Tag));
+    Options(x => x.WithTags(ApiTags.Content.Tag));
     DontThrowIfValidationFails();
   }
 
