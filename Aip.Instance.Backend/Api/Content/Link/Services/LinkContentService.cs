@@ -55,4 +55,33 @@ public class LinkContentService(AppDbContext db) {
 
     return Result.Success(req);
   }
+
+  public async Task<Result<SearchByIdModel>> UpdateLinkContent(UpdateLinkContentRequest req, CancellationToken ct) {
+    var content = await db.LinkContents
+      .Include(e => e.Section)
+      .FirstOrDefaultAsync(e => e.Id == req.Id, ct);
+
+    if (content is null) {
+      return Result.NotFound(nameof(content));
+    }
+
+    content.Link = req.Link;
+    content.IsVisibleToStudents = req.IsVisibleToInterns;
+
+    if (content.Section.Id != req.SectionId) {
+      var section = await db.Sections.FirstOrDefaultAsync(e => e.Id == req.SectionId, ct);
+      if (section is not null) {
+        content.Section = section;
+      }
+      else {
+        return Result.NotFound(nameof(section));
+      }
+    }
+
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new SearchByIdModel {
+      Id = req.Id,
+    });
+  }
 }
