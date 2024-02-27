@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 
 using Aip.Instance.Backend.Api.Content.File.Data;
@@ -195,6 +196,7 @@ public class ContentFileService(
     var bytes = Math.Abs(fileLength);
     var place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
     var num = Math.Round(bytes / Math.Pow(1024, place), 1);
-    return $"{Math.Sign(fileLength) * num} {suf[place]}";
+    var result = (Math.Sign(fileLength) * num).ToString(CultureInfo.InvariantCulture);
+    return $"{result} {suf[place]}";
   }
 }
