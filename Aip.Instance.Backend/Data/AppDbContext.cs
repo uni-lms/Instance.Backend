@@ -17,6 +17,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
   public virtual DbSet<InternshipUserRole> InternshipBasedRoles => Set<InternshipUserRole>();
   public virtual DbSet<MobileSession> MobileSessions => Set<MobileSession>();
+  public virtual DbSet<Assignment> Assignments => Set<Assignment>();
+  public virtual DbSet<Solution> Solutions => Set<Solution>();
+  public virtual DbSet<Comment> Comment => Set<Comment>();
+  public virtual DbSet<CommentClosure> CommentClosures => Set<CommentClosure>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
     modelBuilder.Entity<User>().HasIndex(e => e.Email);
@@ -56,5 +60,21 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
       .HasOne(uir => uir.Role)
       .WithMany()
       .HasForeignKey(uir => uir.RoleId);
+
+    modelBuilder.Entity<CommentClosure>()
+      .HasKey(c => new { c.AncestorId, c.DescendantId });
+
+    // Configuring the foreign key relationships
+    modelBuilder.Entity<CommentClosure>()
+      .HasOne(c => c.Ancestor)
+      .WithMany() // Depending on your model, you might not need to navigate back from Comment to CommentClosure
+      .HasForeignKey(c => c.AncestorId)
+      .OnDelete(DeleteBehavior.Restrict); // Prevent deletion if there are related entries in CommentClosure
+
+    modelBuilder.Entity<CommentClosure>()
+      .HasOne(c => c.Descendant)
+      .WithMany()
+      .HasForeignKey(c => c.DescendantId)
+      .OnDelete(DeleteBehavior.Restrict); // Similar reasoning as above
   }
 }
