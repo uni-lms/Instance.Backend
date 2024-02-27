@@ -11,7 +11,7 @@ namespace Aip.Instance.Backend.Api.Content.Text.Endpoints.Delete;
 public class DeleteTextContentEndpoint(TextContentService service) : Endpoint<SearchByIdModel> {
   public override void Configure() {
     Version(2);
-    Delete("/content/file/{id}");
+    Delete("/content/text/{id}");
     Options(x => x.WithTags(ApiTags.TextContent.Tag));
     DontThrowIfValidationFails();
   }
