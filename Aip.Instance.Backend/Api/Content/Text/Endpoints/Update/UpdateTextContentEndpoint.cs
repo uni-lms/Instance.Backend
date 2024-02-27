@@ -1,6 +1,7 @@
 ﻿using Aip.Instance.Backend.Api.Content.Text.Data;
 using Aip.Instance.Backend.Api.Content.Text.Services;
 using Aip.Instance.Backend.Configuration.Swagger;
+using Aip.Instance.Backend.Extensions;
 
 using FastEndpoints;
 
@@ -17,5 +18,6 @@ public class UpdateTextContentEndpoint(TextContentService service) : Endpoint<Up
 
   public override async Task HandleAsync(UpdateTextContentRequest req, CancellationToken ct) {
     var result = await service.UpdateTextContent(req, ct);
+    await this.SendResponseAsync(result, ct);
   }
 }
