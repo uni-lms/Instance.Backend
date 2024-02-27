@@ -54,11 +54,16 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     };
 
     await db.Users.AddAsync(user, cancellation);
-    await db.SaveChangesAsync(cancellation);
 
     var response = new LogInResponse {
       AccessToken = GenerateAccessToken(user),
     };
+
+    if (!string.IsNullOrEmpty(req.FcmToken)) {
+      await SaveMobileSession(req.FcmToken, user, cancellation);
+    }
+
+    await db.SaveChangesAsync(cancellation);
 
     return Result.Success(response);
   }
@@ -115,6 +120,12 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
     }
 
     var token = GenerateAccessToken(user);
+
+    if (!string.IsNullOrEmpty(req.FcmToken)) {
+      await SaveMobileSession(req.FcmToken, user, cancellation);
+      await db.SaveChangesAsync(cancellation);
+    }
+
     return Result.Success(new LogInResponse {
       AccessToken = token,
     });
@@ -142,6 +153,20 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
       expireAt: DateTime.UtcNow.AddMinutes(40),
       claims: new[] { new Claim(ClaimTypes.Name, user.Email) }
     );
+  }
+
+  private async Task SaveMobileSession(string token, User user, CancellationToken ct = default) {
+    var session = await db.MobileSessions.FirstOrDefaultAsync(e => e.User == user, ct);
+
+    if (session is not null) {
+      session.FcmToken = token;
+      return;
+    }
+
+    await db.MobileSessions.AddAsync(new MobileSession {
+      FcmToken = token,
+      User = user,
+    }, ct);
   }
 
   public async Task<Result<DeleteUserResponse>> DeleteAccountAsync(string email) {

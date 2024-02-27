@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using FastEndpoints;
+
+using JetBrains.Annotations;
 
 
 namespace Aip.Instance.Backend.Api.Auth.Data;
@@ -10,4 +12,7 @@ public sealed class SignUpRequest {
   public string? Patronymic { get; [UsedImplicitly] set; }
   public required string Password { get; [UsedImplicitly] set; }
   public required Guid RoleId { get; [UsedImplicitly] set; }
+
+  [FromHeader("X-FCM-Token", IsRequired = false)]
+  public string? FcmToken { get; set; }
 }
