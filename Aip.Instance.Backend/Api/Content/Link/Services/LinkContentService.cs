@@ -1,5 +1,6 @@
 ﻿using Aip.Instance.Backend.Api.Content.Link.Data;
 using Aip.Instance.Backend.Data;
+using Aip.Instance.Backend.Data.Common;
 using Aip.Instance.Backend.Data.Models;
 
 using Ardalis.Result;
@@ -40,5 +41,18 @@ public class LinkContentService(AppDbContext db) {
     return Result.Success(new CreateLinkContentResponse {
       Id = content.Id,
     });
+  }
+
+  public async Task<Result<SearchByIdModel>> DeleteLinkContent(SearchByIdModel req, CancellationToken ct) {
+    var content = await db.LinkContents.FirstOrDefaultAsync(e => e.Id == req.Id, ct);
+
+    if (content is null) {
+      return Result.NotFound();
+    }
+
+    db.LinkContents.Remove(content);
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(req);
   }
 }
