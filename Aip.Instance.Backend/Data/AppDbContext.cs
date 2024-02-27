@@ -16,6 +16,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public virtual DbSet<LinkContent> LinkContents => Set<LinkContent>();
   public virtual DbSet<StaticFile> StaticFiles => Set<StaticFile>();
   public virtual DbSet<InternshipUserRole> InternshipBasedRoles => Set<InternshipUserRole>();
+  public virtual DbSet<MobileSession> MobileSessions => Set<MobileSession>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
     modelBuilder.Entity<User>().HasIndex(e => e.Email);
