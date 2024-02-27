@@ -68,7 +68,20 @@ public class ContentService(AppDbContext db) {
         }),
       }).ToListAsync(ct);
 
-    var contents = fileContents.Concat(textContents)
+    var linkContents = await db.LinkContents
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .GroupBy(e => e.Section.Name)
+      .Select(g => new ContentSection {
+        Name = g.Key,
+        Items = g.Select(e => new LinkContentItem {
+          Id = e.Id,
+          Link = e.Link,
+        }),
+      }).ToListAsync(ct);
+
+    var contents = fileContents
+      .Concat(textContents)
+      .Concat(linkContents)
       .GroupBy(section => section.Name)
       .Select(grouped => new ContentSection {
         Name = grouped.Key,
