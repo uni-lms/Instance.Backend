@@ -46,8 +46,6 @@ public class ContentService(AppDbContext db) {
 
     var isIntern = roleInfo[0].Role.Name == "Intern";
 
-    List<ContentSection> contents = [];
-
     var fileContents = await db.FileContents
       .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
       .GroupBy(e => e.Section.Name)
@@ -59,7 +57,24 @@ public class ContentService(AppDbContext db) {
         }),
       }).ToListAsync(ct);
 
-    contents.AddRange(fileContents);
+    var textContents = await db.TextContents
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .GroupBy(e => e.Section.Name)
+      .Select(g => new ContentSection {
+        Name = g.Key,
+        Items = g.Select(e => new TextContentItem {
+          Id = e.Id,
+          Text = e.Text,
+        }),
+      }).ToListAsync(ct);
+
+    var contents = fileContents.Concat(textContents)
+      .GroupBy(section => section.Name)
+      .Select(grouped => new ContentSection {
+        Name = grouped.Key,
+        Items = grouped.SelectMany(g => g.Items).ToList(),
+      })
+      .ToList();
 
     return Result.Success(new Data.Content {
       Sections = contents,
