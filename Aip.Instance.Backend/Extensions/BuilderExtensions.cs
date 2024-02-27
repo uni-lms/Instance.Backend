@@ -1,6 +1,7 @@
 ﻿using Aip.Instance.Backend.Api.Auth.Services;
 using Aip.Instance.Backend.Api.Content.Common.Services;
 using Aip.Instance.Backend.Api.Content.File.Services;
+using Aip.Instance.Backend.Api.Content.Link.Services;
 using Aip.Instance.Backend.Api.Content.Text.Services;
 using Aip.Instance.Backend.Api.Flows.Services;
 using Aip.Instance.Backend.Api.Internships.Services;
@@ -56,6 +57,7 @@ public static class BuilderExtensions {
     builder.Services.AddTransient<ContentFileService>();
     builder.Services.AddTransient<ContentService>();
     builder.Services.AddTransient<TextContentService>();
+    builder.Services.AddTransient<LinkContentService>();
   }
 
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
@@ -86,6 +88,8 @@ public static class BuilderExtensions {
     t[ApiTags.Users.Tag] = ApiTags.Users.Description;
     t[ApiTags.Internships.Tag] = ApiTags.Internships.Description;
     t[ApiTags.FileContent.Tag] = ApiTags.FileContent.Description;
+    t[ApiTags.TextContent.Tag] = ApiTags.TextContent.Description;
+    t[ApiTags.LinkContent.Tag] = ApiTags.LinkContent.Description;
     t[ApiTags.Content.Tag] = ApiTags.Content.Description;
   }
 }
