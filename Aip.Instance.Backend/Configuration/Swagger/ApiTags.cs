@@ -26,4 +26,7 @@ public static class ApiTags {
 
   public static readonly ApiTag Content =
     new("Контент", "Методы, связанные с управлением контентом на стажировках");
+
+  public static readonly ApiTag Assignment =
+    new("Задания", "Методы, связанные с управлением заданиями на стажировках");
 }
