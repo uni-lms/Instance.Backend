@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using System.Security.Cryptography;
-using System.Text;
-
+﻿using Aip.Instance.Backend.Api.Common.Services;
 using Aip.Instance.Backend.Api.Content.File.Data;
 using Aip.Instance.Backend.Data;
 using Aip.Instance.Backend.Data.Common;
@@ -12,8 +9,6 @@ using Ardalis.Result;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
-using Sqids;
-
 using FileInfo = Aip.Instance.Backend.Api.Content.File.Data.FileInfo;
 
 
@@ -21,11 +16,8 @@ namespace Aip.Instance.Backend.Api.Content.File.Services;
 
 public class ContentFileService(
   AppDbContext db,
-  IHostEnvironment environment,
-  ILogger<ContentFileService> logger
+  StaticFileService fileService
 ) {
-  private readonly string _uploadsPath = Path.Combine(environment.ContentRootPath, "uploads");
-
   public async Task<Result<UploadFileContentResponse>> UploadFile(UploadFileContentRequest req, CancellationToken ct) {
     var course = await db.Internships.Where(e => e.Id == req.CourseId).FirstOrDefaultAsync(ct);
 
@@ -39,12 +31,12 @@ public class ContentFileService(
       return Result.NotFound("Раздел курса не найден");
     }
 
-    var checksum = await CalculateChecksumAsync(req.Content, ct);
+    var checksum = await fileService.CalculateChecksumAsync(req.Content, ct);
 
     var existedFile = await db.StaticFiles.Where(e => e.Checksum == checksum).FirstOrDefaultAsync(ct);
 
     if (existedFile is null) {
-      var ioResult = await SaveFileAsync(req.Content, ct);
+      var ioResult = await fileService.SaveFileAsync(req.Content, ct);
 
       if (ioResult.IsSuccess) {
         existedFile = new StaticFile {
@@ -108,12 +100,7 @@ public class ContentFileService(
     db.Remove(content.File);
     db.Remove(content);
 
-    try {
-      System.IO.File.Delete(content.File.Filepath!);
-    }
-    catch (Exception e) {
-      logger.LogWarning("Произошла I/O ошибка: {Error}", e.Message);
-    }
+    fileService.RemoveFile(content.File.Filepath!);
 
     return Result.Success(new UploadFileContentResponse {
       Id = content.Id,
@@ -137,66 +124,10 @@ public class ContentFileService(
     return Result.Success(new FileInfo {
       Id = content.Id,
       Title = content.Title,
-      FileSize = BytesToString(new System.IO.FileInfo(content.File.Filepath!).Length),
+      FileSize = fileService.BytesToString(new System.IO.FileInfo(content.File.Filepath!).Length),
       FileName = content.File.Filename,
       Extension = extension,
       ContentType = contentType!,
     });
-  }
-
-  private async Task<string> CalculateChecksumAsync(IFormFile file, CancellationToken ct = default) {
-    using var md5 = MD5.Create();
-    using var streamReader = new StreamReader(file.OpenReadStream());
-    return BitConverter
-      .ToString(await md5.ComputeHashAsync(streamReader.BaseStream, ct))
-      .Replace("-", "");
-  }
-
-  private async Task<FileSaveResult> SaveFileAsync(IFormFile file, CancellationToken ct = default) {
-    if (file.Length <= 0) {
-      return new FileSaveResult {
-        IsSuccess = false,
-        Error = "Файл не может быть пустым",
-      };
-    }
-
-    if (new DriveInfo(_uploadsPath).AvailableFreeSpace <= file.Length) {
-      return new FileSaveResult {
-        IsSuccess = false,
-        Error = "На диске недостаточно свободного места",
-      };
-    }
-
-    Directory.CreateDirectory(_uploadsPath);
-
-    var fileId = new SqidsEncoder<long>(new SqidsOptions {
-      MinLength = 7,
-    }).Encode(file.Length);
-    var fileName = new StringBuilder(fileId)
-      .Append(Path.GetExtension(file.FileName))
-      .ToString();
-    var path = Path.Combine(_uploadsPath, fileName);
-    await using var stream = new FileStream(path, FileMode.Create);
-    await file.CopyToAsync(stream, ct);
-
-    return new FileSaveResult {
-      IsSuccess = true,
-      FileId = fileId,
-      FilePath = path,
-    };
-  }
-
-  public static string BytesToString(long fileLength) {
-    string[] suf = ["Б", "КБ", "МБ", "ГБ", "ТБ"];
-
-    if (fileLength == 0) {
-      return $"0 {suf[0]}";
-    }
-
-    var bytes = Math.Abs(fileLength);
-    var place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
-    var num = Math.Round(bytes / Math.Pow(1024, place), 1);
-    var result = (Math.Sign(fileLength) * num).ToString(CultureInfo.InvariantCulture);
-    return $"{result} {suf[place]}";
   }
 }

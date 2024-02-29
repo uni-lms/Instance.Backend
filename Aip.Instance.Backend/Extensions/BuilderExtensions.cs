@@ -1,4 +1,5 @@
 ﻿using Aip.Instance.Backend.Api.Auth.Services;
+using Aip.Instance.Backend.Api.Common.Services;
 using Aip.Instance.Backend.Api.Content.Assignment.Services;
 using Aip.Instance.Backend.Api.Content.Common.Services;
 using Aip.Instance.Backend.Api.Content.File.Services;
@@ -60,6 +61,7 @@ public static class BuilderExtensions {
     builder.Services.AddTransient<TextContentService>();
     builder.Services.AddTransient<LinkContentService>();
     builder.Services.AddTransient<AssignmentService>();
+    builder.Services.AddTransient<StaticFileService>();
   }
 
   public static void ConfigureSwaggerDocuments(this WebApplicationBuilder builder) {
