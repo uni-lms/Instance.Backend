@@ -79,9 +79,21 @@ public class ContentService(AppDbContext db) {
         }),
       }).ToListAsync(ct);
 
+    var assgnmentContents = await db.Assignments
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .GroupBy(e => e.Section.Name)
+      .Select(g => new ContentSection {
+        Name = g.Key,
+        Items = g.Select(e => new AssignmentContentItem {
+          Id = e.Id,
+          Title = e.Title,
+        }),
+      }).ToListAsync(ct);
+
     var contents = fileContents
       .Concat(textContents)
       .Concat(linkContents)
+      .Concat(assgnmentContents)
       .GroupBy(section => section.Name)
       .Select(grouped => new ContentSection {
         Name = grouped.Key,
