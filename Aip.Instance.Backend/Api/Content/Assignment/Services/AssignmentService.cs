@@ -102,4 +102,16 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
       Id = assignment.Id,
     });
   }
+
+  public async Task<Result<SearchByIdModel>> DeleteAssignment(SearchByIdModel req, CancellationToken ct) {
+    var assignment = await db.Assignments.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (assignment is null) {
+      return Result.NotFound(nameof(assignment));
+    }
+
+    db.Assignments.Remove(assignment);
+
+    return Result.Success(req);
+  }
 }
