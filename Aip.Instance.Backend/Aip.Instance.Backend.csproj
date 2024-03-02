@@ -151,6 +151,12 @@
         <Compile Update="Api\Content\Link\Endpoints\Delete\DeleteLinkContentEndpointSummary.cs">
             <DependentUpon>DeleteLinkContentEndpoint.cs</DependentUpon>
         </Compile>
+        <Compile Update="Api\Content\Assignment\Endpoints\Create\CreateAssignmentEndpointSummary.cs">
+            <DependentUpon>CreateAssignmentEndpoint.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Api\Content\Assignment\Endpoints\Update\UpdateAssignmentEndpointSummary.cs">
+            <DependentUpon>UpdateAssignmentEndpoint.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

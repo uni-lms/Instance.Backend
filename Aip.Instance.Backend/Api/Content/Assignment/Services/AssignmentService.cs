@@ -68,4 +68,38 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
       Id = assignment.Id,
     });
   }
+
+  public async Task<Result<SearchByIdModel>> UpdateAssignment(UpdateAssignmentRequest req, CancellationToken ct) {
+    var assignment = await db.Assignments
+      .Where(e => e.Id == req.Id)
+      .Include(e => e.Section)
+      .FirstOrDefaultAsync(ct);
+
+    if (assignment is null) {
+      return Result.NotFound(nameof(assignment));
+    }
+
+    if (assignment.Section.Id != req.SectionId) {
+      var section = await db.Sections
+        .Where(e => e.Id == req.SectionId)
+        .FirstOrDefaultAsync(ct);
+
+      if (section is null) {
+        return Result.NotFound(nameof(section));
+      }
+
+      assignment.Section = section;
+    }
+
+    assignment.Description = req.Description;
+    assignment.Deadline = req.Deadline;
+    assignment.Title = req.Title;
+    assignment.IsVisibleToStudents = req.IsVisibleToInterns;
+
+    await db.SaveChangesAsync(ct);
+
+    return Result.Success(new SearchByIdModel {
+      Id = assignment.Id,
+    });
+  }
 }
