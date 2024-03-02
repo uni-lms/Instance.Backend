@@ -34,7 +34,7 @@ public class TextContentService(AppDbContext db) {
     var content = new TextContent {
       Internship = internship,
       Section = section,
-      IsVisibleToStudents = req.IsVisibleToStudents,
+      IsVisibleToInterns = req.IsVisibleToStudents,
       Text = req.Text,
     };
 
@@ -69,7 +69,7 @@ public class TextContentService(AppDbContext db) {
     }
 
     content.Text = req.Text;
-    content.IsVisibleToStudents = req.IsVisibleToInterns;
+    content.IsVisibleToInterns = req.IsVisibleToInterns;
 
     if (content.Section.Id != req.SectionId) {
       var section = await db.Sections.FirstOrDefaultAsync(e => e.Id == req.SectionId, ct);

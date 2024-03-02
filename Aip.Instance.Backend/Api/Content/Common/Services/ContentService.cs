@@ -47,7 +47,7 @@ public class ContentService(AppDbContext db) {
     var isIntern = roleInfo[0].Role.Name == "Intern";
 
     var fileContents = await db.FileContents
-      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToInterns))
       .GroupBy(e => e.Section.Name)
       .Select(g => new ContentSection {
         Name = g.Key,
@@ -58,7 +58,7 @@ public class ContentService(AppDbContext db) {
       }).ToListAsync(ct);
 
     var textContents = await db.TextContents
-      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToInterns))
       .GroupBy(e => e.Section.Name)
       .Select(g => new ContentSection {
         Name = g.Key,
@@ -69,7 +69,7 @@ public class ContentService(AppDbContext db) {
       }).ToListAsync(ct);
 
     var linkContents = await db.LinkContents
-      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToInterns))
       .GroupBy(e => e.Section.Name)
       .Select(g => new ContentSection {
         Name = g.Key,
@@ -80,7 +80,7 @@ public class ContentService(AppDbContext db) {
       }).ToListAsync(ct);
 
     var assgnmentContents = await db.Assignments
-      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToStudents))
+      .Where(e => e.Internship == internship && !isIntern || (isIntern && e.IsVisibleToInterns))
       .GroupBy(e => e.Section.Name)
       .Select(g => new ContentSection {
         Name = g.Key,

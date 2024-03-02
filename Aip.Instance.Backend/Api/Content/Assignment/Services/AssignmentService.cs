@@ -56,7 +56,7 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
       Deadline = req.Deadline,
       Internship = internship,
       Section = section,
-      IsVisibleToStudents = req.IsVisibleToInterns,
+      IsVisibleToInterns = req.IsVisibleToInterns,
       Description = req.Description,
       File = existedFile,
     };
@@ -94,7 +94,7 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
     assignment.Description = req.Description;
     assignment.Deadline = req.Deadline;
     assignment.Title = req.Title;
-    assignment.IsVisibleToStudents = req.IsVisibleToInterns;
+    assignment.IsVisibleToInterns = req.IsVisibleToInterns;
 
     await db.SaveChangesAsync(ct);
 

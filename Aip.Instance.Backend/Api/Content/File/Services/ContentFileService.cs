@@ -58,7 +58,7 @@ public class ContentFileService(
       Internship = course,
       Section = courseSection,
       File = existedFile,
-      IsVisibleToStudents = req.IsVisibleToStudents,
+      IsVisibleToInterns = req.IsVisibleToStudents,
     };
 
     await db.FileContents.AddAsync(content, ct);
@@ -80,7 +80,7 @@ public class ContentFileService(
       content.Title = req.Title;
     }
 
-    content.IsVisibleToStudents = req.IsVisibleToInterns;
+    content.IsVisibleToInterns = req.IsVisibleToInterns;
 
     await db.SaveChangesAsync(ct);
 

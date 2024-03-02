@@ -31,7 +31,7 @@ public class LinkContentService(AppDbContext db) {
       Link = req.Link,
       Internship = internship,
       Section = section,
-      IsVisibleToStudents = req.IsVisibleToStudents,
+      IsVisibleToInterns = req.IsVisibleToStudents,
       Title = req.Title,
     };
 
@@ -66,7 +66,7 @@ public class LinkContentService(AppDbContext db) {
     }
 
     content.Link = req.Link;
-    content.IsVisibleToStudents = req.IsVisibleToInterns;
+    content.IsVisibleToInterns = req.IsVisibleToInterns;
 
     if (content.Section.Id != req.SectionId) {
       var section = await db.Sections.FirstOrDefaultAsync(e => e.Id == req.SectionId, ct);
