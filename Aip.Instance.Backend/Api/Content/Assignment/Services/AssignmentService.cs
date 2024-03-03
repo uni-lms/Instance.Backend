@@ -111,6 +111,7 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
     }
 
     db.Assignments.Remove(assignment);
+    await db.SaveChangesAsync(ct);
 
     return Result.Success(req);
   }
