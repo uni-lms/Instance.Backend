@@ -146,13 +146,13 @@ public class InternshipsService(AppDbContext db) {
     var userData = await db.Users.Where(e => e.Email == userEmail).FirstOrDefaultAsync(ct);
 
     if (userData is null) {
-      return Result.NotFound();
+      return Result.NotFound(nameof(userEmail));
     }
 
     var group = await db.Groups.Where(e => e.Students.Contains(userData)).FirstOrDefaultAsync(ct);
 
     if (group is null) {
-      return Result.NotFound();
+      return Result.NotFound(nameof(group));
     }
 
     var courses = await db.Internships
