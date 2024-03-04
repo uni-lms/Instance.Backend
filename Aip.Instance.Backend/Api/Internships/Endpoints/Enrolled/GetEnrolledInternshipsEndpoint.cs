@@ -11,7 +11,6 @@ public class GetEnrolledInternshipsEndpoint(InternshipsService service) : Endpoi
   public override void Configure() {
     Version(2);
     Get("/internships/enrolled");
-    Roles(CanBeUsedBy.OnlyIntern);
     Options(x => x.WithTags(ApiTags.Internships.Tag));
     DontThrowIfValidationFails();
   }
