@@ -80,7 +80,7 @@ public static class BuilderExtensions {
     const string title = "AIP API";
     s.Title = title;
     s.Description = "API of the internship platform \"AIP\"";
-    s.DocumentName = $"{title} {version}";
+    s.DocumentName = $"{version}";
     s.Version = version;
   }
 
