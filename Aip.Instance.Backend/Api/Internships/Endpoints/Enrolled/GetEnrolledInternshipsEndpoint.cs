@@ -10,7 +10,7 @@ namespace Aip.Instance.Backend.Api.Internships.Endpoints.Enrolled;
 public class GetEnrolledInternshipsEndpoint(InternshipsService service) : Endpoint<EmptyRequest> {
   public override void Configure() {
     Version(2);
-    Post("/internships/enrolled");
+    Get("/internships/enrolled");
     Roles(CanBeUsedBy.OnlyIntern);
     Options(x => x.WithTags(ApiTags.Internships.Tag));
     DontThrowIfValidationFails();
