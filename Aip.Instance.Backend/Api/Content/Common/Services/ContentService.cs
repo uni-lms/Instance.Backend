@@ -35,6 +35,8 @@ public class ContentService(AppDbContext db) {
       .Where(e => e.Id == req.Id)
       .Include(e => e.InternshipUserRoles)
       .ThenInclude(e => e.User)
+      .Include(e => e.InternshipUserRoles)
+      .ThenInclude(e => e.Role)
       .FirstOrDefaultAsync(ct);
 
     if (internship is null) {
