@@ -31,14 +31,18 @@ public class ContentService(AppDbContext db) {
       return Result.Unauthorized();
     }
 
-    var internship = await db.Internships.Where(e => e.Id == req.Id).Include(e => e.InternshipUserRoles)
+    var internship = await db.Internships
+      .Where(e => e.Id == req.Id)
+      .Include(e => e.InternshipUserRoles)
+      .ThenInclude(e => e.User)
       .FirstOrDefaultAsync(ct);
 
     if (internship is null) {
       return Result.NotFound();
     }
 
-    var roleInfo = internship.InternshipUserRoles.Where(e => e.User == userInfo).ToList();
+    var roleInfo = internship.InternshipUserRoles
+      .Where(e => e.User == userInfo).ToList();
 
     if (roleInfo.Count == 0) {
       return Result.Forbidden();
