@@ -11,7 +11,6 @@ public sealed class SignUpRequest {
   public required string LastName { get; [UsedImplicitly] set; }
   public string? Patronymic { get; [UsedImplicitly] set; }
   public required string Password { get; [UsedImplicitly] set; }
-  public required Guid RoleId { get; [UsedImplicitly] set; }
 
   [FromHeader("X-FCM-Token", IsRequired = false)]
   public string? FcmToken { get; set; }

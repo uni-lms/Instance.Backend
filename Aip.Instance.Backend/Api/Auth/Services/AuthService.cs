@@ -38,12 +38,6 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
 
     CreatePasswordHash(req.Password, out var salt, out var hash);
 
-    var role = await db.Roles.FirstOrDefaultAsync(e => e.Id == req.RoleId, cancellation);
-
-    if (role is null) {
-      return Result.NotFound("Нет такой роли");
-    }
-
     var user = new User {
       Email = req.Email,
       FirstName = req.FirstName,
