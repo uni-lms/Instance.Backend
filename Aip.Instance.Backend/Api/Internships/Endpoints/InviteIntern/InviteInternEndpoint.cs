@@ -1,4 +1,4 @@
-﻿using Aip.Instance.Backend.Api.Flows.Data;
+﻿using Aip.Instance.Backend.Api.Internships.Data;
 using Aip.Instance.Backend.Api.Internships.Services;
 using Aip.Instance.Backend.Configuration.Swagger;
 using Aip.Instance.Backend.Extensions;

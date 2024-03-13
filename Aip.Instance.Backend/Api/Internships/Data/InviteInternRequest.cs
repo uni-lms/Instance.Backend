@@ -1,4 +1,4 @@
-﻿namespace Aip.Instance.Backend.Api.Flows.Data;
+﻿namespace Aip.Instance.Backend.Api.Internships.Data;
 
 public class InviteInternRequest {
   public Guid Id { get; set; }
