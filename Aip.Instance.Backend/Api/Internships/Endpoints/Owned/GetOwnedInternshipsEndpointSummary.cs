@@ -1,4 +1,4 @@
-﻿using Aip.Instance.Backend.Api.Flows.Data;
+﻿using Aip.Instance.Backend.Api.Internships.Data;
 using Aip.Instance.Backend.Configuration.Swagger;
 
 using Ardalis.Result;
@@ -12,7 +12,7 @@ public class GetOwnedInternshipsEndpointSummary : Summary<GetOwnedInternshipsEnd
   public GetOwnedInternshipsEndpointSummary() {
     Summary = "Возвращает список курсов, которыми владеет текущий пользователь";
     Description = CanBeUsedBy.AnyInvitedTutor;
-    Response<Result<CreateFlowResponse>>(200, "Возвращает список курсов");
+    Response<Result<List<InternshipDto>>>(200, "Возвращает список курсов");
     Response<Result<ErrorResponse>>(401, "Неавторизованный доступ");
     Response<Result<ErrorResponse>>(403, "Доступ запрещён");
   }
