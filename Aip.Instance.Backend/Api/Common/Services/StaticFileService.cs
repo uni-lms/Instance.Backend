@@ -31,7 +31,7 @@ public class StaticFileService(
       };
     }
 
-    if (new DriveInfo(_uploadsPath).AvailableFreeSpace <= file.Length) {
+    if (new DriveInfo(Path.GetPathRoot(_uploadsPath) ?? string.Empty).AvailableFreeSpace <= file.Length) {
       return new FileSaveResult {
         IsSuccess = false,
         Error = "На диске недостаточно свободного места",
