@@ -20,7 +20,6 @@ public class SignUpEndpointSummary : Summary<SignUpEndpoint> {
       Password = "p@ssW0rd",
       FirstName = "Иван",
       LastName = "Иванов",
-      RoleId = new Guid("c82073b9-126c-4b4e-8edc-bc3d0cea56f1"),
     };
     Response<Result<LogInResponse>>(200, "Успешная регистрация");
     Response<Result<ErrorResponse>>(400, "Неверный запрос");
