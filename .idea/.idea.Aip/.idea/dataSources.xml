@@ -9,5 +9,12 @@
       <jdbc-url>jdbc:postgresql://localhost/uni2?password=1234&amp;user=postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="aip@80.90.187.249" uuid="9dd4de19-a1a1-4d37-9342-2de25eda81c9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://80.90.187.249:5432/aip</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
