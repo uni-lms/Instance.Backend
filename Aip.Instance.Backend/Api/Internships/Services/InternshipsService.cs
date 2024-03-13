@@ -1,6 +1,9 @@
 ﻿using System.Security.Claims;
 
+using Aip.Instance.Backend.Api.Auth.Data;
+using Aip.Instance.Backend.Api.Auth.Services;
 using Aip.Instance.Backend.Api.Common.Data;
+using Aip.Instance.Backend.Api.Flows.Data;
 using Aip.Instance.Backend.Api.Internships.Data;
 using Aip.Instance.Backend.Data;
 using Aip.Instance.Backend.Data.Common;
@@ -17,10 +20,12 @@ using Microsoft.EntityFrameworkCore;
 
 using NuGet.Packaging;
 
+using Sqids;
+
 
 namespace Aip.Instance.Backend.Api.Internships.Services;
 
-public class InternshipsService(AppDbContext db) {
+public class InternshipsService(AppDbContext db, AuthService authService) {
   public async Task<Result<InternshipDto>> CreateInternship(
     bool validationFailed,
     IEnumerable<ValidationFailure> validationFailures,
@@ -191,5 +196,44 @@ public class InternshipsService(AppDbContext db) {
       Id = internship.Id,
       Name = internship.Name,
     });
+  }
+
+  public async Task<Result<SearchByIdModel>> InviteIntern(InviteInternRequest req, CancellationToken ct) {
+    var internship = await db.Internships.Where(e => e.Id == req.Id).FirstOrDefaultAsync(ct);
+
+    if (internship is null) {
+      return Result.NotFound(nameof(internship));
+    }
+
+    var password = new SqidsEncoder<int>(new SqidsOptions {
+      MinLength = 10,
+    }).Encode(Guid.NewGuid().GetHashCode());
+
+    await authService.SignUpAsync(false, Enumerable.Empty<ValidationFailure>(), new SignUpRequest {
+      Email = req.Email,
+      FirstName = req.FirstName,
+      LastName = req.LastName,
+      Password = password,
+      Patronymic = req.Patronymic,
+      FcmToken = null,
+    }, ct);
+
+    var user = await db.Users.Where(e => e.Email == req.Email).FirstOrDefaultAsync(ct);
+
+    if (user is null) {
+      return Result.NotFound(nameof(user));
+    }
+
+    var role = await db.Roles.Where(e => e.Name == "Intern").FirstAsync(ct);
+
+    var userRole = new InternshipUserRole {
+      User = user,
+      Internship = internship,
+      Role = role,
+    };
+
+    await db.InternshipBasedRoles.AddAsync(userRole, ct);
+
+    return Result.Success();
   }
 }
