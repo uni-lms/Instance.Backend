@@ -62,6 +62,7 @@ public class ContentFileService(
     };
 
     await db.FileContents.AddAsync(content, ct);
+    await db.SaveChangesAsync(ct);
 
     return Result.Success(new UploadFileContentResponse {
       Id = content.Id,
