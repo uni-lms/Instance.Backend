@@ -10,7 +10,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public virtual DbSet<Role> Roles => Set<Role>();
   public virtual DbSet<Section> Sections => Set<Section>();
   public virtual DbSet<Internship> Internships => Set<Internship>();
-  public virtual DbSet<Flow> Groups => Set<Flow>();
   public virtual DbSet<FileContent> FileContents => Set<FileContent>();
   public virtual DbSet<TextContent> TextContents => Set<TextContent>();
   public virtual DbSet<LinkContent> LinkContents => Set<LinkContent>();
@@ -40,8 +39,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
       new() { Id = new Guid("fa013e01-8a58-4ba5-b426-72b790c3ba4f"), Name = "Курсовая работа" },
       new() { Id = new Guid("33fe1815-0e3b-4991-8add-c163a2286711"), Name = "Зачёт" },
     });
-
-    modelBuilder.Entity<Flow>().HasIndex(e => e.Name).IsUnique();
 
     modelBuilder.Entity<InternshipUserRole>()
       .HasKey(uir => new { uir.UserId, uir.InternshipId }); // Composite key

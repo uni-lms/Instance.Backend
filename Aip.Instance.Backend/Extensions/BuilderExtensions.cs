@@ -5,7 +5,6 @@ using Aip.Instance.Backend.Api.Content.Common.Services;
 using Aip.Instance.Backend.Api.Content.File.Services;
 using Aip.Instance.Backend.Api.Content.Link.Services;
 using Aip.Instance.Backend.Api.Content.Text.Services;
-using Aip.Instance.Backend.Api.Flows.Services;
 using Aip.Instance.Backend.Api.Internships.Services;
 using Aip.Instance.Backend.Api.Sections.Services;
 using Aip.Instance.Backend.Api.Users.Services;
@@ -53,7 +52,6 @@ public static class BuilderExtensions {
   public static void RegisterServices(this WebApplicationBuilder builder) {
     builder.Services.AddTransient<AuthService>();
     builder.Services.AddTransient<CourseSectionsService>();
-    builder.Services.AddTransient<FlowsService>();
     builder.Services.AddTransient<UsersService>();
     builder.Services.AddTransient<InternshipsService>();
     builder.Services.AddTransient<ContentFileService>();

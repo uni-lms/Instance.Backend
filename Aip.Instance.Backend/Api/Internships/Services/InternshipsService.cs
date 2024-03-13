@@ -48,21 +48,8 @@ public class InternshipsService(AppDbContext db, AuthService authService) {
       return Result.NotFound();
     }
 
-    List<Flow> groups = [];
-
-    foreach (var groupId in req.AssignedFlows) {
-      var group = await db.Groups.Where(e => e.Id == groupId).FirstOrDefaultAsync(ct);
-
-      if (group is null) {
-        return Result.NotFound($"Group {groupId} was not found");
-      }
-
-      groups.Add(group);
-    }
-
     var course = new Internship {
       Name = req.Name,
-      AssignedFlows = groups,
     };
 
     var primaryTutorRole = await db.Roles.FirstAsync(e => e.Name == "PrimaryTutor", ct);
@@ -153,20 +140,17 @@ public class InternshipsService(AppDbContext db, AuthService authService) {
       return Result.NotFound(nameof(userEmail));
     }
 
-    var group = await db.Groups.Where(e => e.Students.Contains(userData)).FirstOrDefaultAsync(ct);
-
-    if (group is null) {
-      return Result.NotFound(nameof(group));
-    }
-
-    var courses = await db.Internships
-      .Where(e => e.AssignedFlows.Contains(group))
+    var internships = await db.InternshipBasedRoles
+      .Include(e => e.Internship)
+      .Include(e => e.Role)
+      .Where(e => e.User == userData && e.Role.Name == "Intern")
       .Select(e => new InternshipDto {
-        Id = e.Id,
-        Name = e.Name,
-      }).ToListAsync(ct);
+        Id = e.Internship.Id,
+        Name = e.Internship.Name,
+      })
+      .ToListAsync(ct);
 
-    return Result.Success(courses);
+    return Result.Success(internships);
   }
 
   public async Task<Result<InternshipDto>> InviteTutor(ListOfGuidsRequest req, CancellationToken ct) {
