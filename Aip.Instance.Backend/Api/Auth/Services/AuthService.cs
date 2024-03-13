@@ -121,10 +121,10 @@ public class AuthService(AppDbContext db, SecurityConfiguration configuration) {
 
     var token = GenerateAccessToken(user);
 
-    if (!string.IsNullOrEmpty(req.FcmToken)) {
-      await SaveMobileSession(req.FcmToken, user, cancellation);
-      await db.SaveChangesAsync(cancellation);
-    }
+    // if (!string.IsNullOrEmpty(req.FcmToken)) {
+    //   await SaveMobileSession(req.FcmToken, user, cancellation);
+    //   await db.SaveChangesAsync(cancellation);
+    // }
 
     return Result.Success(new LogInResponse {
       AccessToken = token,
