@@ -102,6 +102,7 @@ public class ContentService(AppDbContext db) {
       .ToList();
 
     return Result.Success(new Data.Content {
+      Title = internship.Name,
       Sections = contents,
     });
   }
