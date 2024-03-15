@@ -3,5 +3,5 @@
 public class LinkContentItem : IContentItem {
   public Uri Link { get; set; }
   public Guid Id { get; set; }
-  public string Type => "link";
+  public string ContentType => "link";
 }

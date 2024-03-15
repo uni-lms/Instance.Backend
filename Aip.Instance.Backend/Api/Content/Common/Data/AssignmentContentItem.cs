@@ -3,5 +3,5 @@
 public class AssignmentContentItem : IContentItem {
   public string Title { get; set; }
   public Guid Id { get; set; }
-  public string Type => "assignment";
+  public string ContentType => "assignment";
 }

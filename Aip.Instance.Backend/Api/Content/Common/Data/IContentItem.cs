@@ -2,5 +2,5 @@
 
 public interface IContentItem {
   public Guid Id { get; set; }
-  public string Type { get; }
+  public string ContentType { get; }
 }
