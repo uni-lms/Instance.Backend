@@ -22,6 +22,6 @@ public class ContentConverter : JsonConverter<IContentItem> {
   }
 
   public override void Write(Utf8JsonWriter writer, IContentItem value, JsonSerializerOptions options) {
-    throw new NotImplementedException();
+    JsonSerializer.Serialize(writer, value, value.GetType(), options);
   }
 }
