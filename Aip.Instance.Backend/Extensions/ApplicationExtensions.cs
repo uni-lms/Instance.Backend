@@ -1,5 +1,6 @@
 ﻿using System.Net;
 
+using Aip.Instance.Backend.Configuration.Serializators;
 using Aip.Instance.Backend.Data;
 using Aip.Instance.Backend.Data.Common;
 
@@ -29,6 +30,7 @@ public static class ApplicationExtensions {
       c.Versioning.Prefix = "v";
       c.Versioning.PrependToRoute = true;
       c.Endpoints.ShortNames = true;
+      c.Serializer.Options.Converters.Add(new ContentConverter());
     });
   }
 
