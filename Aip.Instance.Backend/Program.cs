@@ -15,7 +15,7 @@ Log.Logger = new LoggerConfiguration()
     opts.Endpoint = "http://localhost:4317";
     opts.Protocol = OtlpProtocol.Grpc;
     opts.ResourceAttributes = new Dictionary<string, object> {
-      ["ServiceName"] = "AIP API",
+      ["service.name"] = "AIP API",
     };
   })
   .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
