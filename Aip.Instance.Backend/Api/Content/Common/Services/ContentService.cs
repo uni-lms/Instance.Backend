@@ -88,6 +88,7 @@ public class ContentService(AppDbContext db) {
         Items = g.Select(e => new LinkContentItem {
           Id = e.Id,
           Link = e.Link,
+          Title = e.Title,
         }),
       }).ToListAsync(ct);
 
