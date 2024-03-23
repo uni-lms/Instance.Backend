@@ -73,7 +73,7 @@ public class StaticFileService(
 
   public void RemoveFile(string filePath) {
     try {
-      File.Delete(filePath);
+      System.IO.File.Delete(filePath);
     }
     catch (Exception e) {
       logger.LogWarning("Произошла I/O ошибка: {Error}", e.Message);
