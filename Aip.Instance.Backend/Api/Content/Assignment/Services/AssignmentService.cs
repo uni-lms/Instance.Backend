@@ -120,6 +120,8 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
     var assignment = await db.Assignments
       .Where(e => e.Id == req.Id)
       .Include(e => e.File)
+      .Include(e => e.Internship)
+      .Include(e => e.Section)
       .FirstOrDefaultAsync(ct);
 
     if (assignment is null) {
