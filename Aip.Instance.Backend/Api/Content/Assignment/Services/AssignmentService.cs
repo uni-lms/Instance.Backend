@@ -53,7 +53,7 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
 
     var assignment = new Backend.Data.Models.Assignment {
       Title = req.Title,
-      Deadline = req.Deadline,
+      Deadline = req.Deadline.ToUniversalTime(),
       Internship = internship,
       Section = section,
       IsVisibleToInterns = req.IsVisibleToInterns,
