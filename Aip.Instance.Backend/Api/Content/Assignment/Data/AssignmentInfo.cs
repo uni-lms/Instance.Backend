@@ -5,5 +5,5 @@ public class AssignmentInfo {
   public required string Title { get; set; }
   public string? Description { get; set; }
   public DateTime Deadline { get; set; }
-  public string? FileId { get; set; }
+  public Guid? FileId { get; set; }
 }

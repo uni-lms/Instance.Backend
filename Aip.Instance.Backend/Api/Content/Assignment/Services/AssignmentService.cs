@@ -126,12 +126,33 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
       return Result.NotFound(nameof(assignment));
     }
 
+    FileContent? fileContent = null;
+
+    if (assignment.File is not null) {
+      fileContent = await db.FileContents
+        .Where(e => e.File.Id == assignment.File.Id)
+        .FirstOrDefaultAsync(ct);
+
+      if (fileContent is null) {
+        fileContent = new FileContent {
+          File = assignment.File,
+          Internship = assignment.Internship,
+          IsVisibleToInterns = false,
+          Section = assignment.Section,
+          Title = $"Вложение к {assignment.Title}",
+        };
+
+        await db.FileContents.AddAsync(fileContent, ct);
+        await db.SaveChangesAsync(ct);
+      }
+    }
+
     var response = new AssignmentInfo {
       Id = assignment.Id,
       Title = assignment.Title,
       Deadline = assignment.Deadline,
       Description = assignment.Description,
-      FileId = assignment.File?.Id,
+      FileId = fileContent?.Id,
     };
 
     return Result.Success(response);
