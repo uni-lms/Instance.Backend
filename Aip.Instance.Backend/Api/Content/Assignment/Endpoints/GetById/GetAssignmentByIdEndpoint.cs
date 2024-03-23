@@ -11,7 +11,7 @@ namespace Aip.Instance.Backend.Api.Content.Assignment.Endpoints.GetById;
 public class GetAssignmentByIdEndpoint(AssignmentService service) : Endpoint<SearchByIdModel> {
   public override void Configure() {
     Version(2);
-    Post("/content/assignments/{id}");
+    Get("/content/assignments/{id}");
     Options(x => x.WithTags(ApiTags.Assignment.Tag));
     DontThrowIfValidationFails();
   }
