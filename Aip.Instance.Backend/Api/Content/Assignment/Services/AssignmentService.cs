@@ -115,4 +115,25 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
 
     return Result.Success(req);
   }
+
+  public async Task<Result<AssignmentInfo>> GetAssignment(SearchByIdModel req, CancellationToken ct) {
+    var assignment = await db.Assignments
+      .Where(e => e.Id == req.Id)
+      .Include(e => e.Id)
+      .FirstOrDefaultAsync(ct);
+
+    if (assignment is null) {
+      return Result.NotFound(nameof(assignment));
+    }
+
+    var response = new AssignmentInfo {
+      Id = assignment.Id,
+      Title = assignment.Title,
+      Deadline = assignment.Deadline,
+      Description = assignment.Description,
+      FileId = assignment.File?.Id,
+    };
+
+    return Result.Success(response);
+  }
 }
