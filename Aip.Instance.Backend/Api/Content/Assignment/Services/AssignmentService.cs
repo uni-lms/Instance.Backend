@@ -119,7 +119,7 @@ public class AssignmentService(AppDbContext db, StaticFileService service) {
   public async Task<Result<AssignmentInfo>> GetAssignment(SearchByIdModel req, CancellationToken ct) {
     var assignment = await db.Assignments
       .Where(e => e.Id == req.Id)
-      .Include(e => e.Id)
+      .Include(e => e.File)
       .FirstOrDefaultAsync(ct);
 
     if (assignment is null) {
