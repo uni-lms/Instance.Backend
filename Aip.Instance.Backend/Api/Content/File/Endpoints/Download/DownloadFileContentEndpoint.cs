@@ -16,7 +16,7 @@ namespace Aip.Instance.Backend.Api.Content.File.Endpoints.Download;
 public class DownloadFileContentEndpoint(AppDbContext db) : Endpoint<SearchByIdModel> {
   public override void Configure() {
     Version(2);
-    Put("/content/file/{id}/download");
+    Get("/content/file/{id}/download");
     Options(x => x.WithTags(ApiTags.FileContent.Tag));
     DontThrowIfValidationFails();
   }
