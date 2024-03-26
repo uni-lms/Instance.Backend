@@ -31,6 +31,7 @@ public static class ApplicationExtensions {
       c.Versioning.PrependToRoute = true;
       c.Endpoints.ShortNames = true;
       c.Serializer.Options.Converters.Add(new ContentConverter());
+      c.Serializer.Options.Converters.Add(new EventConverter());
     });
   }
 
